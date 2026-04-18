@@ -5,6 +5,8 @@ import DescriptionRoar from "@/components/home/descriptionroar";
 import TrustedSection from "@/components/home/trustedsection";
 import Services from "@/components/home/services";
 import SelectedWork from "@/components/home/selectedwork";
+import QuoteSection from "@/components/home/quotesection";
+import FooterSection from "@/components/home/footersection";
 
 export default function Home() {
   return (
@@ -20,6 +22,8 @@ export default function Home() {
       <TrustedSection />
       <Services />
       <SelectedWork />
+      <QuoteSection />
+      <FooterSection />
       <main className="overflow-x-hidden" />
     </>
   );
