@@ -1,25 +1,50 @@
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
+import styles from "./trustedsection.module.css";
 
-const logos = [
-  "/images/clients/icl.svg",
-  "/images/clients/rootura.svg",
-  "/images/clients/kudocard.svg",
-  "/images/clients/nn.svg",
-  "/images/clients/nexalley.svg",
+import mclLogo from "./trustedsectionimage/1.png";
+import rooturaLogo from "./trustedsectionimage/2.svg";
+import kudocardLogo from "./trustedsectionimage/3.svg";
+import nnLogo from "./trustedsectionimage/4.svg";
+import nexalleyLogo from "./trustedsectionimage/5.png";
+
+type TrustedLogo = {
+  src: StaticImageData;
+  alt: string;
+  isIcon?: boolean;
+};
+
+const logos: TrustedLogo[] = [
+  { src: mclLogo, alt: "Michael Creative Labs" },
+  { src: rooturaLogo, alt: "Rootura" },
+  { src: kudocardLogo, alt: "KudoCard" },
+  { src: nnLogo, alt: "NN" , isIcon: true },
+  { src: nexalleyLogo, alt: "Nexalley" },
 ];
 
 export default function TrustedSection() {
   return (
-    <section className="bg-white py-12">
-      <div className="section-shell text-center">
-        <h3 className="text-xl font-medium text-black mb-6">Trusted by</h3>
+    <section className={styles.trustedSection}>
+      <div className="section-shell">
+        <div className={styles.trustedWrap}>
+          <h3 className={styles.trustedTitle}>Trusted by</h3>
 
-        <div className="flex items-center justify-center gap-8 flex-wrap">
-          {logos.map((src, i) => (
-            <div key={i} className="w-[5.25rem] h-12 sm:w-[6.875rem] md:w-[8.75rem] flex items-center justify-center opacity-80">
-              <Image src={src} alt={`client-${i}`} width={140} height={48} className="object-contain" sizes="(max-width: 640px) 80px, 140px" />
-            </div>
-          ))}
+          <div className={styles.logoStrip}>
+            {logos.map((logo) => (
+              <div
+                key={logo.alt}
+                className={`${styles.logoItem} ${logo.isIcon ? styles.iconLogo : ""}`}
+              >
+                <Image
+                  src={logo.src}
+                  alt={logo.alt}
+                  className={styles.logoImage}
+                  sizes="(max-width: 480px) 20vw, (max-width: 1024px) 16vw, 190px"
+                  priority={logo.alt === "Rootura" || logo.alt === "KudoCard"}
+                  loading={logo.alt === "Rootura" || logo.alt === "KudoCard" ? undefined : "lazy"}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

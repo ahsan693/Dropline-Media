@@ -1,0 +1,80 @@
+.trustedSection {
+  background: #efefef;
+  padding: 1.5rem 0 1.35rem;
+}
+
+.trustedWrap {
+  text-align: center;
+  width: 100%;
+}
+
+.trustedTitle {
+  margin: 0;
+  color: #0b0b0b;
+  font-size: clamp(1.15rem, 2.2vw, 1.85rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.logoStrip {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 0.92fr 1.04fr 1.08fr 0.7fr 1.26fr;
+  gap: 0.45rem;
+  align-items: center;
+}
+
+.logoItem {
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logoImage {
+  width: 100%;
+  height: auto;
+  max-height: 2.05rem;
+  object-fit: contain;
+  opacity: 0.96;
+}
+
+.iconLogo .logoImage {
+  max-height: 1.5rem;
+}
+
+@media (max-width: 430px) {
+  .trustedSection {
+    padding: 1.3rem 0 1.1rem;
+  }
+
+  .logoStrip {
+    gap: 0.35rem;
+  }
+
+  .logoImage {
+    max-height: 1.7rem;
+  }
+
+  .iconLogo .logoImage {
+    max-height: 1.35rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .trustedSection {
+    padding: 1.8rem 0 1.65rem;
+  }
+
+  .logoStrip {
+    gap: 0.9rem;
+  }
+
+  .logoImage {
+    max-height: 2.35rem;
+  }
+
+  .iconLogo .logoImage {
+    max-height: 1.75rem;
+  }
+}
