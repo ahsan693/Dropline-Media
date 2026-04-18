@@ -1,0 +1,13 @@
+<svg width="800" height="480" viewBox="0 0 800 480" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gold2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fde68a" />
+      <stop offset="100%" stop-color="#f59e0b" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="480" rx="36" fill="#0f172a" />
+  <circle cx="400" cy="210" r="128" fill="url(#gold2)" />
+  <text x="400" y="200" fill="#111827" text-anchor="middle" font-size="34" font-family="Arial, sans-serif" font-weight="700">Europe's Best</text>
+  <text x="400" y="245" fill="#111827" text-anchor="middle" font-size="34" font-family="Arial, sans-serif" font-weight="700">Workplaces</text>
+  <text x="400" y="408" fill="#d1d5db" text-anchor="middle" font-size="24" font-family="Arial, sans-serif">Award Placeholder Badge</text>
+</svg>
