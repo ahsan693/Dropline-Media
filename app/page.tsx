@@ -4,6 +4,7 @@ import RoarSection from "@/components/home/roarsection";
 import DescriptionRoar from "@/components/home/descriptionroar";
 import TrustedSection from "@/components/home/trustedsection";
 import Services from "@/components/home/services";
+import SelectedWork from "@/components/home/selectedwork";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <DescriptionRoar />
       <TrustedSection />
       <Services />
+      <SelectedWork />
       <main className="overflow-x-hidden" />
     </>
   );
