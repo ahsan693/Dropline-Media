@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import styles from "./quotesection.module.css";
 
 import quoteLogo from "./logoimage/Ellipse 1516.png";
@@ -27,23 +27,22 @@ export default function QuoteSection() {
 
 	return (
 		<section className={styles.quoteSection}>
-			<div className="section-shell">
-				<div
-					className={styles.quoteCard}
-					onMouseMove={(event) => updateMotionFromPoint(event.clientX, event.currentTarget)}
-					onMouseLeave={() => setLogoMotion({ x: 0, rotate: 0 })}
-					onTouchMove={(event) => {
-						const firstTouch = event.touches[0];
-						if (!firstTouch) return;
-						updateMotionFromPoint(firstTouch.clientX, event.currentTarget);
-					}}
-					onTouchEnd={() => setLogoMotion({ x: 0, rotate: 0 })}
-				>
-					<span className={`${styles.navDot} ${styles.navDotLeft}`} aria-hidden="true">
-						←
-					</span>
+			<div
+				className={styles.quoteCard}
+				onMouseMove={(event) => updateMotionFromPoint(event.clientX, event.currentTarget)}
+				onMouseLeave={() => setLogoMotion({ x: 0, rotate: 0 })}
+				onTouchMove={(event) => {
+					const firstTouch = event.touches[0];
+					if (!firstTouch) return;
+					updateMotionFromPoint(firstTouch.clientX, event.currentTarget);
+				}}
+				onTouchEnd={() => setLogoMotion({ x: 0, rotate: 0 })}
+			>
+				<span className={`${styles.navDot} ${styles.navDotLeft}`} aria-hidden="true">
+					←
+				</span>
 
-					<div className={styles.quoteContent}>
+				<div className={styles.quoteContent}>
 						<Image
 							src={quoteLogo}
 							alt="Dropline logo"
@@ -51,8 +50,9 @@ export default function QuoteSection() {
 							width={56}
 							height={56}
 							style={{
-								transform: `translateX(${logoMotion.x}px) rotate(${logoMotion.rotate}deg)`,
-							}}
+								"--logo-x": `${logoMotion.x}px`,
+								"--logo-rotate": `${logoMotion.rotate}deg`,
+							} as CSSProperties}
 							priority
 						/>
 
@@ -68,7 +68,6 @@ export default function QuoteSection() {
 					<span className={`${styles.navDot} ${styles.navDotRight}`} aria-hidden="true">
 						→
 					</span>
-				</div>
 			</div>
 		</section>
 	);

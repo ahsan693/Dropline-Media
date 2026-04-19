@@ -11,23 +11,29 @@
 
 .selectedWorkHeader {
 	text-align: center;
-	margin-bottom: 1rem;
+	margin-bottom: 2rem;
 }
 
 .selectedWorkTitle {
-	margin: 0;
+	margin-top: 0;
+	margin-bottom: 0.5rem;
 	font-size: clamp(1.5rem, 4.5vw, 3rem);
-	font-weight: 700;
+	
 	line-height: 1.1;
 	letter-spacing: -0.02em;
 	color: #fff;
+	
 }
 
 .selectedWorkSubtitle {
-	margin: 0.5rem 0 0;
+	display: inline-block;
+	margin: 0;
 	font-size: clamp(0.72rem, 2vw, 0.95rem);
 	line-height: 1.4;
-	color: rgba(255, 255, 255, 0.72);
+	margin-top: 1px;
+	padding-top: 0.5rem 0;
+	padding-bottom: 2.5rem;
+	
 }
 
 .selectedWorkGrid {
@@ -53,10 +59,13 @@
 .selectedWorkCtaWrap {
 	display: flex;
 	justify-content: center;
-	margin-top: 1.65rem;
+	margin-top: 2rem;
 }
 
 .selectedWorkCta {
+	display: inline-block;
+
+	margin: 0.5rem 0;
 	border: 0;
 	border-radius: 999px;
 	padding: 0.52rem 0.9rem;
@@ -102,6 +111,7 @@
 	.selectedWorkCta {
 		padding: 0.68rem 1.15rem;
 		font-size: 0.72rem;
+		margin: 1rem 0;
 	}
 }
 

@@ -24,7 +24,7 @@ const logos: TrustedLogo[] = [
 export default function TrustedSection() {
   return (
     <section className={styles.trustedSection}>
-      <div className="section-shell">
+      <div className={styles.fullWidthContainer}>
         <div className={styles.trustedWrap}>
           <h3 className={styles.trustedTitle}>Trusted by</h3>
 

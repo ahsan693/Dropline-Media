@@ -104,7 +104,7 @@ export default function Services() {
 		<section className={styles.servicesSection}>
 			<div className="section-shell">
 				<div className={styles.servicesFrame}>
-					<h2 className={styles.servicesTitle}>Services</h2>
+					<h1 className={styles.servicesTitle}>Services</h1>
 
 					<div className={styles.servicesGrid}>
 						{cards.map((card) => (
