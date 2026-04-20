@@ -1,0 +1,170 @@
+"use client";
+
+import Link from "next/link";
+import { useState } from "react";
+import BlogFooter from "../blog/blogfooter";
+import styles from "./contact.module.css";
+
+export default function ContactUs() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className={styles.page}>
+      <header className={styles.navbar}>
+        <div className={styles.navInner}>
+          <Link href="/" aria-label="Dropline Media home" className={styles.logo}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 595 92"
+              width="184"
+              height="28"
+              fill="none"
+              className={styles.logoImage}
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path fill="currentColor" d="M119.336 76.52V15.264h22.189c16.878 0 27.244 10.966 27.244 30.671S158.403 76.52 141.525 76.52h-22.189Zm7.71-54.402v47.549h14.479c15.593 0 19.534-11.738 19.534-23.732s-3.941-23.817-19.534-23.817h-14.479Zm63.792 9.51c1.628 0 2.828.085 4.027.257v6.854h-.171c-9.51-1.543-16.107 5.14-16.107 14.478V76.52h-6.854V32.828h6.854v8.653h.171c2.314-5.74 5.826-9.852 12.08-9.852ZM213.22 77.72c-13.365 0-21.418-9.424-21.418-23.046s8.053-23.046 21.418-23.046c13.279 0 21.333 9.424 21.333 23.046S226.499 77.72 213.22 77.72Zm0-5.997c9.767 0 14.479-7.71 14.479-17.05 0-9.338-4.712-17.048-14.479-17.048-9.853 0-14.565 7.71-14.565 17.049 0 9.338 4.712 17.049 14.565 17.049Zm44.017-40.095c10.795 0 19.534 8.653 19.534 23.046 0 14.393-8.739 23.046-19.534 23.046-7.196 0-11.309-3.084-13.879-6.854h-.171v20.39h-6.854V32.827h6.854v5.398h.171c2.57-3.342 6.683-6.597 13.879-6.597Zm-.856 40.095c8.995 0 13.536-8.482 13.536-17.05 0-8.567-4.541-17.048-13.536-17.048-8.139 0-13.194 6.768-13.194 17.049 0 10.28 5.055 17.049 13.194 17.049Zm22.674-56.459h6.854v61.257h-6.854V15.264Zm14.867 9.081c-1.885 0-4.284-1.456-4.284-4.112s2.399-4.112 4.284-4.112c1.97 0 4.283 1.456 4.283 4.112s-2.313 4.112-4.283 4.112Zm-3.427 8.482h6.854v43.694h-6.854V32.826Zm33.409-1.2c7.968 0 14.65 4.37 14.65 14.394v30.5H331.7V47.733c0-5.654-2.656-10.11-9.509-10.11-7.711 0-12.851 4.884-12.851 11.652V76.52h-6.854V32.828h6.854v5.226h.171c2.313-3.084 6.939-6.425 14.393-6.425Zm37.295 40.096c8.739 0 11.995-5.655 12.766-8.653h6.854c-2.228 8.139-8.482 14.65-19.363 14.65-13.279 0-21.332-9.338-21.332-23.046 0-14.565 8.224-23.046 20.99-23.046 13.708 0 20.39 9.338 20.39 24.845h-34.526c0 7.882 4.712 15.25 14.221 15.25Zm-.085-34.098c-8.225 0-14.136 5.825-14.136 12.85h27.672c0-7.025-5.312-12.85-13.536-12.85Zm31.647 38.895V15.264h10.538l19.191 50.89h.171l19.191-50.89h10.538v61.257h-7.71V26.143h-.172L426.003 76.52h-6.854l-18.506-50.377h-.171V76.52h-7.711Zm83.519-4.797c8.738 0 11.994-5.655 12.765-8.653h6.854c-2.228 8.139-8.482 14.65-19.362 14.65-13.28 0-21.333-9.338-21.333-23.046 0-14.565 8.225-23.046 20.99-23.046 13.708 0 20.39 9.338 20.39 24.845h-34.526c0 7.882 4.712 15.25 14.222 15.25Zm-.086-34.098c-8.225 0-14.136 5.825-14.136 12.85h27.672c0-7.025-5.311-12.85-13.536-12.85Zm55.705-22.361h6.854v61.257h-6.854v-5.398h-.171c-2.57 3.341-6.683 6.597-13.708 6.597-10.966 0-19.705-8.653-19.705-23.046 0-14.393 8.739-23.046 19.705-23.046 7.025 0 11.138 3.084 13.708 6.853h.171V15.264Zm-13.194 56.459c8.139 0 13.194-6.768 13.194-17.05 0-10.28-5.055-17.048-13.194-17.048-8.995 0-13.536 8.481-13.536 17.049 0 8.567 4.541 17.049 13.536 17.049Zm27.756-47.378c-1.885 0-4.284-1.456-4.284-4.112s2.399-4.112 4.284-4.112c1.97 0 4.284 1.456 4.284 4.112s-2.314 4.112-4.284 4.112Zm-3.427 8.482h6.854v43.694h-6.854V32.826Zm38.721 11.138c0-3.427-1.885-6.34-8.91-6.34-8.31 0-11.052 2.399-11.48 8.738h-6.854c.428-8.396 5.654-14.735 18.334-14.735 8.31 0 15.764 3.255 15.764 13.793v21.247c0 3.427.6 5.312 4.969 4.798v4.797c-1.799.6-2.742.686-4.027.686-4.112 0-6.596-1.114-7.796-5.912h-.171c-2.742 4.113-7.625 6.683-14.822 6.683-8.824 0-14.393-5.055-14.393-12.423 0-9.938 7.368-12.508 18.677-14.65 7.368-1.37 10.709-2.313 10.709-6.682Zm-14.307 27.758c8.139 0 14.307-3.684 14.307-12.08V52.36c-1.285 1.285-5.483 2.484-10.109 3.427-8.482 1.799-12.423 3.94-12.423 9.167 0 4.283 2.57 6.768 8.225 6.768Z"/>
+              <g clipPath="url(#a)">
+                <path fill="currentColor" d="m50.159 25.111-.311-.31v38.244s.2-.178.31-.29c4.8-4.822 7.779-11.488 7.779-18.822 0-7.333-2.978-14-7.778-18.822Zm-18.845 5.4v26.845a19.883 19.883 0 0 0 5.178-13.422c0-5.178-1.956-9.89-5.178-13.423Zm18.845-5.4-.311-.31v38.244s.2-.178.31-.29c4.8-4.822 7.779-11.488 7.779-18.822 0-7.333-2.978-14-7.778-18.822Zm0 0-.311-.31v38.244s.2-.178.31-.29c4.8-4.822 7.779-11.488 7.779-18.822 0-7.333-2.978-14-7.778-18.822ZM31.314 57.356a19.883 19.883 0 0 0 5.178-13.422c0-5.178-1.956-9.89-5.178-13.423v26.845Zm-14.8-24.8V55.31c.356-.289.711-.6 1.022-.933a14.675 14.675 0 0 0 4.334-10.444c0-4.067-1.645-7.778-4.334-10.445a10.182 10.182 0 0 0-1.022-.933ZM44.448 0H.514v87.89h43.934c12.155 0 23.133-4.934 31.089-12.89 7.955-7.955 12.866-18.933 12.866-31.066C88.403 19.667 68.737 0 44.448 0ZM72.47 66.534c-5.8 5.8-13.8 9.377-22.622 9.377V63.045a26.516 26.516 0 0 1-18.534 7.489V57.356c-.2.244-.422.466-.666.71-3.623 3.6-8.6 5.845-14.134 5.845v-8.6a14.648 14.648 0 0 1-9.422 3.4V29.156c3.578 0 6.867 1.266 9.422 3.4v-8.6c5.534 0 10.511 2.244 14.134 5.844.244.244.466.467.666.711v-13.2a26.515 26.515 0 0 1 18.534 7.49V11.955c8.822 0 16.822 3.577 22.622 9.355 5.778 5.8 9.356 13.778 9.356 22.623 0 8.844-3.578 16.822-9.356 22.6Zm-14.533-22.6c0-7.356-2.978-14-7.778-18.823l-.311-.31v38.244s.2-.178.31-.29c4.8-4.822 7.779-11.488 7.779-18.822ZM31.314 30.51v26.845a19.883 19.883 0 0 0 5.178-13.422c0-5.178-1.956-9.89-5.178-13.423ZM21.87 43.934c0-4.09-1.645-7.778-4.334-10.445a10.182 10.182 0 0 0-1.022-.933V55.31c.356-.289.711-.6 1.022-.933a14.675 14.675 0 0 0 4.334-10.444Zm9.444-13.423v26.845a19.883 19.883 0 0 0 5.178-13.422c0-5.178-1.956-9.89-5.178-13.423Zm18.845-5.4-.311-.31v38.244s.2-.178.31-.29c4.8-4.822 7.779-11.488 7.779-18.822 0-7.333-2.978-14-7.778-18.822Zm0 0-.311-.31v38.244s.2-.178.31-.29c4.8-4.822 7.779-11.488 7.779-18.822 0-7.333-2.978-14-7.778-18.822Z"/>
+              </g>
+              <defs>
+                <clipPath id="a"><path fill="#fff" d="M.514 0h87.89v87.889H.513z"/></clipPath>
+              </defs>
+            </svg>
+          </Link>
+
+          <nav className={styles.navLinks}>
+            <a href="/#services">Services</a>
+            <a href="/#work">Work</a>
+            <a href="/blog">Blog</a>
+          </nav>
+
+          <div className={styles.actionWrap}>
+            <a
+              className={styles.cta}
+              href="https://buy.polar.sh/polar_cl_540Xa7jXDRuxRHrZhhoutzRcU9p7zkrVDFgAF3LQcVL"
+            >
+              Get Started
+            </a>
+
+            <button
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
+              className={styles.mobileToggle}
+              onClick={() => setOpen((v) => !v)}
+              type="button"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d={open ? "M6 18L18 6M6 6l12 12" : "M3 6h18M3 12h18M3 18h18"}
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+
+          {open && (
+            <nav className={styles.drawer}>
+              <div className={styles.drawerList}>
+                <a href="/#services" onClick={() => setOpen(false)} className={styles.drawerLink}>
+                  Services
+                </a>
+                <a href="/#work" onClick={() => setOpen(false)} className={styles.drawerLink}>
+                  Work
+                </a>
+                <a href="/blog" onClick={() => setOpen(false)} className={styles.drawerLink}>
+                  Blog
+                </a>
+                <a href="/contact" onClick={() => setOpen(false)} className={styles.drawerLink}>
+                  Contact
+                </a>
+                <a
+                  href="https://buy.polar.sh/polar_cl_540Xa7jXDRuxRHrZhhoutzRcU9p7zkrVDFgAF3LQcVL"
+                  className={styles.drawerCta}
+                >
+                  Get Started
+                </a>
+              </div>
+            </nav>
+          )}
+        </div>
+      </header>
+
+      <main className={styles.mainSection}>
+        <section className={styles.contactSection}>
+          <h1>Contact Us</h1>
+          <p className={styles.subtitle}>
+            Fill out the form and we&apos;ll get back to you within 24 hours
+          </p>
+
+          <div className={styles.contactCard}>
+            <form className={styles.form} onSubmit={(event) => event.preventDefault()}>
+              <div className={styles.formMain}>
+                <div className={styles.twoCols}>
+                  <label className={styles.field}>
+                    <span>Full Name</span>
+                    <input type="text" placeholder="John Murphy" />
+                  </label>
+
+                  <label className={styles.field}>
+                    <span>Email Address</span>
+                    <input type="email" placeholder="your@email.com" />
+                  </label>
+                </div>
+
+                <label className={styles.field}>
+                  <span>What can we help you with?</span>
+                  <select defaultValue="">
+                    <option value="" disabled>
+                      Select...
+                    </option>
+                    <option value="web-design">Web Design</option>
+                    <option value="marketing">Marketing</option>
+                    <option value="branding">Branding</option>
+                  </select>
+                </label>
+
+                <label className={styles.field}>
+                  <span>Company Name / Website</span>
+                  <input type="text" placeholder="e.g. yourbrand.com" />
+                </label>
+
+                <label className={styles.field}>
+                  <span>Message</span>
+                  <textarea
+                    rows={4}
+                    placeholder="Tell us a bit about your business and what you’re looking to achieve"
+                  />
+                </label>
+
+                <button type="submit" className={styles.submitBtn}>
+                  Submit your request
+                </button>
+              </div>
+
+              <div className={styles.contactInfo}>
+                <p>Prefer to reach out directly?</p>
+                <a href="tel:+35312834344">+353 1 283 4344</a>
+                <a href="mailto:hello@droplinemedia.ie">hello@droplinemedia.ie</a>
+              </div>
+            </form>
+
+            <aside className={styles.visualPanel}>
+              <img
+                src="/images/product-bg.svg"
+                alt="Contact section visual"
+                className={styles.visualImage}
+              />
+              <div className={styles.visualLogo}>DD</div>
+            </aside>
+          </div>
+        </section>
+      </main>
+
+      <BlogFooter />
+    </div>
+  );
+}

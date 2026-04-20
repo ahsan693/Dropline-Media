@@ -9,6 +9,7 @@ const navLinks = [
   { label: "Services", href: "#services" },
   { label: "Work", href: "#work" },
   { label: "Blog", href: "/blog" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function HomeNavbar() {
@@ -36,7 +37,7 @@ export default function HomeNavbar() {
         {/* Desktop nav */}
         <nav className="hidden items-center justify-center gap-8 md:flex">
           {navLinks.map((link) => (
-            link.label === "Blog" ? (
+            link.label === "Blog" || link.label === "Contact" ? (
               <Link
                 key={link.label}
                 href={link.href}
@@ -88,7 +89,7 @@ export default function HomeNavbar() {
             >
               <div className="flex flex-col gap-3">
                 {navLinks.map((link) => (
-                  link.label === "Blog" ? (
+                  link.label === "Blog" || link.label === "Contact" ? (
                     <Link
                       key={link.label}
                       href={link.href}

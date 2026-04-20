@@ -1,3 +1,4 @@
+// ...existing code...
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
@@ -16,6 +17,9 @@ const nextConfig: NextConfig = {
         hostname: "framerusercontent.com",
       },
     ],
+  },
+  experimental: {
+    turbo: false, // Disable Turbopack, use Webpack
   },
 };
 

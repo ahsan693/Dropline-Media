@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import FeaturedImg from "./featuredimage/Professionelles Webdesign 2025_ Der ultimative Guide.png";
 import Link from "next/link";
 import styles from "./blogmain.module.css";

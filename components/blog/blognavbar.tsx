@@ -10,6 +10,8 @@ const navLinks = [
   { label: "Services", href: "/#services" },
   { label: "Work", href: "/#work" },
   { label: "Blog", href: "/blog" },
+  { label: "Contact", href: "/contact" },
+  { label: "Details", href: "/blog/details" },
 ];
 
 export default function BlogNavbar() {

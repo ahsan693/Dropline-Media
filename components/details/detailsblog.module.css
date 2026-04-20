@@ -1,0 +1,144 @@
+.wrapper {
+  width: 100%;
+  display: block;
+  background: #e5e5e5;
+  color: #111;
+  padding: 120px 20px 72px;
+  box-sizing: border-box;
+}
+
+.inner {
+  width: 100%;
+  max-width: 820px;
+  margin: 0 auto;
+  padding-left: clamp(0px, 2vw, 8px);
+  padding-right: clamp(0px, 2vw, 8px);
+}
+
+.breadcrumb {
+  margin: 0 0 24px;
+  color: #717171;
+  font-size: 11px;
+  line-height: 1;
+}
+
+.titleBlock {
+  margin-bottom: 32px;
+  border-bottom: 1px solid #d7d7d7;
+  padding-bottom: 20px;
+}
+
+.kicker {
+  margin: 0 0 14px;
+  color: #6e6e6e;
+  font-size: 10px;
+  line-height: 1.2;
+  text-transform: none;
+}
+
+.title {
+  margin: 0;
+  color: #111;
+  font-size: clamp(34px, 5vw, 52px);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  font-weight: 500;
+  max-width: 740px;
+}
+
+.excerpt {
+  margin: 16px 0 14px;
+  color: #505050;
+  font-size: 14px;
+  line-height: 1.75;
+  max-width: 720px;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 11px;
+  color: #717171;
+}
+
+.heroWrap {
+  margin: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #efefef;
+  border: 1px solid #dddddd;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.hero {
+  width: 100%;
+  display: block;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.content {
+  color: #4e4e4e;
+  font-size: 14px;
+  line-height: 1.7;
+  margin-top: 34px;
+}
+
+.shareBar {
+  margin: 30px 0 0;
+  border-top: 1px solid #d7d7d7;
+  padding-top: 16px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+}
+
+.shareButtons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  border-radius: 999px;
+  border: 1px solid #cfcfcf;
+  background: #efefef;
+  color: #1e1e1e;
+  padding: 6px 12px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.social:hover,
+.copyBtn:hover {
+  border-color: #9f9f9f;
+}
+
+.copyBtn {
+  background: #111;
+  border-color: #111;
+  color: #f6f6f6;
+  font-weight: 600;
+}
+
+.copyBtn[aria-pressed="true"] {
+  background: #0b8f34;
+  border-color: #0b8f34;
+  color: #fff;
+}
+
+@media (max-width: 680px) {
+  .wrapper {
+    padding: 96px 16px 56px;
+  }
+
+  .title {
+    font-size: clamp(30px, 10vw, 42px);
+  }
+
+  .shareBar {
+    justify-content: flex-start;
+  }
+}
