@@ -6,7 +6,7 @@ import styles from "../home/descriptionroar.module.css";
 
 type Props = {
   text: string;
-  targetRef: React.RefObject<HTMLElement>;
+  targetRef: React.RefObject<HTMLElement | null>;
   blurMax?: number;
   className?: string;
 };

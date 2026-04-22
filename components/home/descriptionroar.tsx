@@ -5,9 +5,9 @@ import WordReveal from "../ui/WordReveal";
 import styles from "./descriptionroar.module.css";
 
 export default function DescriptionRoar() {
-  const p1Ref = useRef<HTMLElement | null>(null);
-  const p2Ref = useRef<HTMLElement | null>(null);
-  const p3Ref = useRef<HTMLElement | null>(null);
+  const p1Ref = useRef<HTMLParagraphElement | null>(null);
+  const p2Ref = useRef<HTMLParagraphElement | null>(null);
+  const p3Ref = useRef<HTMLParagraphElement | null>(null);
 
   const text1 =
     "We've worked on campaigns for global brands in leading agencies, sitting through layers, meetings, and noise, and realised real growth does not come from complexity, it comes from clarity and execution.";
