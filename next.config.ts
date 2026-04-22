@@ -18,9 +18,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  experimental: {
-    turbo: false, // Disable Turbopack, use Webpack
-  },
+  // experimental: { turbo: false } removed to satisfy known NextConfig properties
 };
 
 export default nextConfig;

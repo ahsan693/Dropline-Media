@@ -30,7 +30,9 @@ export function useSafeArea() {
     const safeData = { top, bottom, left, right };
     // schedule state update to avoid calling setState directly during measurement
     requestAnimationFrame(() => setSafe(safeData));
-    document.body.removeChild(el);
+    if (el.parentNode) {
+      el.parentNode.removeChild(el);
+    }
   }, []);
 
   return safe;

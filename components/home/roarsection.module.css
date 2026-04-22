@@ -1,0 +1,31 @@
+.roarGreen {
+  font-family: var(--font-inter), Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #9edf73;
+  /* mobile / base */
+  font-size: 80px;
+  font-weight: 300 !important;
+  line-height: 1;
+}
+
+@media (min-width: 768px) {
+  .roarGreen {
+    /* desktop: target ~125px */
+    font-size: 125px;
+  }
+}
+
+.roarWhite {
+  font-family: 'Neue Montreal', "Avenir Next", Satoshi, "Helvetica Neue", Arial, sans-serif;
+  color: #ffffff;
+  font-weight: 300 !important; /* enforce light weight */
+  /* mobile / base */
+  font-size: 80px;
+  line-height: 1;
+}
+
+@media (min-width: 768px) {
+  .roarWhite {
+    /* desktop: match green size (~125px) */
+    font-size: 125px;
+  }
+}

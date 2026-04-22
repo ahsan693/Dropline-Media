@@ -5,5 +5,9 @@ export const metadata = {
 };
 
 export default function ContactPage() {
-  return <ContactUs />;
+  return (
+    <div className="font-home-sans">
+      <ContactUs />
+    </div>
+  );
 }

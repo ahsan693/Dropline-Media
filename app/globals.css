@@ -2,6 +2,88 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+  Add custom Neue Montreal fonts.
+  Place the provided .otf files into `public/fonts/` so these src URLs resolve:
+    /fonts/NeueMontreal-Regular.otf
+    /fonts/NeueMontreal-Bold.otf
+    /fonts/NeueMontreal-BoldItalic.otf
+    /fonts/NeueMontreal-Italic.otf
+    /fonts/NeueMontreal-Light.otf
+    /fonts/NeueMontreal-LightItalic.otf
+    /fonts/NeueMontreal-Medium.otf
+    /fonts/NeueMontreal-MediumItalic.otf
+*/
+
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('/Font/NeueMontreal-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('/Font/NeueMontreal-LightItalic.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('/Font/NeueMontreal-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('/Font/NeueMontreal-Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('/Font/NeueMontreal-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('/Font/NeueMontreal-MediumItalic.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('/Font/NeueMontreal-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('/Font/NeueMontreal-BoldItalic.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Utility class to apply Neue Montreal on the home page only */
+.font-home-sans {
+  font-family: 'Neue Montreal', "Avenir Next", Satoshi, "Helvetica Neue", Arial, sans-serif;
+}
+
 :root {
   color-scheme: dark;
 

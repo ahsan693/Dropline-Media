@@ -12,10 +12,10 @@ export const metadata: Metadata = {
 
 export default function BlogPage() {
   return (
-    <>
+    <div className="font-home-sans">
       <BlogNavbar />
       <BlogMain />
       <BlogFooter />
-    </>
+    </div>
   );
 }

@@ -1,164 +1,151 @@
 ﻿import Image from "next/image";
-import FeaturedImg from "./featuredimage/Professionelles Webdesign 2025_ Der ultimative Guide.png";
 import Link from "next/link";
 import styles from "./blogmain.module.css";
+import * as Sanity from "@/lib/sanity";
 
-const featuredPost = {
-	href: "/blog",
-	badge: "Featured",
-	category: "Webdesign",
-	date: "Jan 15, 2026",
-	readTime: "8 min",
-	title: "Professional Web Design 2025: The Ultimate Guide",
-	excerpt:
-		"Modern websites must blend strong visuals with smart structure. Learn how to plan, design, and ship a site that converts.",
-	author: "Kerim Bilin",
-	image: FeaturedImg,
-};
+export default async function BlogMain() {
+  const query = `*[_type == "blog" && defined(slug.current) && publishedAt <= now()] | order(publishedAt desc) {
+    _id,
+    title,
+    excerpt,
+    "slug": slug.current,
+    publishedAt,
+    author,
+    images,
+    "category": "Blog"
+  }`;
 
-const posts = [
-	{
-		href: "/blog",
-		category: "Responsive design",
-		title: "Responsive web design: Mobile-first design for 2025",
-		excerpt:
-			"Great experiences now start on small screens. Learn how to build layouts that scale beautifully.",
-		date: "Jan 25, 2025",
-		readTime: "6 min",
-		image: "/images/framer/work-logos-grid.png",
-	},
-	{
-		href: "/blog",
-		category: "SEO",
-		title: "SEO Agency: How to rank on page 1 of Google",
-		excerpt:
-			"Search engine optimization is the key to increased visibility, traffic, and revenue.",
-		date: "Jan 25, 2025",
-		readTime: "9 min",
-		image: "/images/framer/work-ads.png",
-	},
-	{
-		href: "/blog",
-		category: "UI/UX Design",
-		title: "UI/UX Design: Digital experiences that convert",
-		excerpt:
-			"Good design is invisible. Learn how UX design drives results and reduces friction.",
-		date: "Jan 28, 2025",
-		readTime: "8 min",
-		image: "/images/framer/work-product-pages.png",
-	},
-	{
-		href: "/blog",
-		category: "Web development",
-		title: "Web development: Frontend, Backend & Full Stack",
-		excerpt:
-			"Modern web projects need speed, stability, and clarity across the stack.",
-		date: "Jan 30, 2025",
-		readTime: "5 min",
-		image: "/images/framer/hero-watch.png",
-	},
-	{
-		href: "/blog",
-		category: "Google Ads",
-		title: "Google Ads: The Guide to Successful SEA Campaigns",
-		excerpt:
-			"Learn how to structure, launch, and optimize paid search campaigns that scale.",
-		date: "Feb 1, 2025",
-		readTime: "7 min",
-		image: "/images/framer/work-rootura.png",
-	},
-	{
-		href: "/blog",
-		category: "Performance",
-		title: "Performance optimization: Achieve PageSpeed 100/100",
-		excerpt:
-			"Fast sites convert. Explore practical steps to hit top scores without sacrificing design.",
-		date: "Feb 3, 2025",
-		readTime: "5 min",
-		image: "/images/framer/work-plumpd.png",
-	},
-];
+  const posts = await Sanity.fetchQuery(query);
 
-export default function BlogMain() {
-	return (
-		<main className={styles.blogMain}>
-			<div className="section-shell">
-				<div className={styles.blogInner}>
-					<header className={styles.hero}>
-						<h1 className={styles.title}>The Dropline Journal</h1>
-						<p className={styles.subtitle}>
-							Marketing insights, digital strategy, and design trends curated by
-							Dublin&apos;s leading marketing agency.
-						</p>
-					</header>
+  if (!posts || posts.length === 0) {
+    return (
+      <main className={styles.blogMain}>
+        <div className="section-shell">
+          <div className={styles.blogInner}>
+            <header className={styles.hero}>
+              <h1 className={styles.title}>The Dropline Journal</h1>
+              <p className={styles.subtitle}>
+                Marketing insights, digital strategy, and design trends curated by
+                Dublin&apos;s leading marketing agency.
+              </p>
+            </header>
+            <p>No blog posts found.</p>
+          </div>
+        </div>
+      </main>
+    );
+  }
 
-					<section className={styles.featuredSection}>
-						<article className={styles.featuredCard}>
-							<div className={styles.featuredMedia}>
-								<Image
-									src={featuredPost.image}
-									alt={featuredPost.title}
-									fill
-									className={styles.featuredImage}
-									sizes="(max-width: 900px) 100vw, 60vw"
-									style={{ objectFit: "cover" }}
-									priority
-								/>
-								<span className={styles.featuredBadge}>{featuredPost.badge}</span>
-							</div>
+  const featuredPost = posts.find((p: any) => p.featured) || posts[0];
+  const otherPosts = posts.filter((p: any) => p._id !== featuredPost._id);
 
-							<div className={styles.featuredContent}>
-								<div className={styles.featuredMeta}>
-									<span>{featuredPost.category}</span>
-									<span>{featuredPost.date}</span>
-									<span>{featuredPost.readTime}</span>
-								</div>
-								<h2 className={styles.featuredTitle}>{featuredPost.title}</h2>
-								<p className={styles.featuredExcerpt}>{featuredPost.excerpt}</p>
-								<div className={styles.featuredFooter}>
-									<span className={styles.featuredAuthor}>By {featuredPost.author}</span>
-									<Link href={featuredPost.href} className={styles.featuredLink}>
-										Read More -&gt;
-									</Link>
-								</div>
-							</div>
-						</article>
-					</section>
+  // Build image URLs server-side to avoid bundling image-builder on client
+  let featuredImageUrl: string | null = null;
+  if (featuredPost?.images && featuredPost.images.length > 0) {
+    const b = await Sanity.urlFor(featuredPost.images[0]);
+    featuredImageUrl = b.width(1200).height(800).url();
+  }
 
-					<section className={styles.postsSection}>
-						<div className={styles.postsGrid}>
-							{posts.map((post) => (
-								<article key={post.title} className={styles.card}>
-									<div className={styles.cardMedia}>
-										<Image
-											src={post.image}
-											alt={post.title}
-											fill
-											sizes="(max-width: 900px) 100vw, 33vw"
-											style={{ objectFit: "cover" }}
-										/>
-									</div>
-									<div className={styles.cardBody}>
-										<span className={styles.cardBadge}>{post.category}</span>
-										<h3 className={styles.cardTitle}>{post.title}</h3>
-										<p className={styles.cardExcerpt}>{post.excerpt}</p>
-										<div className={styles.cardMeta}>
-											<span>{post.date}</span>
-											<span>{post.readTime}</span>
-										</div>
-									</div>
-								</article>
-							))}
-						</div>
+  const otherImages = await Promise.all(
+    otherPosts.map(async (p: any) => {
+      if (p?.images && p.images.length > 0) {
+        const b = await Sanity.urlFor(p.images[0]);
+        return b.width(800).height(600).url();
+      }
+      return null;
+    })
+  );
 
-						<div className={styles.readMoreWrap}>
-							<button type="button" className={styles.readMoreButton}>
-								Read More
-							</button>
-						</div>
-					</section>
-				</div>
-			</div>
-		</main>
-	);
+  function formatDate(dateStr: string) {
+    if (!dateStr) return "";
+    return new Date(dateStr).toLocaleDateString("en-GB", { month: "short", day: "numeric", year: "numeric" });
+  }
+
+  return (
+    <main className={styles.blogMain}>
+      <div className="section-shell">
+        <div className={styles.blogInner}>
+          <header className={styles.hero}>
+            <h1 className={styles.title}>The Dropline Journal</h1>
+            <p className={styles.subtitle}>
+              Marketing insights, digital strategy, and design trends curated by
+              Dublin&apos;s leading marketing agency.
+            </p>
+          </header>
+
+          <section className={styles.featuredSection}>
+            <article className={styles.featuredCard}>
+              <div className={styles.featuredMedia}>
+                {featuredImageUrl ? (
+                  <Image
+                    src={featuredImageUrl}
+                    alt={featuredPost.title}
+                    fill
+                    className={styles.featuredImage}
+                    sizes="(max-width: 900px) 100vw, 60vw"
+                    style={{ objectFit: "cover" }}
+                    priority
+                  />
+                ) : null}
+                <span className={styles.featuredBadge}>Featured</span>
+              </div>
+
+              <div className={styles.featuredContent}>
+                <div className={styles.featuredMeta}>
+                  <span>{featuredPost.category}</span>
+                  <span>{formatDate(featuredPost.publishedAt)}</span>
+                  <span>{/* readTime placeholder */}</span>
+                </div>
+                <h2 className={styles.featuredTitle}>{featuredPost.title}</h2>
+                <p className={styles.featuredExcerpt}>{featuredPost.excerpt}</p>
+                <div className={styles.featuredFooter}>
+                  <span className={styles.featuredAuthor}>By {featuredPost.author}</span>
+                  <Link href={`/blog/${featuredPost.slug}`} className={styles.featuredLink}>
+                    Read More -&gt;
+                  </Link>
+                </div>
+              </div>
+            </article>
+          </section>
+
+          <section className={styles.postsSection}>
+            <div className={styles.postsGrid}>
+              {otherPosts.map((post: any, idx: number) => (
+                <Link key={post._id} href={`/blog/${post.slug}`}>
+                  <article className={styles.card}>
+                    <div className={styles.cardMedia}>
+                      {otherImages[idx] ? (
+                        <Image
+                          src={otherImages[idx] as string}
+                          alt={post.title}
+                          fill
+                          sizes="(max-width: 900px) 100vw, 33vw"
+                          style={{ objectFit: "cover" }}
+                        />
+                      ) : null}
+                    </div>
+                    <div className={styles.cardBody}>
+                      <span className={styles.cardBadge}>{post.category}</span>
+                      <h3 className={styles.cardTitle}>{post.title}</h3>
+                      <p className={styles.cardExcerpt}>{post.excerpt}</p>
+                      <div className={styles.cardMeta}>
+                        <span>{formatDate(post.publishedAt)}</span>
+                        <span>{/* optional read time */}</span>
+                      </div>
+                    </div>
+                  </article>
+                </Link>
+              ))}
+            </div>
+
+            <div className={styles.readMoreWrap}>
+              <Link href="/blog" className={styles.readMoreButton}>
+                Read More
+              </Link>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  );
 }

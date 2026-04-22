@@ -1,3 +1,472 @@
+/* ==================== NAVBAR STYLES ==================== */
+/* Fixed header navigation styling */
+
+.navbar {
+  /* Fixed positioning at top of page */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  
+  /* Background and dimensions */
+  background: #e5e5e5;
+  height: 80px;
+  
+  /* Flexbox centering */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.navInner {
+  /* Content wrapper inside navbar */
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  width: min(100%, 1440px);
+  max-width: 1440px;
+  height: 80px;
+  padding: 0 48px;
+  box-sizing: border-box;
+}
+
+.logo {
+  /* Logo/branding link */
+  display: inline-flex;
+  align-items: center;
+  color: black;
+  text-decoration: none;
+}
+
+.logoImage {
+  /* Logo image sizing */
+  width: clamp(72px, 20vw, 138px);
+  height: auto;
+  color: black;
+}
+
+.navDesktop {
+  /* Desktop navigation links - hidden on mobile */
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+
+@media (min-width: 768px) {
+  .navDesktop {
+    display: flex;
+  }
+}
+
+.navLink {
+  /* Individual navigation link styling */
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #0a0a0a;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.navLink:hover {
+  /* Hover state for navigation links */
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.navLink:focus-visible {
+  /* Keyboard focus state */
+  outline: 2px solid #111;
+  outline-offset: 2px;
+  border-radius: 999px;
+}
+
+.actionWrap {
+  /* Right side action buttons container */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+/* ==================== MAIN CONTENT STYLES ==================== */
+/* Blog detail page main content area */
+
+.pageMain {
+  /* Main page container */
+  min-height: 100dvh;
+  background-color: #f4f4f2;
+  padding-top: 100px; /* Gap between navbar and content */
+}
+
+.article {
+  /* Article wrapper with responsive padding */
+  padding: 3rem 0 4.5rem;
+}
+
+@media (min-width: 640px) {
+  .article {
+    padding: 4rem 0 4.5rem;
+  }
+}
+
+.articleInner {
+  /* Content container - max-width centered */
+  width: 100%;
+  max-width: 896px;
+  margin: 0 auto;
+}
+
+.headerSection {
+  /* Top header area with title and metadata */
+  margin-bottom: 2rem;
+}
+
+.categoryBadge {
+  /* Small category/tag badge */
+  display: inline-block;
+  background-color: #b6ec97;
+  color: #000;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.375rem 0.75rem;
+  border-radius: 9999px;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.blogTitle {
+  /* Main blog post title */
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  color: #000;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.metaInfo {
+  /* Metadata container (author, date, etc.) */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.metaAuthor {
+  /* Author name styling */
+  font-weight: 500;
+  color: #333;
+}
+
+.metaSeparator {
+  /* Separator between metadata items (•) */
+  color: #999;
+}
+
+.imageWrapper {
+  /* Featured image container */
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin-bottom: 3rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.blogImage {
+  /* Featured image styling */
+  object-fit: cover;
+}
+
+.contentSection {
+  /* Main blog content wrapper */
+  margin-bottom: 3rem;
+}
+
+.contentText {
+  /* Blog post text content */
+  color: #4a4a4a;
+  font-size: 1rem;
+  line-height: 1.75;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.backLinkSection {
+  /* Back link area */
+  padding-top: 2rem;
+  border-top: 1px solid #d1d5db;
+}
+
+.backLink {
+  /* Back link styling */
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #4a4a4a;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.backLink:hover {
+  /* Hover state for back link */
+  color: #000;
+}
+
+/* ==================== FOOTER STYLES ==================== */
+/* Page footer styling */
+
+.footerSection {
+  /* Main footer container */
+  background: #000;
+  padding: 1.25rem 0 calc(1.5rem + env(safe-area-inset-bottom, 0px));
+}
+
+.footerTop {
+  /* Top section of footer with columns */
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.45rem 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 1.1rem;
+}
+
+.footerColumn {
+  /* Individual footer column */
+  min-width: 0;
+}
+
+.footerHeading {
+  /* Footer section headings */
+  margin: 0 0 0.5rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.64rem;
+  font-weight: 600;
+}
+
+.footerList {
+  /* Footer link list */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.3rem;
+}
+
+.footerLink {
+  /* Individual footer link */
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-size: 0.83rem;
+  line-height: 1.3;
+  transition: color 0.2s ease;
+}
+
+.footerLink:hover {
+  /* Hover state for footer links */
+  color: #fff;
+}
+
+.footerText {
+  /* Regular text in footer */
+  margin: 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.83rem;
+}
+
+.footerEmail {
+  /* Email link styling in footer */
+  color: rgba(255, 255, 255, 0.94);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  font-size: 0.8rem;
+  line-height: 1.35;
+  transition: color 0.2s ease;
+}
+
+.footerEmail:hover {
+  /* Hover state for email links */
+  color: #fff;
+}
+
+.supportHeading {
+  /* Support section heading */
+  margin-top: 0.85rem;
+}
+
+.footerBrand {
+  /* Brand/company name in footer */
+  margin: 0;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.footerLegal {
+  /* Legal text/disclaimer */
+  margin: 0.5rem 0 0;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.69rem;
+  line-height: 1.35;
+  max-width: 30rem;
+}
+
+.footerPolicyLinks {
+  /* Footer policy/legal links */
+  margin-top: 0.8rem;
+  display: grid;
+  gap: 0.34rem;
+}
+
+.footerShowcase {
+  /* Footer showcase/feature section */
+  margin-top: 1.2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 0.8rem;
+}
+
+.footerTitle {
+  /* Large featured title in footer */
+  margin: 0;
+  color: #fff;
+  font-size: clamp(2.75rem, 11vw, 11rem);
+  line-height: 0.93;
+  letter-spacing: -0.05em;
+  font-weight: 500;
+}
+
+.footerTagline {
+  /* Tagline under footer title */
+  margin: 0.5rem 0 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+}
+
+/* ==================== RESPONSIVE STYLES ==================== */
+/* Mobile and tablet responsive adjustments */
+
+@media (max-width: 768px) {
+  /* Tablet and below adjustments */
+  
+  .pageMain {
+    padding-top: 60px; /* Reduced top padding for mobile */
+  }
+
+  .article {
+    padding: 2rem 1rem;
+  }
+
+  .navInner {
+    padding: 0 24px; /* Reduced horizontal padding */
+  }
+
+  .blogTitle {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .metaInfo {
+    gap: 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .imageWrapper {
+    margin-bottom: 2rem;
+  }
+
+  .contentSection {
+    margin-bottom: 2rem;
+  }
+
+  .backLinkSection {
+    padding-top: 1.5rem;
+  }
+
+  .footerTop {
+    gap: 1rem 0.75rem;
+    padding-top: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Mobile adjustments */
+  
+  .pageMain {
+    padding-top: 50px; /* Further reduced top padding */
+  }
+
+  .article {
+    padding: 1.5rem 0.75rem;
+  }
+
+  .navInner {
+    padding: 0 16px; /* Further reduced horizontal padding */
+    height: 70px; /* Reduced navbar height */
+  }
+
+  .navbar {
+    height: 70px;
+  }
+
+  .headerSection {
+    margin-bottom: 1rem;
+  }
+
+  .categoryBadge {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .blogTitle {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .metaInfo {
+    gap: 0.25rem;
+    font-size: 0.7rem;
+    margin-bottom: 1rem;
+  }
+
+  .imageWrapper {
+    aspect-ratio: 4 / 3; /* Adjusted aspect ratio for mobile */
+    margin-bottom: 1.5rem;
+  }
+
+  .contentText {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .footerTop {
+    grid-template-columns: 1fr; /* Single column on mobile */
+    gap: 1rem 0;
+  }
+
+  .footerTitle {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+}
+
+/* ==================== LEGACY STYLES (OLD) ==================== */
+/* Keeping old styles for reference/backwards compatibility */
+
 .wrapper {
   width: 100%;
   display: block;
@@ -5,6 +474,7 @@
   color: #111;
   padding: 120px 20px 72px;
   box-sizing: border-box;
+  margin-top: 100px;
 }
 
 .inner {
@@ -140,5 +610,194 @@
 
   .shareBar {
     justify-content: flex-start;
+  }
+}
+
+/* ==================== NEW BLOG DETAIL PAGE STYLES ==================== */
+
+.pageMain {
+  min-height: 100dvh;
+  background-color: #f4f4f2;
+  padding-top: 100px;
+}
+
+.article {
+  /* Using section-shell class handling via parent */
+  padding: 3rem 0 4.5rem;
+}
+
+@media (min-width: 640px) {
+  .article {
+    padding: 4rem 0 4.5rem;
+  }
+}
+
+.articleInner {
+  width: 100%;
+  max-width: 896px;
+  margin: 0 auto;
+}
+
+.headerSection {
+  margin-bottom: 2rem;
+}
+
+.categoryBadge {
+  display: inline-block;
+  background-color: #b6ec97;
+  color: #000;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.375rem 0.75rem;
+  border-radius: 9999px;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.blogTitle {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  color: #000;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.metaInfo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.metaAuthor {
+  font-weight: 500;
+  color: #333;
+}
+
+.metaSeparator {
+  color: #999;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin-bottom: 3rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.blogImage {
+  object-fit: cover;
+}
+
+.contentSection {
+  margin-bottom: 3rem;
+}
+
+.contentText {
+  color: #4a4a4a;
+  font-size: 1rem;
+  line-height: 1.75;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.backLinkSection {
+  padding-top: 2rem;
+  border-top: 1px solid #d1d5db;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #4a4a4a;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.backLink:hover {
+  color: #000;
+}
+
+/* ==================== RESPONSIVE STYLES ==================== */
+
+@media (max-width: 768px) {
+  .pageMain {
+    padding-top: 60px;
+  }
+
+  .article {
+    padding: 2rem 1rem;
+  }
+
+  .blogTitle {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .metaInfo {
+    gap: 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .imageWrapper {
+    margin-bottom: 2rem;
+  }
+
+  .contentSection {
+    margin-bottom: 2rem;
+  }
+
+  .backLinkSection {
+    padding-top: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .pageMain {
+    padding-top: 50px;
+  }
+
+  .article {
+    padding: 1.5rem 0.75rem;
+  }
+
+  .headerSection {
+    margin-bottom: 1rem;
+  }
+
+  .categoryBadge {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .blogTitle {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .metaInfo {
+    gap: 0.25rem;
+    font-size: 0.7rem;
+    margin-bottom: 1rem;
+  }
+
+  .imageWrapper {
+    aspect-ratio: 4 / 3;
+    margin-bottom: 1.5rem;
+  }
+
+  .contentText {
+    font-size: 0.9rem;
+    line-height: 1.6;
   }
 }

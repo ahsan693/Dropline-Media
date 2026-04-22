@@ -1,11 +1,20 @@
+/* Selected Work layout controls: adjust these to match Services spacing and card size. */
 .selectedWorkSection {
+	--section-padding-top: 96px; /* Top padding for the Selected Work section */
+	--section-padding-bottom: 96px; /* Bottom padding for the Selected Work section */
+	--section-padding-x: 0px; /* Horizontal padding handled by .section-shell */
+	--section-max-width: 76.25rem; /* Max width for .selectedWorkWrap */
+	--grid-gap: 16px; /* Gap between .selectedWorkCard items */
+	--card-max-width: 560px; /* Max width for each .selectedWorkCard */
+	--card-radius: 1.1rem; /* Corner radius for .selectedWorkCard */
 	background: #000;
-	padding: 3.25rem 0 4.25rem;
+	padding: var(--section-padding-top) var(--section-padding-x)
+		var(--section-padding-bottom);
 }
 
 .selectedWorkWrap {
 	width: 100%;
-	max-width: 76.25rem;
+	max-width: var(--section-max-width);
 	margin: 0 auto;
 }
 
@@ -36,19 +45,22 @@
 	
 }
 
-.selectedWorkGrid {
+	.selectedWorkGrid {
 	display: grid;
 	grid-template-columns: 1fr;
-	gap: 0.9rem;
+		gap: var(--grid-gap);
 	margin-top: 1.35rem;
+	justify-items: center;
 }
 
-.selectedWorkCard {
-	border-radius: 1.1rem;
-	overflow: hidden;
-	background: #0b0b0b;
-	border: 1px solid rgba(255, 255, 255, 0.08);
-}
+	.selectedWorkCard {
+		border-radius: var(--card-radius);
+		overflow: hidden;
+		background: #0b0b0b;
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		width: 100%;
+		max-width: var(--card-max-width);
+	}
 
 .selectedWorkImage {
 	display: block;
@@ -86,22 +98,16 @@
 @media (min-width: 520px) {
 	.selectedWorkGrid {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 0.8rem;
 	}
 }
 
 @media (min-width: 768px) {
-	.selectedWorkSection {
-		padding: 3.9rem 0 5.1rem;
-	}
-
 	.selectedWorkGrid {
-		gap: 1rem;
 		margin-top: 1.75rem;
 	}
 
-	.selectedWorkCard {
-		border-radius: 1.45rem;
+	.selectedWorkSection {
+		--card-radius: 1.45rem;
 	}
 
 	.selectedWorkCtaWrap {
@@ -116,11 +122,7 @@
 }
 
 @media (min-width: 861px) {
-	.selectedWorkGrid {
-		gap: 1.05rem;
-	}
-
-	.selectedWorkCard {
-		border-radius: 1.6rem;
+	.selectedWorkSection {
+		--card-radius: 1.6rem;
 	}
 }

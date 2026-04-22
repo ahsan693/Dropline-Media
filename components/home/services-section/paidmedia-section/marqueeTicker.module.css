@@ -1,0 +1,100 @@
+.marqueeContainer {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  z-index: 2;
+  height: var(--ticker-height, 3rem);
+}
+
+.marqueeTrack {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.marqueeItem {
+  position: absolute;
+  top: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-50%);
+  will-change: transform;
+}
+
+.scrollLeft .marqueeItem {
+  left: 100%;
+  animation: marquee-left var(--scroll-speed, 20s) linear infinite;
+}
+
+.scrollRight .marqueeItem {
+  left: -100%;
+  animation: marquee-right var(--scroll-speed, 20s) linear infinite;
+}
+
+.tickerImage {
+  width: auto;
+  height: var(--ticker-height, 3rem);
+  object-fit: contain;
+}
+
+@keyframes marquee-left {
+  0% {
+    transform: translateY(-50%) translateX(0);
+  }
+  100% {
+    transform: translateY(-50%) translateX(-220%);
+  }
+}
+
+@keyframes marquee-right {
+  0% {
+    transform: translateY(-50%) translateX(0);
+  }
+  100% {
+    transform: translateY(-50%) translateX(220%);
+  }
+}
+
+.ticker1 {
+  position: absolute;
+  left: 0;
+  bottom: 2%;
+  width: clamp(12rem, 68%, 22rem);
+  height: clamp(7rem, 14vw, 10rem);
+  z-index: 3;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ticker1 img,
+.ticker1 .tickerImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.ticker2 {
+  position: absolute;
+  right: 0;
+  top: 18%;
+  width: clamp(10rem, 52%, 17rem);
+  height: clamp(4.5rem, 9vw, 6.5rem);
+  z-index: 3;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ticker2 img,
+.ticker2 .tickerImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+

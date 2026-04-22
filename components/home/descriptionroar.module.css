@@ -1,0 +1,42 @@
+.charHidden {
+  opacity: 0;
+  display: inline-block;
+  will-change: opacity;
+}
+
+.charRevealed {
+  opacity: 1;
+  display: inline-block;
+  transition: opacity 120ms ease-out;
+  will-change: opacity;
+}
+
+@keyframes charReveal {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.wordSpacing {
+  word-spacing: 2px;
+  white-space: pre-wrap;
+  display: inline;
+}
+
+.wordHidden {
+  opacity: 0.16;
+  display: inline;
+  will-change: opacity;
+  transition: opacity 260ms ease;
+}
+
+.wordRevealed {
+  opacity: 1;
+  filter: none;
+  transform: translateY(0);
+  display: inline;
+  transition: opacity 260ms ease;
+}
