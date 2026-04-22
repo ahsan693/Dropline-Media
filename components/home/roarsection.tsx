@@ -4,9 +4,9 @@ import styles from "./roarsection.module.css";
 import WordReveal from "../ui/WordReveal";
 
 export default function RoarSection() {
-  const li1Ref = useRef<HTMLElement | null>(null);
-  const li2Ref = useRef<HTMLElement | null>(null);
-  const li3Ref = useRef<HTMLElement | null>(null);
+  const li1Ref = useRef<HTMLLIElement | null>(null);
+  const li2Ref = useRef<HTMLLIElement | null>(null);
+  const li3Ref = useRef<HTMLLIElement | null>(null);
   return (
     <section className="bg-black pt-6 pb-10 lg:pt-[1.5625rem] lg:pb-[6.5rem]">
       <div className="mx-auto w-full max-w-full lg:max-w-[90rem] lg:h-[57.21875rem]">
