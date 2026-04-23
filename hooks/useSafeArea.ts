@@ -28,11 +28,27 @@ export function useSafeArea() {
     const right = parseFloat(style.paddingRight) || 0;
 
     const safeData = { top, bottom, left, right };
+    
+    let isMounted = true;
+    
     // schedule state update to avoid calling setState directly during measurement
-    requestAnimationFrame(() => setSafe(safeData));
-    if (el.parentNode) {
-      el.parentNode.removeChild(el);
-    }
+    const rafId = requestAnimationFrame(() => {
+      if (isMounted) {
+        setSafe(safeData);
+      }
+      // Remove only after state update is scheduled
+      if (el.parentNode) {
+        el.remove();
+      }
+    });
+
+    return () => {
+      isMounted = false;
+      cancelAnimationFrame(rafId);
+      if (el.parentNode) {
+        el.remove();
+      }
+    };
   }, []);
 
   return safe;

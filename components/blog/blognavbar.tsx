@@ -17,6 +17,23 @@ const navLinks = [
 export default function BlogNavbar() {
   const [open, setOpen] = useState(false);
   const shouldReduce = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const navAnimation = (mounted && !shouldReduce)
+    ? {
+        initial: { opacity: 0, y: -12 },
+        animate: { opacity: 1, y: 0 },
+        exit: { opacity: 0, y: -12 },
+      }
+    : {
+        initial: {},
+        animate: {},
+        exit: {},
+      };
 
   return (
     <header
@@ -80,12 +97,11 @@ export default function BlogNavbar() {
           </button>
         </div>
 
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
           {open && (
             <motion.nav
-              initial={shouldReduce ? {} : { opacity: 0, y: -12 }}
-              animate={shouldReduce ? {} : { opacity: 1, y: 0 }}
-              exit={shouldReduce ? {} : { opacity: 0, y: -12 }}
+              key="blog-mobile-nav"
+              {...navAnimation}
               transition={{ duration: 0.18 }}
               className={styles.drawer}
             >

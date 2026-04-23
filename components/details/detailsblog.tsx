@@ -55,9 +55,7 @@ export default function DetailsBlog({
         document.body.appendChild(ta)
         ta.select()
         document.execCommand('copy')
-        if (ta.parentNode) {
-          ta.parentNode.removeChild(ta)
-        }
+        ta.remove()
       }
       setCopied(true)
       setTimeout(() => setCopied(false), 2500)

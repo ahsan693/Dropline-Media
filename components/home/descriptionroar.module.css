@@ -1,3 +1,7 @@
+/* ================================================================
+   ANIMATION CLASSES (UNCHANGED - SAFE)
+   ================================================================ */
+
 .charHidden {
   opacity: 0;
   display: inline-block;
@@ -12,12 +16,8 @@
 }
 
 @keyframes charReveal {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 .wordSpacing {
@@ -27,16 +27,71 @@
 }
 
 .wordHidden {
-  opacity: 0.16;
+  opacity: 0.12;
   display: inline;
-  will-change: opacity;
-  transition: opacity 260ms ease;
+  will-change: opacity, filter;
+  transition: opacity 0.3s ease, filter 0.3s ease;
 }
 
 .wordRevealed {
   opacity: 1;
-  filter: none;
-  transform: translateY(0);
+  filter: blur(0px);
   display: inline;
-  transition: opacity 260ms ease;
+  will-change: opacity, filter;
+}
+
+/* ================================================================
+   SECTION (FIXED SPACING)
+   ================================================================ */
+
+.section {
+  padding-top: 5rem;     /* py-20 */
+  padding-bottom: 5rem;
+}
+
+/* ================================================================
+   CONTAINER (🔥 FIXED WIDTH ISSUE)
+   ================================================================ */
+
+.container {
+  max-width: 75rem;        /* balanced width */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.35rem;   /* reduced by 10% (from 1.5rem) */
+  padding-right: 1.35rem;
+}
+
+/* ================================================================
+   PARAGRAPH (REAL WEBSITE STYLE FIX)
+   ================================================================ */
+
+.paragraph {
+  margin-bottom: 3.5rem;   /* mb-14 */
+  line-height: 1.6;
+  text-align: left;
+  font-weight: 500;        /* Updated weight to 500 */
+}
+
+.paragraph:last-child {
+  margin-bottom: 0;
+}
+
+/* ================================================================
+   RESPONSIVE (TABLET + DESKTOP)
+   ================================================================ */
+
+@media (min-width: 768px) {
+  .section {
+    padding-top: 12.5rem;  /* py-50 */
+    padding-bottom: 12.5rem;
+  }
+
+  .container {
+    padding-left: 3.6rem;  /* reduced by 10% (from 4rem) */
+    padding-right: 3.6rem;
+  }
+
+  .paragraph {
+    margin-bottom: 6.25rem; /* mb-25 */
+  }
 }

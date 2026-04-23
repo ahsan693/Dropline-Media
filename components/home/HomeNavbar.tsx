@@ -20,9 +20,26 @@ export default function HomeNavbar() {
 
   // ================= REDUCE MOTION (accessibility animation control)
   const shouldReduce = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const navAnimation = (mounted && !shouldReduce)
+    ? {
+        initial: { opacity: 0, y: -12 },
+        animate: { opacity: 1, y: 0 },
+        exit: { opacity: 0, y: -12 },
+      }
+    : {
+        initial: {},
+        animate: {},
+        exit: {},
+      };
 
   return (
-    // ================= HEADER WRAPPER (navbar container)
+    // ... existing code ...================= HEADER WRAPPER (navbar container)
     <header
       className="fixed top-0 left-0 right-0 w-full z-50 bg-transparent"
       // ↑ change bg-transparent → bg-black/white etc for background
@@ -168,24 +185,18 @@ export default function HomeNavbar() {
         </div>
 
         {/* ================= MOBILE MENU (DROPDOWN DRAWER) */}
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
           {open && (
             <motion.nav
-
-              initial={shouldReduce ? {} : { opacity: 0, y: -12 }}
-              animate={shouldReduce ? {} : { opacity: 1, y: 0 }}
-              exit={shouldReduce ? {} : { opacity: 0, y: -12 }}
+              key="mobile-nav"
+              {...navAnimation}
               transition={{ duration: 0.18 }}
-
               className="
                 md:hidden
                 fixed inset-x-4
-
                 top-[var(--navbar-offset-mobile)]
                 md:top-[var(--navbar-offset-tablet)]
-
                 z-40 rounded-lg
-
                 bg-bs-panel
                 p-4 shadow-lg
               "

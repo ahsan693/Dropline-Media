@@ -1,51 +1,148 @@
+/* ================================================================
+   MOBILE  (base styles — applies to everything below 1024px)
+   ================================================================ */
+
+.section {
+  background-color: #000;
+  padding-top: 4rem;    /* py-16 */
+  padding-bottom: 4rem; /* py-16 */
+  margin-top: 0;        /* Removed in favor of large padding from snippet */
+  margin-bottom: 0;
+}
+
+.outerWrapper {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.innerWrapper {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 61.25rem;
+  padding-left: 1rem;  /* px-4 */
+  padding-right: 1rem; /* px-4 */
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.content {
+  width: 100%;
+  text-align: center;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0; /* Gap handled by listItem padding to match py-10 */
+  margin-top: 0;
+}
+
+.listItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 2.5rem;    /* py-10 */
+  padding-bottom: 2.5rem; /* py-10 */
+}
+
+.statRow {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.subtitle {
+  margin-top: 0.5rem; /* mt-2 */
+  font-size: 1.5rem; /* Increased from 0.9rem to better match large metrics */
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: lowercase; /* Matches "return on ad spend" style */
+  font-weight: 450;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  display: block; /* Matches block in snippet */
+}
+
 .roarGreen {
-  font-family: var(--font-inter), Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "Instrument Serif", "Times New Roman", Georgia, serif;
   color: #9edf73;
-  font-size: 48px;
-  font-weight: 300 !important;
+  font-size: 70px; /* ← change mobile size here */
+  font-weight: 340;
   line-height: 1;
-}
-
-@media (min-width: 375px) {
-  .roarGreen {
-    font-size: 56px;
-  }
-}
-
-@media (min-width: 640px) {
-  .roarGreen {
-    font-size: 72px;
-  }
-}
-
-@media (min-width: 768px) {
-  .roarGreen {
-    font-size: 125px;
-  }
 }
 
 .roarWhite {
   font-family: 'Neue Montreal', "Avenir Next", Satoshi, "Helvetica Neue", Arial, sans-serif;
   color: #ffffff;
-  font-weight: 300 !important;
-  font-size: 51px; /* ~6% larger to compensate for Neue Montreal's smaller metrics */
+  font-size: 74px; /* ← change mobile size here */
+  font-weight: 340;
   line-height: 1;
 }
 
-@media (min-width: 375px) {
-  .roarWhite {
-    font-size: 59px;
-  }
-}
 
-@media (min-width: 640px) {
-  .roarWhite {
-    font-size: 76px;
-  }
-}
+/* ================================================================
+   DESKTOP  (applies at 1024px and above)
+   ================================================================ */
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
+  .section {
+    padding-top: 6.5rem;    /* py-26 */
+    padding-bottom: 6.5rem; /* py-26 */
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .outerWrapper {
+    max-width: 90rem;
+    height: auto; /* Height auto to allow padding to drive layout */
+  }
+
+  .innerWrapper {
+    padding-left: 4rem;  /* px-16 */
+    padding-right: 4rem; /* px-16 */
+    height: auto;
+  }
+
+  .list {
+    gap: 0;
+    margin-top: 0;
+  }
+
+  .roarGreen {
+    font-size: 160px; /* ← change desktop size here */
+  }
+
   .roarWhite {
-    font-size: 133px;
+    font-size: 150px; /* ← change desktop size here */
+  }
+
+  .subtitle {
+    font-size: 2.25rem; /* ~36px, fits better with 150-160px metrics */
+    margin-top: 0.5rem; /* Matches mt-2 block in snippet */
+    font-weight: 450;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
   }
 }

@@ -28,22 +28,24 @@ export default function TrustedSection() {
         <div className={styles.trustedWrap}>
           <h3 className={styles.trustedTitle}>Trusted by</h3>
 
-          <div className={styles.logoStrip}>
-            {logos.map((logo) => (
-              <div
-                key={logo.alt}
-                className={`${styles.logoItem} ${logo.isIcon ? styles.iconLogo : ""}`}
-              >
-                <Image
-                  src={logo.src}
-                  alt={logo.alt}
-                  className={styles.logoImage}
-                  sizes="(max-width: 480px) 20vw, (max-width: 1024px) 16vw, 190px"
-                  priority={logo.alt === "Rootura" || logo.alt === "KudoCard"}
-                  loading={logo.alt === "Rootura" || logo.alt === "KudoCard" ? undefined : "lazy"}
-                />
-              </div>
-            ))}
+          <div className={styles.marqueeContainer}>
+            <div className={styles.logoStrip}>
+              {logos.map((logo) => (
+                <div
+                  key={logo.alt}
+                  className={`${styles.logoItem} ${logo.isIcon ? styles.iconLogo : ""}`}
+                >
+                  <Image
+                    src={logo.src}
+                    alt={logo.alt}
+                    className={styles.logoImage}
+                    sizes="(max-width: 480px) 20vw, (max-width: 1024px) 16vw, 190px"
+                    priority={logo.alt === "Rootura" || logo.alt === "KudoCard"}
+                    loading={logo.alt === "Rootura" || logo.alt === "KudoCard" ? undefined : "lazy"}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
