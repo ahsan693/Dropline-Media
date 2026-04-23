@@ -9,9 +9,8 @@
      --card-max-width : maximum width each card can grow to
      --card-height    : fixed height of every card
      ───────────────────────────────────────────────────────────────────────── */
-  --card-max-width: 672px;
-  --card-height: 766px;
-
+ --card-max-width: 638.4px;
+--card-height: 715.4px;
   /* Desktop section width control: keeps the frame in sync with card width + gap */
   --section-max-width: calc(var(--card-max-width) * 2 + var(--desktop-grid-gap));
   --grid-gap: 1.5rem; /* gap-6 (6 * 0.25rem = 1.5rem) */
