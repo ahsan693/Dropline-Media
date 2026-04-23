@@ -2,7 +2,7 @@
 
 // inlined SVG so `currentColor` can style the logo
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import styles from "./blognavbar.module.css";
 
@@ -19,7 +19,7 @@ export default function BlogNavbar() {
   const shouldReduce = useReducedMotion();
   const [mounted, setMounted] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setMounted(true);
   }, []);
 

@@ -35,39 +35,60 @@
 
 .logoStrip {
   margin-top: 2rem;
-  display: flex;
+  position: relative;
   width: 100%;
-  justify-content: space-between;
-  align-items: center;
-  animation: marqueeRight 20s linear infinite;
-  will-change: transform;
-}
-
-@keyframes marqueeRight {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
+  min-height: 2.35rem;
 }
 
 .logoItem {
   min-width: 0;
+  width: max-content;
   display: flex;
   justify-content: center;
   align-items: center;
-  
+  position: absolute;
+  top: 50%;
+  left: -18%;
+  transform: translateY(-50%);
+  animation: marqueeRight 20s linear infinite;
+  will-change: left;
+}
 
+.logoItem:nth-child(1) {
+  animation-delay: -16s;
+}
+
+.logoItem:nth-child(2) {
+  animation-delay: -12s;
+}
+
+.logoItem:nth-child(3) {
+  animation-delay: -8s;
+}
+
+.logoItem:nth-child(4) {
+  animation-delay: -4s;
+}
+
+.logoItem:nth-child(5) {
+  animation-delay: 0s;
+}
+
+@keyframes marqueeRight {
+  0% {
+    left: -18%;
+  }
+  100% {
+    left: 118%;
+  }
 }
 
 .logoImage {
-  width: 100%;
+  width: auto;
   height: auto;
   max-height: 2.05rem;
   object-fit: contain;
   opacity: 0.96;
-  
 }
 
 .iconLogo .logoImage {
@@ -80,8 +101,7 @@
   }
 
   .logoStrip {
-    justify-content: space-between;
-    gap: 1rem;
+    min-height: 1.7rem;
   }
 
   .logoImage {
@@ -99,8 +119,7 @@
   }
 
   .logoStrip {
-    justify-content: space-between;
-    gap: 2rem;
+    min-height: 2.35rem;
   }
 
   .logoImage {

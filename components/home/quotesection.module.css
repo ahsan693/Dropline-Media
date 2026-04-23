@@ -4,9 +4,10 @@
 }
 
 .quoteCard {
+  position: relative;
   border-radius: 2rem;
   background: #b6ec97;
-  padding: 2.2rem 1rem 1.95rem;
+  padding: 2.2rem 5rem 1.95rem;
   margin: 10px;
   overflow: hidden;
 }
@@ -22,29 +23,17 @@
 }
 
 .quoteLogo {
-  --logo-x: 0px;
-  --logo-rotate: 0deg;
   width: clamp(2.15rem, 6vw, 3.5rem);
   height: auto;
-  transition: transform 0.2s ease;
   margin-top: 2rem;
   margin-bottom: 1.5rem;
-  transform: translateX(var(--logo-x)) rotate(var(--logo-rotate));
   transform-origin: center;
-}
-
-.quoteLogo:hover,
-.quoteLogo:active {
-  animation: quoteLogoFlip 1.2s ease-in-out infinite;
+  animation: quoteLogoFlip 6s linear infinite;
 }
 
 @keyframes quoteLogoFlip {
-  0%,
-  100% {
-    transform: translateX(var(--logo-x)) rotate(var(--logo-rotate)) rotateY(0deg);
-  }
-  50% {
-    transform: translateX(var(--logo-x)) rotate(var(--logo-rotate)) rotateY(180deg);
+  to {
+    transform: rotateY(360deg);
   }
 }
 
@@ -52,7 +41,7 @@
   margin: 0;
   color: #050505;
   font-size: clamp(0.95rem, 2.2vw, 1.9rem);
-  line-height: 1;
+  line-height: 1.4;
   letter-spacing: -0.02em;
   max-width: 48rem;
 }
@@ -74,42 +63,56 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: clamp(1.25rem, 3.2vw, 1.85rem);
-  height: clamp(1.25rem, 3.2vw, 1.85rem);
+  width: clamp(2rem, 4vw, 2.8rem);
+  height: clamp(2rem, 4vw, 2.8rem);
   border-radius: 999px;
-  border: 1px solid rgba(6, 6, 6, 0.22);
-  color: rgba(6, 6, 6, 0.76);
+  background-color: #0a0a0a;
+  border: none;
+  color: #ffffff;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: clamp(0.62rem, 1.5vw, 0.82rem);
+  font-size: clamp(0.75rem, 1.6vw, 1rem);
   line-height: 1;
-  pointer-events: none;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background-color 0.2s ease;
+}
+
+.navDot:hover {
+  background-color: #333333;
 }
 
 .navDotLeft {
-  left: clamp(0.45rem, 2.5vw, 1.7rem);
+  left: 1.2rem;
 }
 
 .navDotRight {
-  right: clamp(0.45rem, 2.5vw, 1.7rem);
+  right: 1.2rem;
 }
 
 @media (max-width: 520px) {
   .quoteCard {
     border-radius: 1rem;
-    padding: 1.8rem 0.8rem 1.6rem;
+    padding: 1.8rem 3.5rem 1.6rem;
+    margin: 10px;
   }
 
   .quoteText {
     max-width: 22rem;
   }
+
+  .navDotLeft {
+    left: 1.2rem;
+  }
+
+  .navDotRight {
+    right: 1.2rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .quoteLogo {
-    transition: none;
-    transform: none !important;
     animation: none;
   }
 }

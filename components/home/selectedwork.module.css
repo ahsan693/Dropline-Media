@@ -54,13 +54,13 @@
 }
 
 	.selectedWorkCard {
-		border-radius: var(--card-radius);
-		overflow: hidden;
-		background: #0b0b0b;
-		border: 1px solid rgba(255, 255, 255, 0.08);
-		width: 100%;
-		max-width: var(--card-max-width);
-	}
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  background: transparent; /* ← was #0b0b0b */
+  
+  width: 100%;
+  max-width: var(--card-max-width);
+}
 
 .selectedWorkImage {
 	display: block;

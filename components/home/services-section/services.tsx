@@ -103,67 +103,63 @@ const cards: ServiceCard[] = [
 
 export default function Services() {
 	return (
-		<section className={styles.servicesSection}>
-			<div className="section-shell">
-				<div className={styles.servicesFrame}>
-					<h1 className={styles.servicesTitle}>Services</h1>
+  <section className={styles.servicesSection}>
+    <div className={styles.servicesFrame}>
+      <h1 className={styles.servicesTitle}>Services</h1>
 
-					<div className={styles.servicesGrid}>
-						{cards.map((card) => (
-							<article
-								key={card.title}
-								className={`${styles.serviceCard} ${styles[card.theme]}`}
-							>
-								<div className={styles.cardTop}>
-									<h3 className={styles.cardTitle}>{card.title}</h3>
-									<span className={styles.cardButton}>{card.cta} ↗</span>
-								</div>
+      <div className={styles.servicesGrid}>
+        {cards.map((card) => (
+          <article
+            key={card.title}
+            className={`${styles.serviceCard} ${styles[card.theme]}`}
+          >
+            <div className={styles.cardTop}>
+              <h3 className={styles.cardTitle}>{card.title}</h3>
+              <span className={styles.cardButton}>{card.cta} ↗</span>
+            </div>
 
-								<p className={styles.cardDescription}>{card.description}</p>
+            <p className={styles.cardDescription}>{card.description}</p>
 
-								<ul className={styles.cardList}>
-									{card.bullets.map((item) => (
-										<li key={item}>{item}</li>
-									))}
-								</ul>
+            <ul className={styles.cardList}>
+              {card.bullets.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
 
-								<div className={styles.mediaRail}>
-									<div className={styles.mediaScale}>
-										{card.title === "Paid Media" ? (
-											<PaidMediaHero />
-										) : card.title === "Content Creation" ? (
-											<ContentCreation />
-										) : (
-											<div
-												className={`${styles.mediaDrift} ${
-													card.motion === "left"
-														? styles.driftLeft
-														: card.motion === "right"
-															? styles.driftRight
-															: ""
-												}`}
-											>
-												<Image
-													src={card.image}
-													alt={card.title}
-													className={styles.cardImage}
-													sizes="(max-width: 390px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-													loading={
-														card.title === "Content Creation"
-															? undefined
-															: "lazy"
-													}
-													priority={card.title === "Content Creation"}
-												/>
-											</div>
-										)}
-									</div>
-								</div>
-							</article>
-						))}
-					</div>
-				</div>
-			</div>
-		</section>
-	);
+            <div className={styles.mediaRail}>
+              <div className={styles.mediaScale}>
+                {card.title === "Paid Media" ? (
+                  <PaidMediaHero />
+                ) : card.title === "Content Creation" ? (
+                  <ContentCreation />
+                ) : (
+                  <div
+                    className={`${styles.mediaDrift} ${
+                      card.motion === "left"
+                        ? styles.driftLeft
+                        : card.motion === "right"
+                          ? styles.driftRight
+                          : ""
+                    }`}
+                  >
+                    <Image
+                      src={card.image}
+                      alt={card.title}
+                      className={styles.cardImage}
+                      sizes="(max-width: 390px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      loading={
+                        card.title === "Content Creation" ? undefined : "lazy"
+                      }
+                      priority={card.title === "Content Creation"}
+                    />
+                  </div>
+                )}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+);
 }

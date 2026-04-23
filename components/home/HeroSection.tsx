@@ -34,12 +34,15 @@ export default function HeroSection() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-    setViewportWidth(window.innerWidth);
+    const rafId = requestAnimationFrame(() => {
+      setMounted(true);
+      setViewportWidth(window.innerWidth);
+    });
     const onResize = () => setViewportWidth(window.innerWidth);
     window.addEventListener("resize", onResize);
 
     return () => {
+      cancelAnimationFrame(rafId);
       window.removeEventListener("resize", onResize);
     };
   }, []);
@@ -190,7 +193,7 @@ export default function HeroSection() {
     return () => {
       ctx.revert();
     };
-  }, [viewportWidth]);
+  }, [mounted, viewportWidth]);
 
   return (
     <section className={styles.bsHeroSection}>

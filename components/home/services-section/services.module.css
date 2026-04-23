@@ -2,12 +2,21 @@
 .servicesSection {
   --section-padding-top: 96px; /* Top padding for the Services section */
   --section-padding-bottom: 96px; /* Bottom padding for the Services section */
-  --section-padding-x: 0px; /* Horizontal padding handled by .section-shell */
-  --section-max-width: 76.25rem; /* Max width for .servicesFrame */
+  --section-padding-x: 40px; /* Horizontal padding handled by .section-shell */
+
+  /* ─────────────────────────────────────────────────────────────────────────
+     EDIT CARD SIZE HERE — only touch these two values to resize all 6 cards.
+     --card-max-width : maximum width each card can grow to
+     --card-height    : fixed height of every card
+     ───────────────────────────────────────────────────────────────────────── */
+  --card-max-width: 672px;
+  --card-height: 766px;
+
+  /* Desktop section width control: keeps the frame in sync with card width + gap */
+  --section-max-width: calc(var(--card-max-width) * 2 + var(--desktop-grid-gap));
   --grid-gap: 1.5rem; /* gap-6 (6 * 0.25rem = 1.5rem) */
-  --card-max-width: 560px; /* Max width for each .serviceCard */
-  --card-height: 560px; /* Fixed height to keep all cards equal */
-  --media-rail-height: 300px; /* Height reserved for the media area */
+  --desktop-grid-gap: 3rem; /* gap-12 */
+
   padding: var(--section-padding-top) var(--section-padding-x)
     var(--section-padding-bottom);
   background: #ffffff;
@@ -34,7 +43,8 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--grid-gap);
-  justify-items: center;
+  justify-content: center;
+  justify-items: stretch;
 }
 
 .serviceCard {
@@ -51,12 +61,16 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 0.01px;
+  /* overflow: hidden stops flex children from bursting past the fixed --card-height */
   overflow: hidden;
+  /* min-height: 0 prevents the flex container from auto-growing beyond --card-height */
+  min-height: 0;
   isolation: isolate;
   border-radius: 36px; /* Updated to match rounded-[36px] */
   background: var(--card-bg);
   width: 100%;
   max-width: var(--card-max-width);
+  /* Fixed card height — change --card-height in .servicesSection at the top of this file */
   height: var(--card-height);
   padding: 20px 20px 0 20px;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
@@ -150,7 +164,8 @@
   margin-right: 0;
   display: grid;
   place-items: end center;
-  height: var(--media-rail-height);
+  min-height: 0;
+  flex: 1 1 auto;
   overflow: hidden;
 }
 
@@ -273,9 +288,9 @@
 
 @media (min-width: 861px) {
   .servicesGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    justify-items: center;
-    gap: 3rem; /* gap-12 (12 * 0.25rem = 3rem) */
+    grid-template-columns: repeat(2, minmax(0, var(--card-max-width)));
+    justify-content: center;
+    gap: var(--desktop-grid-gap); /* gap-12 (12 * 0.25rem = 3rem) */
   }
 
   .serviceCard {
@@ -295,7 +310,6 @@
     font-size: 0.84rem;
     line-height: 1.36;
   }
-
 }
 
 @media (min-width: 1200px) {
@@ -315,7 +329,6 @@
   .cardList {
     font-size: 0.95rem;
   }
-
 }
 
 @media (prefers-reduced-motion: reduce) {

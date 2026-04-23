@@ -1,12 +1,12 @@
 import Image from "next/image";
 import styles from "./selectedwork.module.css";
 
-import workOne from "./selectedworkimages/Background+Shadow.png";
-import workTwo from "./selectedworkimages/Background+Shadow (1).png";
-import workThree from "./selectedworkimages/Background+Shadow (2).png";
-import workFour from "./selectedworkimages/Background+Shadow (3).png";
-import workFive from "./selectedworkimages/Background+Shadow (4).png";
-import workSix from "./selectedworkimages/Background+Shadow (5).png";
+import workOne from "./selectedworkimages/1.png";
+import workTwo from "./selectedworkimages/2.png";
+import workThree from "./selectedworkimages/3.png";
+import workFour from "./selectedworkimages/4.png";
+import workFive from "./selectedworkimages/5.png";
+import workSix from "./selectedworkimages/6.png";
 
 const workCards = [
   workOne,
@@ -32,14 +32,15 @@ export default function SelectedWork() {
           <div className={styles.selectedWorkGrid}>
             {workCards.map((image, index) => (
               <article key={index} className={styles.selectedWorkCard}>
-                <Image
-                  src={image}
-                  alt={`Selected work panel ${index + 1}`}
-                  className={styles.selectedWorkImage}
-                  sizes="(max-width: 519px) 100vw, (max-width: 1199px) 50vw, 600px"
-                  priority={index < 2}
-                  loading={index < 2 ? undefined : "lazy"}
-                />
+               <Image
+  src={image}
+  alt={`Selected work panel ${index + 1}`}
+  className={styles.selectedWorkImage}
+  sizes="(max-width: 519px) 100vw, (max-width: 1199px) 50vw, 600px"
+  placeholder="empty"
+  priority={index < 2}
+  loading={index < 2 ? undefined : "lazy"}
+/>
               </article>
             ))}
           </div>

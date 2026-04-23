@@ -1,5 +1,4 @@
 import Image from "next/image";
-import type { CSSProperties } from "react";
 import styles from "./PaidMediaHero.module.css";
 
 import phoneImage from "../../servicessectionimages/paidmediasection/iPhone 11 Pro.png";

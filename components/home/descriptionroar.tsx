@@ -1,6 +1,5 @@
 "use client";
 
-import React, { useRef } from "react";
 import WordReveal from "../ui/WordReveal";
 import styles from "./descriptionroar.module.css";
 

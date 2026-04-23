@@ -34,9 +34,9 @@ export default function ContactUs() {
           </Link>
 
           <nav className={styles.navLinks}>
-            <a href="/#services">Services</a>
-            <a href="/#work">Work</a>
-            <a href="/blog">Blog</a>
+            <Link href="/#services">Services</Link>
+            <Link href="/#work">Work</Link>
+            <Link href="/blog">Blog</Link>
           </nav>
 
           <div className={styles.actionWrap}>
@@ -69,18 +69,18 @@ export default function ContactUs() {
           {open && (
             <nav className={styles.drawer}>
               <div className={styles.drawerList}>
-                <a href="/#services" onClick={() => setOpen(false)} className={styles.drawerLink}>
+                <Link href="/#services" onClick={() => setOpen(false)} className={styles.drawerLink}>
                   Services
-                </a>
-                <a href="/#work" onClick={() => setOpen(false)} className={styles.drawerLink}>
+                </Link>
+                <Link href="/#work" onClick={() => setOpen(false)} className={styles.drawerLink}>
                   Work
-                </a>
-                <a href="/blog" onClick={() => setOpen(false)} className={styles.drawerLink}>
+                </Link>
+                <Link href="/blog" onClick={() => setOpen(false)} className={styles.drawerLink}>
                   Blog
-                </a>
-                <a href="/contact" onClick={() => setOpen(false)} className={styles.drawerLink}>
+                </Link>
+                <Link href="/contact" onClick={() => setOpen(false)} className={styles.drawerLink}>
                   Contact
-                </a>
+                </Link>
                 <a
                   href="https://buy.polar.sh/polar_cl_540Xa7jXDRuxRHrZhhoutzRcU9p7zkrVDFgAF3LQcVL"
                   className={styles.drawerCta}

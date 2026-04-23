@@ -1,13 +1,17 @@
-const fs = require('fs');
-const path = require('path');
-const sharp = require('sharp');
-
-const folder = path.join(__dirname, '../components/home/services-section/content-creation');
-const skip = ['mainimg.png']; // don't trim the main mockup
-const exts = ['.png', '.jpg', '.jpeg', '.webp'];
-
 (async () => {
   try {
+    const fs = await import("node:fs");
+    const path = await import("node:path");
+    const sharpMod = await import("sharp");
+    const sharp = sharpMod.default ?? sharpMod;
+
+    const folder = path.join(
+      __dirname,
+      "../components/home/services-section/content-creation",
+    );
+    const skip = ["mainimg.png"];
+    const exts = [".png", ".jpg", ".jpeg", ".webp"];
+
     const files = fs.readdirSync(folder).filter(f => exts.includes(path.extname(f).toLowerCase()) && !skip.includes(f));
     if (files.length === 0) {
       console.log('No images to trim in', folder);

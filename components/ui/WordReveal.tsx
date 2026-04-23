@@ -1,7 +1,14 @@
 "use client";
 
 import React from "react";
-import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+  useMotionValue,
+  type MotionValue,
+} from "framer-motion";
 import styles from "../home/descriptionroar.module.css";
 
 type Props = {
@@ -44,10 +51,46 @@ export default function WordReveal({ text, blurMax = 12, className }: Omit<Props
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 0.9", "start 0.0"], // Extended range to slow down the reveal
+    offset: ["start 0.9", "end 0.1"],
   });
   
   const count = words.length;
+  const shouldReduceMotion = useReducedMotion();
+  const staticProgress = useMotionValue(1);
+  const [forceReveal, setForceReveal] = React.useState(false);
+
+  React.useEffect(() => {
+    if (shouldReduceMotion) {
+      setForceReveal(true);
+      return;
+    }
+
+    let rafId = 0;
+    const update = () => {
+      rafId = 0;
+      const el = containerRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight || 0;
+      const fullyVisible = rect.top >= 0 && rect.bottom <= vh;
+      setForceReveal(fullyVisible);
+    };
+
+    const schedule = () => {
+      if (rafId) return;
+      rafId = window.requestAnimationFrame(update);
+    };
+
+    schedule();
+    window.addEventListener("resize", schedule, { passive: true });
+    window.addEventListener("scroll", schedule, { passive: true });
+
+    return () => {
+      if (rafId) window.cancelAnimationFrame(rafId);
+      window.removeEventListener("resize", schedule);
+      window.removeEventListener("scroll", schedule);
+    };
+  }, [shouldReduceMotion]);
 
   return (
     <span 
@@ -57,15 +100,17 @@ export default function WordReveal({ text, blurMax = 12, className }: Omit<Props
     >
       {words.map((word, idx) => {
         // Use full range (no 0.8 compression) to spread out the reveal
-        const wordDuration = 1 / (count * 0.4); // Increased duration per word
+        const wordDuration = 1 / (count * 0.33);
         const start = idx / count; 
         const end = start + wordDuration;
         
+        const progress = forceReveal ? staticProgress : scrollYProgress;
+
         return (
           <Word
             key={`${idx}-${word}`}
             word={word}
-            progress={scrollYProgress}
+            progress={progress}
             start={start}
             end={Math.min(end, 1)}
             blurMax={blurMax}
