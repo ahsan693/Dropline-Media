@@ -1,11 +1,14 @@
 .selectedWorkSection {
   background: #000;
   padding: 96px 40px;
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden;
 }
 
 .selectedWorkWrap {
   width: 100%;
-  max-width: 1309.8px;
+  max-width: calc(638.4px * 2 + 3rem);
   margin: 0 auto;
 }
 
@@ -32,7 +35,6 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
-/* Mobile: single column */
 .selectedWorkGrid {
   display: grid;
   grid-template-columns: 1fr;
@@ -40,11 +42,11 @@
   gap: 3rem;
 }
 
-/* fill prop requires position:relative on parent */
 .selectedWorkCard {
   position: relative;
   border-radius: 36px;
   overflow: hidden;
+  height: 100%;
 }
 
 .selectedWorkCtaWrap {
@@ -71,10 +73,10 @@
   opacity: 0.95;
 }
 
-/* Desktop: 2 columns, all rows locked to same height */
 @media (min-width: 861px) {
   .selectedWorkGrid {
-    grid-template-columns: repeat(2, 638.4px);
+    /* fluid columns that grow up to 638.4px but never overflow */
+    grid-template-columns: repeat(2, minmax(0, 638.4px));
     grid-auto-rows: 715.4px;
     gap: 3rem;
     justify-content: center;
