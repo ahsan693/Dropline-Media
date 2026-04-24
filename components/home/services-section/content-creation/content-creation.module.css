@@ -38,6 +38,8 @@
 /* Base float styles */
 .floatCard {
   --cycle: 4s;
+  --float-from: 480px;
+  --float-to: 180px;
   position: absolute;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -147,19 +149,19 @@
 .delay-5 { animation-delay: 1.04s; }
 
 @keyframes float-left {
-  0%   { transform: translate(calc(-50% - 480px), -50%); opacity:0; }
-  25%  { transform: translate(calc(-50% - 180px), -50%); opacity:1; }
-  62.5%{ transform: translate(calc(-50% - 180px), -50%); opacity:1; }
-  87.5%{ transform: translate(calc(-50% - 480px), -50%); opacity:0; }
-  100% { transform: translate(calc(-50% - 480px), -50%); opacity:0; }
+  0%   { transform: translate(calc(-50% - var(--float-from)), -50%); opacity:0; }
+  25%  { transform: translate(calc(-50% - var(--float-to)), -50%); opacity:1; }
+  62.5%{ transform: translate(calc(-50% - var(--float-to)), -50%); opacity:1; }
+  87.5%{ transform: translate(calc(-50% - var(--float-from)), -50%); opacity:0; }
+  100% { transform: translate(calc(-50% - var(--float-from)), -50%); opacity:0; }
 }
 
 @keyframes float-right {
-  0%   { transform: translate(calc(-50% + 480px), -50%); opacity:0; }
-  25%  { transform: translate(calc(-50% + 180px), -50%); opacity:1; }
-  62.5%{ transform: translate(calc(-50% + 180px), -50%); opacity:1; }
-  87.5%{ transform: translate(calc(-50% + 480px), -50%); opacity:0; }
-  100% { transform: translate(calc(-50% + 480px), -50%); opacity:0; }
+  0%   { transform: translate(calc(-50% + var(--float-from)), -50%); opacity:0; }
+  25%  { transform: translate(calc(-50% + var(--float-to)), -50%); opacity:1; }
+  62.5%{ transform: translate(calc(-50% + var(--float-to)), -50%); opacity:1; }
+  87.5%{ transform: translate(calc(-50% + var(--float-from)), -50%); opacity:0; }
+  100% { transform: translate(calc(-50% + var(--float-from)), -50%); opacity:0; }
 }
 
 /* z-index layering to match design: top cards above mid above bottom */
@@ -169,7 +171,14 @@
 
 /* responsive tweaks */
 @media (max-width: 640px) {
-  .heroWrap { transform: scale(0.9); }
+  .heroWrap {
+    transform: scale(0.78);
+    transform-origin: center bottom;
+  }
   .cardMedium { width: 180px; height: 180px; }
   .cardSmall { width: 120px; }
+  .floatCard {
+    --float-from: 260px;
+    --float-to: 110px;
+  }
 }

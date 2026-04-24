@@ -53,7 +53,7 @@ export default function HomeNavbar() {
       ].join(" ")}
       style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}
     >
-      <div className="mx-auto grid h-20 w-full max-w-[1440px] grid-cols-[auto_1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center px-12">
+      <div className="mx-auto grid h-20 w-full max-w-[1440px] grid-cols-[auto_1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center px-4 sm:px-6 md:px-8 lg:px-12">
 
         {/* ===== LOGO ===== */}
         <Link href="/" aria-label="Dropline Media home" className="shrink-0">

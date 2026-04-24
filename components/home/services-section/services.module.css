@@ -21,6 +21,15 @@
   background: #ffffff;
 }
 
+@media (max-width: 860px) {
+  .servicesSection {
+    --section-padding-top: 56px;
+    --section-padding-bottom: 56px;
+    --section-padding-x: 12px;
+    --card-height: 620px;
+  }
+}
+
 .servicesFrame {
   width: 100%;
   max-width: var(--section-max-width);
@@ -36,6 +45,14 @@
   letter-spacing: -0.01em;
   font-family: "Avenir Next", "Satoshi", "Helvetica Neue", Arial, sans-serif;
   padding: 0;
+}
+
+@media (max-width: 860px) {
+  .servicesTitle {
+    margin-bottom: 2.25rem;
+    font-size: clamp(2rem, 9.5vw, 3rem);
+    line-height: 0.98;
+  }
 }
 
 .servicesGrid {
@@ -74,6 +91,13 @@
   padding: 20px 20px 0 20px;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
   opacity: 1;
+}
+
+@media (max-width: 860px) {
+  .serviceCard {
+    border-radius: 24px;
+    padding: 16px 14px 0 14px;
+  }
 }
 
 .serviceCard::after {
@@ -117,6 +141,13 @@
   font-family: "Avenir Next", "Satoshi", "Helvetica Neue", Arial, sans-serif;
 }
 
+@media (max-width: 860px) {
+  .cardTitle {
+    font-size: 1.4rem;
+    line-height: 1.15;
+  }
+}
+
 .cardButton {
   flex-shrink: 0;
   display: inline-flex;
@@ -133,6 +164,13 @@
   font-family: "Avenir Next", "Satoshi", "Helvetica Neue", Arial, sans-serif;
 }
 
+@media (max-width: 860px) {
+  .cardButton {
+    padding: 0.45rem 0.74rem;
+    font-size: 0.72rem;
+  }
+}
+
 .cardDescription {
   margin: 0;
   color: var(--body);
@@ -143,6 +181,13 @@
   font-family: "Avenir Next", "Satoshi", "Helvetica Neue", Arial, sans-serif;
 }
 
+@media (max-width: 860px) {
+  .cardDescription {
+    font-size: 0.9rem;
+    line-height: 1.25;
+  }
+}
+
 .cardList {
   margin: 0.55rem 0 0;
   padding: 0 0 0 1rem;
@@ -151,6 +196,14 @@
   line-height: 1.45;
   letter-spacing: -0.01em;
   font-family: "Avenir Next", "Satoshi", "Helvetica Neue", Arial, sans-serif;
+}
+
+@media (max-width: 860px) {
+  .cardList {
+    margin-top: 0.4rem;
+    font-size: 0.82rem;
+    line-height: 1.35;
+  }
 }
 
 .cardList li {

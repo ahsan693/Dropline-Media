@@ -68,10 +68,10 @@
   margin: 0;
   max-width: 980px;
   padding-inline: 1rem;
-  padding-block: 1.5rem;
-  font-size: 45px;
-  line-height: 0.97;
-  letter-spacing: -0.005em;
+  padding-block: 1.25rem;
+  font-size: clamp(2.2rem, 9vw, 2.8rem);
+  line-height: 0.96;
+  letter-spacing: -0.03em;
   font-weight: 400;
   text-align: center;
   color: #ffffff;
@@ -110,8 +110,8 @@
 .bsHeroCarousel {
   position: relative;
   display: flex;
-  height: 33vh;
-  width: 50%;
+  height: clamp(14rem, 34vh, 20rem);
+  width: 64%;
   align-items: center;
   justify-content: center;
   background: transparent;
@@ -180,5 +180,13 @@
   .bsHeroSection::before,
   .bsHeroSection::after {
     width: 14vw;
+  }
+
+  .bsHeroTitleWrap {
+    padding-top: 1rem;
+  }
+
+  .bsHeroCarouselStage {
+    padding-block: 1rem 2rem;
   }
 }

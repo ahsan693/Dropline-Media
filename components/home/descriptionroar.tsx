@@ -17,15 +17,15 @@ export default function DescriptionRoar() {
     <section className={`${styles.section} bg-black`}>
       <div className="mx-auto w-full max-w-full lg:max-w-[120rem]">
         <div className={`${styles.container} mx-auto text-left text-white flex flex-col`}>
-          <p className={`${styles.paragraph} text-[60px] leading-[1.2] tracking-[1px]`}>
+          <p className={`${styles.paragraph} text-[28px] leading-[1.25] tracking-[0.2px] md:text-[60px] md:leading-[1.2] md:tracking-[1px]`}>
             <WordReveal text={text1} />
           </p>
 
-          <p className={`${styles.paragraph} text-[60px] leading-[1.2] tracking-[1px]`}>
+          <p className={`${styles.paragraph} text-[28px] leading-[1.25] tracking-[0.2px] md:text-[60px] md:leading-[1.2] md:tracking-[1px]`}>
             <WordReveal text={text2} />
           </p>
 
-          <p className={`${styles.paragraph} text-[60px] leading-[1.2] tracking-[1px]`}>
+          <p className={`${styles.paragraph} text-[28px] leading-[1.25] tracking-[0.2px] md:text-[60px] md:leading-[1.2] md:tracking-[1px]`}>
             <WordReveal text={text3} />
           </p>
         </div>

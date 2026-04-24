@@ -6,6 +6,12 @@
   overflow: hidden;
 }
 
+@media (max-width: 860px) {
+  .selectedWorkSection {
+    padding: 56px 12px;
+  }
+}
+
 .selectedWorkWrap {
   width: 100%;
   max-width: calc(638.4px * 2 + 3rem);
@@ -15,6 +21,12 @@
 .selectedWorkHeader {
   text-align: center;
   margin-bottom: 80px;
+}
+
+@media (max-width: 860px) {
+  .selectedWorkHeader {
+    margin-bottom: 2.25rem;
+  }
 }
 
 .selectedWorkTitle {
@@ -39,6 +51,12 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 3rem;
+}
+
+@media (max-width: 860px) {
+  .selectedWorkGrid {
+    gap: 1.25rem;
+  }
 }
 
 /* ── Card ── */
@@ -69,6 +87,18 @@
   will-change: transform;
 }
 
+@media (max-width: 860px) {
+  .selectedWorkOverlay {
+    position: relative;
+    height: auto;
+    min-height: 180px;
+    transform: translateY(0);
+    border-radius: 0 0 14px 14px;
+    padding: 1rem 1rem 1.1rem;
+    gap: 0.35rem;
+  }
+}
+
 /* slide up on card hover */
 .selectedWorkCard:hover .selectedWorkOverlay {
   transform: translateY(0);
@@ -83,12 +113,27 @@
   padding-top: 20px;
 }
 
+@media (max-width: 860px) {
+  .overlayTop {
+    align-items: flex-start;
+    padding-top: 0;
+    gap: 0.65rem;
+  }
+}
+
 .overlayTitle {
   font-size: 48px;
   font-weight: 500;
   font-family: "Avenir Next", "Satoshi", "Helvetica Neue", Arial, sans-serif;
   line-height: 1;
   letter-spacing: -0.02em;
+}
+
+@media (max-width: 860px) {
+  .overlayTitle {
+    font-size: clamp(1.75rem, 9vw, 2.4rem);
+    line-height: 1;
+  }
 }
 
 .overlayBtn {
@@ -104,6 +149,13 @@
   flex-shrink: 0;
 }
 
+@media (max-width: 860px) {
+  .overlayBtn {
+    padding: 0.42rem 0.7rem;
+    font-size: 0.68rem;
+  }
+}
+
 .overlayBtn:hover {
   opacity: 0.85;
   transform: translateY(-1px);
@@ -115,6 +167,12 @@
   font-weight: 500;
   line-height: 1.3;
   letter-spacing: 0.01em;
+}
+
+@media (max-width: 860px) {
+  .overlaySubtitle {
+    font-size: 0.92rem;
+  }
 }
 
 .overlayList {
@@ -132,6 +190,13 @@
   line-height: 1.4;
   padding-left: 0.9rem;
   position: relative;
+}
+
+@media (max-width: 860px) {
+  .overlayListItem {
+    font-size: 0.84rem;
+    line-height: 1.35;
+  }
 }
 
 .overlayListItem::before {
