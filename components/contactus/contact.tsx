@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import contactVisual from "./Video → Video Play.png";
 import Link from "next/link";
 import { useState } from "react";
 import BlogFooter from "../blog/blogfooter";
@@ -14,10 +15,10 @@ const navLinks = [
 ];
 
 const desktopLinkCls =
-  "min-h-[2.875rem] min-w-[2.875rem] flex items-center justify-center text-lg font-medium text-black transition-colors duration-300 hover:text-black/60 focus-visible:ring-2 focus-visible:ring-offset-2";
+  "min-h-11 min-w-11 flex items-center justify-center text-lg font-medium text-black transition-colors duration-300 hover:text-black/60 focus-visible:ring-2 focus-visible:ring-offset-2";
 
 const mobileLinkCls =
-  "block rounded-md px-3 py-3 text-[1.125rem] font-medium text-black focus-visible:ring-2 focus-visible:ring-offset-2";
+  "block rounded-md px-3 py-3 text-lg font-medium text-black focus-visible:ring-2 focus-visible:ring-offset-2";
 
 export default function ContactUs() {
   const [open, setOpen] = useState(false);
@@ -34,20 +35,20 @@ export default function ContactUs() {
         ].join(" ")}
         style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}
       >
-        <div className="mx-auto grid h-20 w-full max-w-[1440px] grid-cols-[auto_1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center px-12">
+        <div className="mx-auto grid h-20 w-full max-w-screen-2xl grid-cols-[auto_1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center px-12">
 
           {/* ===== LOGO ===== */}
-         <Link href="/" aria-label="Dropline Media home" className="shrink-0">
-  <Image
-    src="/images/framer/logo-dropline.svg"  // Remove the dot - use absolute path from public folder
-    alt="Dropline Media"
-    width={184}
-    height={28}
-    className="h-auto w-[clamp(90px,20vw,180px)] brightness-0"
-    sizes="(max-width: 390px) 40vw, (max-width: 768px) 20vw, 140px"
-    priority
-  />
-</Link>
+          <Link href="/" aria-label="Dropline Media home" className="shrink-0">
+           <Image
+                      src="/images/framer/logo-dropline.svg"
+                      alt="Dropline Media"
+                      width={184}
+                      height={28}
+                      className="h-auto w-[clamp(90px,20vw,180px)] brightness-0"
+                      sizes="(max-width: 390px) 40vw, (max-width: 768px) 20vw, 140px"
+                      priority
+                    />
+          </Link>
 
           {/* ===== DESKTOP NAV LINKS ===== */}
           <nav className="hidden items-center justify-center gap-8 md:flex">
@@ -62,18 +63,18 @@ export default function ContactUs() {
           <div className="flex items-center justify-end gap-3">
 
             {/* CTA — desktop */}
-            <a
-              href="https://buy.polar.sh/polar_cl_540Xa7jXDRuxRHrZhhoutzRcU9p7zkrVDFgAF3LQcVL"
-              className="hidden md:inline-flex ml-auto items-center rounded-full border border-black bg-black px-[1.125rem] py-[0.625rem] text-[16px] leading-[130%] tracking-[-0.02em] font-medium text-white transition-all duration-300 ease-in-out hover:bg-white hover:text-black focus-visible:ring-2 focus-visible:ring-offset-2"
+            <Link
+              href="/contact"
+              className="hidden md:inline-flex ml-auto items-center rounded-full border border-black bg-black px-4 py-2 text-base font-medium text-white transition-all duration-300 hover:bg-white hover:text-black focus-visible:ring-2 focus-visible:ring-offset-2"
             >
               Get Started
-            </a>
+            </Link>
 
             {/* Hamburger */}
             <button
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
-              className="md:hidden inline-flex h-[2.875rem] w-[2.875rem] items-center justify-center rounded-full bg-black/10 text-black focus-visible:ring-2 focus-visible:ring-offset-2"
+              className="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-full bg-black/10 text-black focus-visible:ring-2 focus-visible:ring-offset-2"
               onClick={() => setOpen((v) => !v)}
               style={{ touchAction: "manipulation" }}
               type="button"
@@ -106,12 +107,12 @@ export default function ContactUs() {
                 ))}
 
                 {/* CTA — mobile */}
-                <a
-                  href="https://buy.polar.sh/polar_cl_540Xa7jXDRuxRHrZhhoutzRcU9p7zkrVDFgAF3LQcVL"
-                  className="mt-2 inline-flex items-center justify-center rounded-full border border-black bg-black px-[1.125rem] py-[0.625rem] text-[16px] leading-[130%] tracking-[-0.02em] font-medium text-white transition-all duration-300 ease-in-out hover:bg-white hover:text-black"
+                <Link
+                  href="/contact"
+                  className="mt-2 inline-flex items-center justify-center rounded-full border border-black bg-black px-4 py-2 text-base font-medium text-white transition-all duration-300 hover:bg-white hover:text-black"
                 >
                   Get Started
-                </a>
+                </Link>
               </div>
             </nav>
           )}
@@ -176,9 +177,11 @@ export default function ContactUs() {
             </form>
 
             <aside className={styles.visualPanel}>
-              <img
-                src="/images/product-bg.svg"
+              <Image
+                src={contactVisual}
                 alt="Contact section visual"
+                width={600}
+                height={400}
                 className={styles.visualImage}
               />
               <div className={styles.visualLogo}>DD</div>

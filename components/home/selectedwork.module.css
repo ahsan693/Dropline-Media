@@ -38,17 +38,112 @@
 .selectedWorkGrid {
   display: grid;
   grid-template-columns: 1fr;
-  grid-auto-rows: 715.4px;
   gap: 3rem;
 }
 
+/* ── Card ── */
 .selectedWorkCard {
   position: relative;
-  border-radius: 36px;
+  border-radius: 8px;
   overflow: hidden;
-  height: 100%;
+  width: 100%;
 }
 
+/* ── Overlay panel ── */
+.selectedWorkOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 263px;
+  padding: 1.5rem 1.6rem 1.6rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0.45rem;
+
+  /* starts hidden below */
+  transform: translateY(100%);
+  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+/* slide up on card hover */
+.selectedWorkCard:hover .selectedWorkOverlay {
+  transform: translateY(0);
+  border-radius: 21px ;
+}
+
+/* ── Overlay internals ── */
+.overlayTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 20px;
+}
+
+.overlayTitle {
+  font-size: 48px;
+  font-weight: 500;
+  font-family: "Avenir Next", "Satoshi", "Helvetica Neue", Arial, sans-serif;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.overlayBtn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.72rem;
+  font-weight: 400;
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  flex-shrink: 0;
+}
+
+.overlayBtn:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+.overlaySubtitle {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0.01em;
+}
+
+.overlayList {
+  list-style: none;
+  margin: 0.3rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.22rem;
+}
+
+.overlayListItem {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.4;
+  padding-left: 0.9rem;
+  position: relative;
+}
+
+.overlayListItem::before {
+  content: "·";
+  position: absolute;
+  left: 0.1rem;
+  top: 0;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+/* ── CTA ── */
 .selectedWorkCtaWrap {
   display: flex;
   justify-content: center;
@@ -73,17 +168,33 @@
   opacity: 0.95;
 }
 
+/* ── Desktop ── */
 @media (min-width: 861px) {
   .selectedWorkGrid {
-    /* fluid columns that grow up to 638.4px but never overflow */
     grid-template-columns: repeat(2, minmax(0, 638.4px));
-    grid-auto-rows: 715.4px;
     gap: 3rem;
     justify-content: center;
   }
 
   .selectedWorkCard {
-    border-radius: 50px;
+    border-radius: 8px;
+  }
+
+  .overlayTitle {
+    font-size: 48px;
+  }
+
+  .overlayBtn {
+    padding: 0.52rem 1rem;
+    font-size: 0.75rem;
+  }
+
+  .overlaySubtitle {
+    font-size: 17px;
+  }
+
+  .overlayListItem {
+    font-size: 16px;
   }
 
   .selectedWorkCta {

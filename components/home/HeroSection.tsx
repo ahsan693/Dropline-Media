@@ -188,6 +188,10 @@ export default function HeroSection() {
             "<70%",
           );
       });
+
+      return () => {
+        mm.revert();
+      };
     }, sectionCardsRef);
 
     return () => {
