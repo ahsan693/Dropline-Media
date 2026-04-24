@@ -1,128 +1,91 @@
-/* Selected Work layout controls: adjust these to match Services spacing and card size. */
 .selectedWorkSection {
-	--section-padding-top: 96px; /* Top padding for the Selected Work section */
-	--section-padding-bottom: 96px; /* Bottom padding for the Selected Work section */
-	--section-padding-x: 0px; /* Horizontal padding handled by .section-shell */
-	--section-max-width: 76.25rem; /* Max width for .selectedWorkWrap */
-	--grid-gap: 16px; /* Gap between .selectedWorkCard items */
-	--card-max-width: 560px; /* Max width for each .selectedWorkCard */
-	--card-radius: 1.1rem; /* Corner radius for .selectedWorkCard */
-	background: #000;
-	padding: var(--section-padding-top) var(--section-padding-x)
-		var(--section-padding-bottom);
+  background: #000;
+  padding: 96px 40px;
 }
 
 .selectedWorkWrap {
-	width: 100%;
-	max-width: var(--section-max-width);
-	margin: 0 auto;
+  width: 100%;
+  max-width: 1309.8px;
+  margin: 0 auto;
 }
 
 .selectedWorkHeader {
-	text-align: center;
-	margin-bottom: 2rem;
+  text-align: center;
+  margin-bottom: 80px;
 }
 
 .selectedWorkTitle {
-	margin-top: 0;
-	margin-bottom: 0.5rem;
-	font-size: clamp(1.5rem, 4.5vw, 3rem);
-	
-	line-height: 1.1;
-	letter-spacing: -0.02em;
-	color: #fff;
-	
+  margin: 0 0 0.5rem;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  font-weight: 500;
+  font-family: "Avenir Next", "Satoshi", "Helvetica Neue", Arial, sans-serif;
+  color: #fff;
 }
 
 .selectedWorkSubtitle {
-	display: inline-block;
-	margin: 0;
-	font-size: clamp(0.72rem, 2vw, 0.95rem);
-	line-height: 1.4;
-	margin-top: 1px;
-	padding-top: 0.5rem 0;
-	padding-bottom: 2.5rem;
-	
+  display: block;
+  margin: 0;
+  font-size: clamp(0.72rem, 2vw, 0.95rem);
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.6);
 }
 
-	.selectedWorkGrid {
-	display: grid;
-	grid-template-columns: 1fr;
-		gap: var(--grid-gap);
-	margin-top: 1.35rem;
-	justify-items: center;
+/* Mobile: single column */
+.selectedWorkGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: 715.4px;
+  gap: 3rem;
 }
 
-	.selectedWorkCard {
-  border-radius: var(--card-radius);
+/* fill prop requires position:relative on parent */
+.selectedWorkCard {
+  position: relative;
+  border-radius: 36px;
   overflow: hidden;
-  background: transparent; /* ← was #0b0b0b */
-  
-  width: 100%;
-  max-width: var(--card-max-width);
-}
-
-.selectedWorkImage {
-	display: block;
-	width: 100%;
-	height: auto;
 }
 
 .selectedWorkCtaWrap {
-	display: flex;
-	justify-content: center;
-	margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
 }
 
 .selectedWorkCta {
-	display: inline-block;
-
-	margin: 0.5rem 0;
-	border: 0;
-	border-radius: 999px;
-	padding: 0.52rem 0.9rem;
-	font-size: 0.65rem;
-	font-weight: 600;
-	line-height: 1;
-	color: #0a0a0a;
-	background: #fff;
-	cursor: pointer;
-	transition: transform 0.18s ease, opacity 0.18s ease;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.52rem 0.9rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  line-height: 1;
+  color: #0a0a0a;
+  background: #fff;
+  cursor: pointer;
+  transition: transform 0.18s ease, opacity 0.18s ease;
 }
 
 .selectedWorkCta:hover {
-	transform: translateY(-1px);
-	opacity: 0.95;
+  transform: translateY(-1px);
+  opacity: 0.95;
 }
 
-@media (min-width: 520px) {
-	.selectedWorkGrid {
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-	}
-}
-
-@media (min-width: 768px) {
-	.selectedWorkGrid {
-		margin-top: 1.75rem;
-	}
-
-	.selectedWorkSection {
-		--card-radius: 1.45rem;
-	}
-
-	.selectedWorkCtaWrap {
-		margin-top: 2rem;
-	}
-
-	.selectedWorkCta {
-		padding: 0.68rem 1.15rem;
-		font-size: 0.72rem;
-		margin: 1rem 0;
-	}
-}
-
+/* Desktop: 2 columns, all rows locked to same height */
 @media (min-width: 861px) {
-	.selectedWorkSection {
-		--card-radius: 1.6rem;
-	}
+  .selectedWorkGrid {
+    grid-template-columns: repeat(2, 638.4px);
+    grid-auto-rows: 715.4px;
+    gap: 3rem;
+    justify-content: center;
+  }
+
+  .selectedWorkCard {
+    border-radius: 50px;
+  }
+
+  .selectedWorkCta {
+    padding: 0.68rem 1.15rem;
+    font-size: 0.72rem;
+  }
 }

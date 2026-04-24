@@ -4,9 +4,9 @@
 
 .section {
   background-color: #000;
-  padding-top: 4rem;    /* py-16 */
-  padding-bottom: 4rem; /* py-16 */
-  margin-top: 0;        /* Removed in favor of large padding from snippet */
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  margin-top: 0;
   margin-bottom: 0;
 }
 
@@ -22,8 +22,8 @@
   margin-left: auto;
   margin-right: auto;
   max-width: 61.25rem;
-  padding-left: 1rem;  /* px-4 */
-  padding-right: 1rem; /* px-4 */
+  padding-left: 1rem;
+  padding-right: 1rem;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -56,7 +56,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0; /* Gap handled by listItem padding to match py-10 */
+  gap: 0;
   margin-top: 0;
 }
 
@@ -64,39 +64,40 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 2.5rem;    /* py-10 */
-  padding-bottom: 2.5rem; /* py-10 */
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
 }
 
 .statRow {
   display: flex;
   align-items: baseline;
-  gap: 0.75rem;
+  gap: 1.25rem; /* ← increased from 0.75rem for mobile */
 }
 
 .subtitle {
-  margin-top: 0.5rem; /* mt-2 */
-  font-size: 1.5rem; /* Increased from 0.9rem to better match large metrics */
+  margin-top: 0.5rem;
+  font-size: 1.5rem;
   color: rgba(255, 255, 255, 0.7);
-  text-transform: lowercase; /* Matches "return on ad spend" style */
+  text-transform: lowercase;
   font-weight: 450;
   letter-spacing: -0.01em;
   line-height: 1.1;
-  display: block; /* Matches block in snippet */
+  display: block;
 }
 
 .roarGreen {
-  font-family: "Instrument Serif", "Times New Roman", Georgia, serif;
+  font-family: var(--font-instrument-serif), "Times New Roman", Georgia, serif;
   color: #9edf73;
-  font-size: 70px; /* ← change mobile size here */
-  font-weight: 340;
+  font-size: 70px;
+  font-weight: 400;
+  font-style: italic;
   line-height: 1;
 }
 
 .roarWhite {
   font-family: 'Neue Montreal', "Avenir Next", Satoshi, "Helvetica Neue", Arial, sans-serif;
   color: #ffffff;
-  font-size: 74px; /* ← change mobile size here */
+  font-size: 74px;
   font-weight: 340;
   line-height: 1;
 }
@@ -108,20 +109,20 @@
 
 @media (min-width: 1024px) {
   .section {
-    padding-top: 6.5rem;    /* py-26 */
-    padding-bottom: 6.5rem; /* py-26 */
+    padding-top: 6.5rem;
+    padding-bottom: 6.5rem;
     margin-top: 0;
     margin-bottom: 0;
   }
 
   .outerWrapper {
     max-width: 90rem;
-    height: auto; /* Height auto to allow padding to drive layout */
+    height: auto;
   }
 
   .innerWrapper {
-    padding-left: 4rem;  /* px-16 */
-    padding-right: 4rem; /* px-16 */
+    padding-left: 4rem;
+    padding-right: 4rem;
     height: auto;
   }
 
@@ -130,17 +131,24 @@
     margin-top: 0;
   }
 
+  .statRow {
+    gap: 2.5rem; /* ← increased proportional to 150-160px font size */
+  }
+
   .roarGreen {
-    font-size: 160px; /* ← change desktop size here */
+    font-family: var(--font-instrument-serif), "Times New Roman", Georgia, serif;
+    font-size: 160px;
+    font-weight: 400;
+    font-style: italic;
   }
 
   .roarWhite {
-    font-size: 150px; /* ← change desktop size here */
+    font-size: 150px;
   }
 
   .subtitle {
-    font-size: 2.25rem; /* ~36px, fits better with 150-160px metrics */
-    margin-top: 0.5rem; /* Matches mt-2 block in snippet */
+    font-size: 2.25rem;
+    margin-top: 0.5rem;
     font-weight: 450;
     letter-spacing: -0.01em;
     line-height: 1.1;
