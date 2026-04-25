@@ -10,20 +10,21 @@ interface HeroCard {
   src: string;
 }
 
+// ─── Local assets from /herosection-videocards ──────────────────────────────
+// Videos and images are co-located in the same folder as this component.
+// If you move them to /public, update the paths to absolute URLs, e.g.:
+//   "/videos/herosection-videocards/brand guidelines.mp4"
 const heroCards: HeroCard[] = [
-  { kind: "video", src: "https://bendingspoons.com/videos/hero-cards-home/komoot.mp4" },
-  { kind: "video", src: "https://bendingspoons.com/videos/hero-cards-home/evernote.mp4" },
-  { kind: "video", src: "https://bendingspoons.com/videos/hero-cards-home/vimeo.mp4" },
-  { kind: "video", src: "https://bendingspoons.com/videos/hero-cards-home/wetransfer.mp4" },
-  { kind: "video", src: "https://bendingspoons.com/videos/hero-cards-home/remini.mp4" },
-  { kind: "video", src: "https://bendingspoons.com/videos/hero-cards-home/brightcove.mp4" },
-  { kind: "video", src: "https://bendingspoons.com/videos/hero-cards-home/meetup.mp4" },
-  {
-    kind: "image",
-    src: "https://bendingspoons.com/_next/static/media/Harvest-card.69130bba.webp",
-  },
-  { kind: "video", src: "https://bendingspoons.com/videos/hero-cards-home/streamyard.mp4" },
-  { kind: "video", src: "https://bendingspoons.com/videos/hero-cards-home/aol.mp4" },
+  { kind: "video", src: "/herosection-videocards/brand%20guidelines.mp4" },
+  { kind: "video", src: "/herosection-videocards/facebook%202.mp4" },
+  { kind: "video", src: "/herosection-videocards/Google%20Ads%20Updated%203.mp4" },
+  { kind: "image", src: "/herosection-videocards/Instagram%20ads.png" },
+  { kind: "video", src: "/herosection-videocards/logo%20updated.mp4" },
+  { kind: "image", src: "/herosection-videocards/pinterest%20ads.png" },
+  { kind: "image", src: "/herosection-videocards/snapchat%20ads.png" },
+  { kind: "video", src: "/herosection-videocards/social%20media%20updated.mp4" },
+  { kind: "video", src: "/herosection-videocards/Tiktok%20updated%203.mp4" },
+  { kind: "image", src: "/herosection-videocards/youtbe%20ads.png" },
 ];
 
 export default function HeroSection() {
@@ -67,13 +68,6 @@ export default function HeroSection() {
         const n = cards.length;
         const angleStep = 360 / n;
 
-        // GSAP's transformOrigin z-offset IS the cylinder radius.
-        // We set each card's rotateY first, then push it out along Z by `depth`.
-        // The result: cards sit on the surface of a cylinder of radius=depth.
-        //
-        // transformOrigin "50% 50% {depth}px" means the pivot is depth px
-        // BEHIND the card's centre — so rotating around that pivot moves
-        // the card's face onto the cylinder surface at radius=depth.
         gsap.set(cards, {
           rotateY: (i: number) => i * -angleStep,
           transformOrigin: `50% 50% ${depth}px`,
@@ -89,25 +83,6 @@ export default function HeroSection() {
           return;
         }
 
-        /*
-         * Depth formula explained:
-         *
-         * The carousel container is 25vw wide on desktop.
-         * The inspect element shows cards at translateZ(-932px) on a ~1366px
-         * viewport, which is 932 / 1366 ≈ 0.68 of viewportWidth.
-         *
-         * But the CONTAINER is 25vw = 0.25 * viewportWidth.
-         * GSAP's transformOrigin is relative to the ELEMENT (the container),
-         * not the viewport. So the effective viewport-relative radius is:
-         *   containerWidth * (depth / containerWidth) = depth
-         *
-         * We want the cylinder radius ≈ 68% of viewportWidth:
-         *   depth = viewportWidth * 0.68 ≈ viewportWidth / 1.47
-         *
-         * However the reference uses viewportWidth / 2.5 in its source,
-         * which at 1366px gives 546px — a tighter, more dramatic cylinder.
-         * Use this to match the reference exactly.
-         */
         const depth = viewportWidth / 2.5;
         buildCarousel(depth);
 
@@ -135,8 +110,6 @@ export default function HeroSection() {
           return;
         }
 
-        // Mobile: container is 50vw, use a larger depth divisor so the
-        // cylinder is wider relative to screen and cards don't overlap.
         const depth = viewportWidth / 1.25;
         buildCarousel(depth);
 
@@ -173,16 +146,6 @@ export default function HeroSection() {
         </h1>
       </div>
 
-      {/*
-       * Layer 1: .bsHeroCarouselStage — perspective ONLY, no transform-style.
-       * Layer 2: .bsHeroCarousel3dCtx — preserve-3d ONLY, no perspective.
-       *          This element is the 3D context bridge.
-       * Layer 3: .bsHeroCarousel     — GSAP spins rotationY here.
-       * Layer 4: .bsHeroCard         — GSAP fans cards onto the cylinder.
-       *
-       * Separating perspective from preserve-3d is critical: a single element
-       * with both causes the browser to flatten the 3D scene entirely.
-       */}
       <div ref={sectionCardsRef} className={styles.bsHeroCarouselStage}>
         <div className={styles.bsHeroCarousel3dCtx}>
           <div ref={carouselRef} className={styles.bsHeroCarousel}>

@@ -94,8 +94,8 @@ export default function HomeNavbar() {
             href="/contact"
             className="hidden md:inline-flex ml-auto items-center rounded-full border border-white bg-white px-[1.125rem] py-[0.625rem] text-[16px] leading-[130%] tracking-[-0.02em] font-medium text-black transition-all duration-300 ease-in-out hover:bg-black hover:text-white focus-visible:ring-2 focus-visible:ring-offset-2"
           >
-            Get Started
-          </a>
+            Get Started  
+          </a>     
 
           {/* Hamburger */}
           <button
