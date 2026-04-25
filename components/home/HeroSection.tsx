@@ -21,7 +21,7 @@ const heroCards: HeroCard[] = [
   { kind: "image", src: "/herosection-videocards/Instagram%20ads.png" },
   { kind: "video", src: "/herosection-videocards/logo%20updated.mp4" },
   { kind: "image", src: "/herosection-videocards/pinterest%20ads.png" },
-  { kind: "image", src: "/herosection-videocards/snapchat%20ads.png" },
+ { kind: "image", src: "/herosection-videocards/Snapchat.png" },
   { kind: "video", src: "/herosection-videocards/social%20media%20updated.mp4" },
   { kind: "video", src: "/herosection-videocards/Tiktok%20updated%203.mp4" },
   { kind: "image", src: "/herosection-videocards/youtbe%20ads.png" },
