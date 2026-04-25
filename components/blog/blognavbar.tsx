@@ -55,7 +55,7 @@ export default function BlogNavbar() {
 
           {/* CTA — desktop */}
           <a
-            href="https://buy.polar.sh/polar_cl_540Xa7jXDRuxRHrZhhoutzRcU9p7zkrVDFgAF3LQcVL"
+            href="/contact"
             className="hidden md:inline-flex ml-auto items-center rounded-full border border-black bg-black px-[1.125rem] py-[0.625rem] text-[16px] leading-[130%] tracking-[-0.02em] font-medium text-white transition-all duration-300 ease-in-out hover:bg-white hover:text-black focus-visible:ring-2 focus-visible:ring-offset-2"
           >
             Get Started
