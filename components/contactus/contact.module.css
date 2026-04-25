@@ -294,21 +294,6 @@
   opacity: 0.92;
 }
 
-.visualLogo {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 86px;
-  height: 58px;
-  border-radius: 3px;
-  background: rgba(255, 255, 255, 0.85);
-  color: #111;
-  display: grid;
-  place-items: center;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-}
 
 @media (max-width: 1024px) {
   .mainSection {

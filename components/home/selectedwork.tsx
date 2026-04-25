@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./selectedwork.module.css";
 
 import workOne from "./selectedworkimages/1.png";
@@ -89,8 +92,10 @@ export default function SelectedWork() {
               >
                 <div className={styles.overlayTop}>
                   <span className={styles.overlayTitle}>{card.title}</span>
-                  <button
-                    type="button"
+
+                  {/* ✅ LINK ADDED HERE */}
+                  <Link
+                    href="/contact"
                     className={styles.overlayBtn}
                     style={{
                       color: card.bg,
@@ -98,20 +103,32 @@ export default function SelectedWork() {
                     }}
                   >
                     Get Started&nbsp;↗
-                  </button>
+                  </Link>
                 </div>
 
                 <p
                   className={styles.overlaySubtitle}
-                  style={{ color: card.color === "#fff" ? "rgba(255,255,255,0.75)" : "rgba(0,0,0,0.55)" }}
+                  style={{
+                    color:
+                      card.color === "#fff"
+                        ? "rgba(255,255,255,0.75)"
+                        : "rgba(0,0,0,0.55)",
+                  }}
                 >
                   {card.subtitle}
                 </p>
 
                 <ul className={styles.overlayList}>
                   {card.bullets.map((b, i) => (
-                    <li key={i} className={styles.overlayListItem}
-                      style={{ color: card.color === "#fff" ? "rgba(255,255,255,0.9)" : "rgba(0,0,0,0.8)" }}
+                    <li
+                      key={i}
+                      className={styles.overlayListItem}
+                      style={{
+                        color:
+                          card.color === "#fff"
+                            ? "rgba(255,255,255,0.9)"
+                            : "rgba(0,0,0,0.8)",
+                      }}
                     >
                       {b}
                     </li>
@@ -123,9 +140,9 @@ export default function SelectedWork() {
         </div>
 
         <div className={styles.selectedWorkCtaWrap}>
-          <button type="button" className={styles.selectedWorkCta}>
+          <Link href="/contact" className={styles.selectedWorkCta}>
             Start A Project
-          </button>
+          </Link>
         </div>
       </div>
     </section>

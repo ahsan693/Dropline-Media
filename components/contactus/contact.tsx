@@ -184,7 +184,7 @@ export default function ContactUs() {
                 height={400}
                 className={styles.visualImage}
               />
-              <div className={styles.visualLogo}>DD</div>
+            
             </aside>
           </div>
         </section>

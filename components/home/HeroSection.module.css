@@ -1,10 +1,12 @@
+/* ─── Hero Section ─────────────────────────────────────────────────────────── */
+
 .bsHeroSection {
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  overflow: hidden;
   background: #000;
+  min-height: 100svh;
 }
 
 .bsHeroSection::before,
@@ -13,9 +15,9 @@
   pointer-events: none;
   position: absolute;
   top: 0;
-  z-index: 1;
+  z-index: 3;
   height: 110%;
-  width: 10vw;
+  width: 20vw;
 }
 
 .bsHeroSection::before {
@@ -56,6 +58,8 @@
   );
 }
 
+/* ─── Title ──────────────────────────────────────────────────────────────── */
+
 .bsHeroTitleWrap {
   z-index: 2;
   display: flex;
@@ -79,9 +83,6 @@
 }
 
 .bsHeroHeading em {
-  /* Mixed typography applied only to emphasized (green) words.
-     Use the Neue Montreal italic face for visual contrast while
-     preserving the overall normal font weight. */
   font-family: 'Neue Montreal', Georgia, "Times New Roman", serif;
   font-weight: 400;
   font-style: italic;
@@ -89,10 +90,19 @@
   color: #c7ff9f;
 }
 
-.bsHeroBreakMobile {
-  display: inline;
-}
+/* ─── Carousel Stage ─────────────────────────────────────────────────────────
+   THE GOLDEN RULE:
+   `perspective` and `transform-style: preserve-3d` must NEVER coexist on
+   the same element — browser flattens the 3D scene when both are present.
 
+   Architecture (4 layers):
+     .bsHeroCarouselStage  → perspective ONLY  (no transform-style)
+     .bsHeroCarousel3dCtx  → preserve-3d ONLY  (no perspective)
+     .bsHeroCarousel       → spinning ring      (preserve-3d + GSAP rotationY)
+     .bsHeroCard           → each card          (GSAP rotateY + z, NO 3d props)
+────────────────────────────────────────────────────────────────────────────── */
+
+/* Layer 1 — perspective root. Must NOT have transform-style. */
 .bsHeroCarouselStage {
   position: relative;
   z-index: 2;
@@ -100,34 +110,43 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2.5rem;
-  overflow-x: clip;
   opacity: 0;
-  perspective: 800px;
-  transform-style: preserve-3d;
+  perspective: 600px;
 }
 
+/* Layer 2 — 3D context bridge. Must NOT have perspective. */
+.bsHeroCarousel3dCtx {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  width: 100%;
+  height: 33vh;
+}
+
+/* Layer 3 — the ring GSAP spins via rotationY. */
 .bsHeroCarousel {
   position: relative;
   display: flex;
-  height: clamp(14rem, 34vh, 20rem);
-  width: 64%;
+  width: 50%;
   align-items: center;
   justify-content: center;
   background: transparent;
   will-change: transform;
-  backface-visibility: hidden;
   transform-style: preserve-3d;
 }
 
+/* Layer 4 — cards. Leaf nodes — no 3D props at all.
+   will-change, backface-visibility, and transform-style each force the
+   browser to composite the card into its own GPU layer with a black
+   background, which shows through as a dark tint over the video.
+   Removing all three makes the GPU render the card inline, transparent. */
 .bsHeroCard {
   position: absolute;
   box-sizing: border-box;
   aspect-ratio: 4 / 5;
   width: 100%;
-  will-change: transform;
-  backface-visibility: hidden;
-  transform-style: preserve-3d;
+  background: transparent;
 }
 
 .bsHeroCardMedia {
@@ -136,10 +155,17 @@
   overflow: clip;
   border-radius: 1rem;
   object-fit: cover;
-  backface-visibility: hidden;
   display: block;
+  background: transparent;
+  /*
+   * Counteract the slight darkening browsers apply to video elements
+   * composited inside a 3D scene. 1.08 brightness + 1.1 saturation
+   * restores the vivid, HD look without blowing out highlights.
+   */
+  filter: brightness(1.08) saturate(1.1);
 }
 
+/* ─── Desktop ─────────────────────────────────────────────────────────────── */
 @media (min-width: 768px) {
   .bsHeroSection {
     justify-content: space-around;
@@ -147,7 +173,6 @@
 
   .bsHeroTitleWrap {
     padding-top: 7.5rem;
-    padding-bottom: 0;
   }
 
   .bsHeroHeading {
@@ -158,13 +183,13 @@
     letter-spacing: -0.06em;
   }
 
-  .bsHeroBreakMobile {
-    display: none;
+  .bsHeroCarouselStage {
+    padding-block: 7.5rem;
+    perspective: 600px;
   }
 
-  .bsHeroCarouselStage {
-    gap: 0;
-    padding-block: 7.5rem;
+  .bsHeroCarousel3dCtx {
+    height: 33vh;
   }
 
   .bsHeroCarousel {
@@ -176,6 +201,7 @@
   }
 }
 
+/* ─── Mobile ──────────────────────────────────────────────────────────────── */
 @media (max-width: 767px) {
   .bsHeroSection::before,
   .bsHeroSection::after {
@@ -188,5 +214,6 @@
 
   .bsHeroCarouselStage {
     padding-block: 1rem 2rem;
+    perspective: 400px;
   }
 }
