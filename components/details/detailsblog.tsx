@@ -10,7 +10,16 @@ type Props = {
   author?: string
   date?: string
   readingTime?: string
+  /** image[0] — existing hero */
   hero?: string
+  /** image[1], image[2], image[3] — 3-col grid (new) */
+  gridImages?: (string | null | undefined)[]
+  /** image[4] — wide full-width (new) */
+  wideImage?: string | null
+  /** image[5] — solo closing image (new) */
+  soloImage?: string | null
+  /** Plain text body for interleaving (new) */
+  body?: string
   children?: React.ReactNode
 }
 
@@ -21,6 +30,10 @@ export default function DetailsBlog({
   date,
   readingTime,
   hero,
+  gridImages = [],
+  wideImage,
+  soloImage,
+  body,
   children,
 }: Props) {
   const [copied, setCopied] = useState(false)
@@ -64,6 +77,21 @@ export default function DetailsBlog({
     }
   }
 
+  // Split body into 4 prose chunks for interleaving with images
+  const bodyText = body ?? ''
+  const sentences = bodyText.split(/(?<=[.!?])\s+/).filter(Boolean)
+  const chunkSize = Math.max(1, Math.ceil(sentences.length / 4))
+  const prose = Array.from({ length: 4 }, (_, i) =>
+    sentences.slice(i * chunkSize, (i + 1) * chunkSize).join(' ')
+  )
+
+  const hasBody = bodyText.trim().length > 0
+  const grid = gridImages.filter(Boolean) as string[]
+  const hasGrid = grid.length > 0
+  const hasWide = !!wideImage
+  const hasSolo = !!soloImage
+  const hasExtras = hasGrid || hasWide || hasSolo
+
   return (
     <>
       <BlogNavbar />
@@ -84,10 +112,83 @@ export default function DetailsBlog({
           </div>
 
           <section className={styles.content}>
+            {/* ── Hero image — unchanged ── */}
             <div className={styles.heroWrap}>
               <img src={hero || '/images/product-bg.svg'} alt="Article visual" className={styles.hero} />
             </div>
-            {children}
+
+            {/* ── Short blog: no extras, render children as before ── */}
+            {!hasExtras && !hasBody && children}
+
+            {/* ── Long blog: interleave text + images ── */}
+            {(hasExtras || hasBody) && (
+              <>
+                {/* Prose chunk 1 */}
+                {prose[0] && (
+                  <p className={styles.contentText}>{prose[0]}</p>
+                )}
+
+                {/* 3-col image grid (images 2, 3, 4) */}
+                {hasGrid && (
+                  <div
+                    className={styles.triGrid}
+                    style={{
+                      gridTemplateColumns: `repeat(${Math.min(grid.length, 3)}, 1fr)`,
+                    }}
+                  >
+                    {grid.slice(0, 3).map((src, i) => (
+                      <div key={i} className={styles.triCell}>
+                        <img
+                          src={src}
+                          alt={`${title} image ${i + 2}`}
+                          className={styles.triImg}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Prose chunk 2 */}
+                {prose[1] && (
+                  <p className={styles.contentText}>{prose[1]}</p>
+                )}
+
+                {/* Prose chunk 3 */}
+                {prose[2] && (
+                  <p className={styles.contentText}>{prose[2]}</p>
+                )}
+
+                {/* Wide full-width image (image 5) */}
+                {hasWide && (
+                  <div className={styles.wideImgWrap}>
+                    <img
+                      src={wideImage as string}
+                      alt={`${title} wide`}
+                      className={styles.wideImg}
+                    />
+                  </div>
+                )}
+
+                {/* Prose chunk 4 — conclusion */}
+                {prose[3] && (
+                  <p className={styles.contentText}>{prose[3]}</p>
+                )}
+
+                {/* Solo closing image (image 6) */}
+                {hasSolo && (
+                  <div className={styles.soloImgWrap}>
+                    <img
+                      src={soloImage as string}
+                      alt={`${title} closing`}
+                      className={styles.soloImg}
+                    />
+                  </div>
+                )}
+
+                {/* children still rendered at end */}
+                {children}
+              </>
+            )}
           </section>
 
           <div className={styles.shareBar}>

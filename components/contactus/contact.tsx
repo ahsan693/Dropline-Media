@@ -11,7 +11,6 @@ const navLinks = [
   { label: "Services", href: "/#services" },
   { label: "Work",     href: "/#work" },
   { label: "Blog",     href: "/blog" },
- 
 ];
 
 const desktopLinkCls =
@@ -39,15 +38,15 @@ export default function ContactUs() {
 
           {/* ===== LOGO ===== */}
           <Link href="/" aria-label="Dropline Media home" className="shrink-0">
-           <Image
-                      src="/images/framer/logo-dropline.svg"
-                      alt="Dropline Media"
-                      width={184}
-                      height={28}
-                      className="h-auto w-[clamp(90px,20vw,180px)] brightness-0"
-                      sizes="(max-width: 390px) 40vw, (max-width: 768px) 20vw, 140px"
-                      priority
-                    />
+            <Image
+              src="/images/framer/logo-dropline.svg"
+              alt="Dropline Media"
+              width={184}
+              height={28}
+              className="h-auto w-[clamp(90px,20vw,180px)] brightness-0"
+              sizes="(max-width: 390px) 40vw, (max-width: 768px) 20vw, 140px"
+              priority
+            />
           </Link>
 
           {/* ===== DESKTOP NAV LINKS ===== */}
@@ -61,8 +60,6 @@ export default function ContactUs() {
 
           {/* ===== RIGHT SIDE ===== */}
           <div className="flex items-center justify-end gap-3">
-
-            {/* CTA — desktop */}
             <Link
               href="/contact"
               className="hidden md:inline-flex ml-auto items-center rounded-full border border-black bg-black px-4 py-2 text-base font-medium text-white transition-all duration-300 hover:bg-white hover:text-black focus-visible:ring-2 focus-visible:ring-offset-2"
@@ -70,7 +67,6 @@ export default function ContactUs() {
               Get Started
             </Link>
 
-            {/* Hamburger */}
             <button
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
@@ -105,8 +101,6 @@ export default function ContactUs() {
                     {link.label}
                   </Link>
                 ))}
-
-                {/* CTA — mobile */}
                 <Link
                   href="/contact"
                   className="mt-2 inline-flex items-center justify-center rounded-full border border-black bg-black px-4 py-2 text-base font-medium text-white transition-all duration-300 hover:bg-white hover:text-black"
@@ -127,9 +121,11 @@ export default function ContactUs() {
             Fill out the form and we&apos;ll get back to you within 24 hours
           </p>
 
+          {/* ── Card: form + image, contact info now lives inside the form ── */}
           <div className={styles.contactCard}>
             <form className={styles.form} onSubmit={(event) => event.preventDefault()}>
               <div className={styles.formMain}>
+
                 <div className={styles.twoCols}>
                   <label className={styles.field}>
                     <span>Full Name</span>
@@ -159,7 +155,7 @@ export default function ContactUs() {
                 <label className={styles.field}>
                   <span>Message</span>
                   <textarea
-                    rows={4}
+                    rows={5}
                     placeholder="Tell us a bit about your business and what you're looking to achieve"
                   />
                 </label>
@@ -167,12 +163,26 @@ export default function ContactUs() {
                 <button type="submit" className={styles.submitBtn}>
                   Submit your request
                 </button>
-              </div>
 
-              <div className={styles.contactInfo}>
-                <p>Prefer to reach out directly?</p>
-                <a href="tel:+35312834344">+353 1 283 4344</a>
-                <a href="mailto:hello@droplinemedia.ie">hello@droplinemedia.ie</a>
+                {/* ── Contact info: now inside the card, below submit ── */}
+                <div className={styles.contactInfo}>
+                  <p>Prefer to reach out directly?</p>
+                  <a href="tel:+35312834344" className={styles.contactInfoPhone}>
+                    +353 1 283 4344
+                  </a>
+                  <div className={styles.contactInfoEmailRow}>
+                    <span className={styles.emailIcon} aria-hidden="true">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+                        <rect x="2" y="4" width="20" height="16" rx="3" stroke="white" strokeWidth="1.8"/>
+                        <path d="M2 8l10 7 10-7" stroke="white" strokeWidth="1.8" strokeLinecap="round"/>
+                      </svg>
+                    </span>
+                    <a href="mailto:hello@droplinemedia.ie" className={styles.contactInfoEmail}>
+                      hello@droplinemedia.ie
+                    </a>
+                  </div>
+                </div>
+
               </div>
             </form>
 
@@ -184,9 +194,9 @@ export default function ContactUs() {
                 height={400}
                 className={styles.visualImage}
               />
-            
             </aside>
           </div>
+
         </section>
       </main>
 

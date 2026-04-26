@@ -4,12 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./selectedwork.module.css";
 
-import workOne from "./selectedworkimages/1.png";
-import workTwo from "./selectedworkimages/2.png";
-import workThree from "./selectedworkimages/3.png";
-import workFour from "./selectedworkimages/4.png";
-import workFive from "./selectedworkimages/5.png";
-import workSix from "./selectedworkimages/6.png";
+import workOne from "./selectedworkimages/card 1.png";
+import workTwo from "./selectedworkimages/card 2.png";
+import workThree from "./selectedworkimages/card 3.png";
+import workFour from "./selectedworkimages/card 4.png";
+import workFive from "./selectedworkimages/card 5.png";
+import workSix from "./selectedworkimages/card 6.png";
 
 const workCards = [
   {
@@ -79,6 +79,7 @@ export default function SelectedWork() {
               <Image
                 src={card.image}
                 alt={`Selected work panel ${index + 1}`}
+                className={styles.workImage}
                 style={{ width: "100%", height: "auto", display: "block" }}
                 sizes="(max-width: 860px) 100vw, 638px"
                 placeholder="blur"
@@ -93,7 +94,6 @@ export default function SelectedWork() {
                 <div className={styles.overlayTop}>
                   <span className={styles.overlayTitle}>{card.title}</span>
 
-                  {/* ✅ LINK ADDED HERE */}
                   <Link
                     href="/contact"
                     className={styles.overlayBtn}

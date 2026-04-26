@@ -1,19 +1,13 @@
 /* ==================== NAVBAR STYLES ==================== */
-/* Fixed header navigation styling */
 
 .navbar {
-  /* Fixed positioning at top of page */
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 50;
-  
-  /* Background and dimensions */
   background: #e5e5e5;
   height: 80px;
-  
-  /* Flexbox centering */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,7 +15,6 @@
 }
 
 .navInner {
-  /* Content wrapper inside navbar */
   margin: 0;
   display: grid;
   grid-template-columns: auto 1fr auto;
@@ -34,7 +27,6 @@
 }
 
 .logo {
-  /* Logo/branding link */
   display: inline-flex;
   align-items: center;
   color: black;
@@ -42,14 +34,12 @@
 }
 
 .logoImage {
-  /* Logo image sizing */
   width: clamp(72px, 20vw, 138px);
   height: auto;
   color: black;
 }
 
 .navDesktop {
-  /* Desktop navigation links - hidden on mobile */
   display: none;
   align-items: center;
   justify-content: center;
@@ -63,7 +53,6 @@
 }
 
 .navLink {
-  /* Individual navigation link styling */
   min-height: 2.75rem;
   min-width: 2.75rem;
   display: inline-flex;
@@ -77,19 +66,16 @@
 }
 
 .navLink:hover {
-  /* Hover state for navigation links */
   color: rgba(0, 0, 0, 0.7);
 }
 
 .navLink:focus-visible {
-  /* Keyboard focus state */
   outline: 2px solid #111;
   outline-offset: 2px;
   border-radius: 999px;
 }
 
 .actionWrap {
-  /* Right side action buttons container */
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -97,40 +83,34 @@
 }
 
 /* ==================== MAIN CONTENT STYLES ==================== */
-/* Blog detail page main content area */
 
 .pageMain {
-  /* Main page container */
   min-height: 100dvh;
   background-color: #f4f4f2;
-  padding-top: 100px; /* Gap between navbar and content */
+  padding-top: 100px;
 }
 
 .article {
-  /* Article wrapper with responsive padding */
-  padding: 3rem 0 4.5rem;
+  padding: 2.55rem 0 3.83rem;
 }
 
 @media (min-width: 640px) {
   .article {
-    padding: 4rem 0 4.5rem;
+    padding: 3.4rem 0 3.83rem;
   }
 }
 
 .articleInner {
-  /* Content container - max-width centered */
   width: 100%;
-  max-width: 896px;
+  max-width: 1020px;
   margin: 0 auto;
 }
 
 .headerSection {
-  /* Top header area with title and metadata */
-  margin-bottom: 2rem;
+  margin-bottom: 1.7rem;
 }
 
 .categoryBadge {
-  /* Small category/tag badge */
   display: inline-block;
   background-color: #b6ec97;
   color: #000;
@@ -144,60 +124,82 @@
 }
 
 .blogTitle {
-  /* Main blog post title */
   margin: 0;
   font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 700;
   color: #000;
   line-height: 1.2;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.275rem;
 }
 
 .metaInfo {
-  /* Metadata container (author, date, etc.) */
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 1rem;
   font-size: 0.875rem;
   color: #666;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.275rem;
 }
 
 .metaAuthor {
-  /* Author name styling */
   font-weight: 500;
   color: #333;
 }
 
 .metaSeparator {
-  /* Separator between metadata items (•) */
   color: #999;
 }
 
 .imageWrapper {
-  /* Featured image container */
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
   border-radius: 0.5rem;
   overflow: hidden;
-  margin-bottom: 3rem;
+  margin-bottom: 2.55rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .blogImage {
-  /* Featured image styling */
   object-fit: cover;
 }
 
+.imageGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0 0 2.55rem;
+}
+
+.gridItem {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.gridImage {
+  object-fit: cover;
+}
+
+.wideImageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin: 0 0 2.55rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
 .contentSection {
-  /* Main blog content wrapper */
-  margin-bottom: 3rem;
+  margin-bottom: 2.55rem;
 }
 
 .contentText {
-  /* Blog post text content */
   color: #4a4a4a;
   font-size: 1rem;
   line-height: 1.75;
@@ -206,13 +208,11 @@
 }
 
 .backLinkSection {
-  /* Back link area */
-  padding-top: 2rem;
+  padding-top: 1.7rem;
   border-top: 1px solid #d1d5db;
 }
 
 .backLink {
-  /* Back link styling */
   display: inline-flex;
   align-items: center;
   font-size: 0.875rem;
@@ -223,21 +223,17 @@
 }
 
 .backLink:hover {
-  /* Hover state for back link */
   color: #000;
 }
 
 /* ==================== FOOTER STYLES ==================== */
-/* Page footer styling */
 
 .footerSection {
-  /* Main footer container */
   background: #000;
   padding: 1.25rem 0 calc(1.5rem + env(safe-area-inset-bottom, 0px));
 }
 
 .footerTop {
-  /* Top section of footer with columns */
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.45rem 1rem;
@@ -246,12 +242,10 @@
 }
 
 .footerColumn {
-  /* Individual footer column */
   min-width: 0;
 }
 
 .footerHeading {
-  /* Footer section headings */
   margin: 0 0 0.5rem;
   color: rgba(255, 255, 255, 0.5);
   text-transform: uppercase;
@@ -261,7 +255,6 @@
 }
 
 .footerList {
-  /* Footer link list */
   list-style: none;
   margin: 0;
   padding: 0;
@@ -270,7 +263,6 @@
 }
 
 .footerLink {
-  /* Individual footer link */
   color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
   font-size: 0.83rem;
@@ -279,19 +271,16 @@
 }
 
 .footerLink:hover {
-  /* Hover state for footer links */
   color: #fff;
 }
 
 .footerText {
-  /* Regular text in footer */
   margin: 0;
   color: rgba(255, 255, 255, 0.9);
   font-size: 0.83rem;
 }
 
 .footerEmail {
-  /* Email link styling in footer */
   color: rgba(255, 255, 255, 0.94);
   text-decoration: underline;
   text-underline-offset: 0.18em;
@@ -301,17 +290,14 @@
 }
 
 .footerEmail:hover {
-  /* Hover state for email links */
   color: #fff;
 }
 
 .supportHeading {
-  /* Support section heading */
   margin-top: 0.85rem;
 }
 
 .footerBrand {
-  /* Brand/company name in footer */
   margin: 0;
   color: #fff;
   font-size: 0.95rem;
@@ -319,7 +305,6 @@
 }
 
 .footerLegal {
-  /* Legal text/disclaimer */
   margin: 0.5rem 0 0;
   color: rgba(255, 255, 255, 0.55);
   font-size: 0.69rem;
@@ -328,21 +313,18 @@
 }
 
 .footerPolicyLinks {
-  /* Footer policy/legal links */
   margin-top: 0.8rem;
   display: grid;
   gap: 0.34rem;
 }
 
 .footerShowcase {
-  /* Footer showcase/feature section */
   margin-top: 1.2rem;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   padding-top: 0.8rem;
 }
 
 .footerTitle {
-  /* Large featured title in footer */
   margin: 0;
   color: #fff;
   font-size: clamp(2.75rem, 11vw, 11rem);
@@ -352,28 +334,24 @@
 }
 
 .footerTagline {
-  /* Tagline under footer title */
   margin: 0.5rem 0 0;
   color: rgba(255, 255, 255, 0.7);
   font-size: 0.95rem;
 }
 
 /* ==================== RESPONSIVE STYLES ==================== */
-/* Mobile and tablet responsive adjustments */
 
 @media (max-width: 768px) {
-  /* Tablet and below adjustments */
-  
   .pageMain {
-    padding-top: 60px; /* Reduced top padding for mobile */
+    padding-top: 60px;
   }
 
   .article {
-    padding: 2rem 1rem;
+    padding: 1.7rem 0.85rem;
   }
 
   .navInner {
-    padding: 0 24px; /* Reduced horizontal padding */
+    padding: 0 24px;
   }
 
   .blogTitle {
@@ -386,15 +364,28 @@
   }
 
   .imageWrapper {
-    margin-bottom: 2rem;
+    margin-bottom: 1.7rem;
+  }
+
+  .imageGrid {
+    grid-template-columns: 1fr;
+    margin-bottom: 1.7rem;
+  }
+
+  .gridItem {
+    aspect-ratio: 16 / 9;
+  }
+
+  .wideImageWrapper {
+    margin-bottom: 1.7rem;
   }
 
   .contentSection {
-    margin-bottom: 2rem;
+    margin-bottom: 1.7rem;
   }
 
   .backLinkSection {
-    padding-top: 1.5rem;
+    padding-top: 1.275rem;
   }
 
   .footerTop {
@@ -404,19 +395,17 @@
 }
 
 @media (max-width: 480px) {
-  /* Mobile adjustments */
-  
   .pageMain {
-    padding-top: 50px; /* Further reduced top padding */
+    padding-top: 50px;
   }
 
   .article {
-    padding: 1.5rem 0.75rem;
+    padding: 1.275rem 0.65rem;
   }
 
   .navInner {
-    padding: 0 16px; /* Further reduced horizontal padding */
-    height: 70px; /* Reduced navbar height */
+    padding: 0 16px;
+    height: 70px;
   }
 
   .navbar {
@@ -424,7 +413,7 @@
   }
 
   .headerSection {
-    margin-bottom: 1rem;
+    margin-bottom: 0.85rem;
   }
 
   .categoryBadge {
@@ -435,18 +424,18 @@
 
   .blogTitle {
     font-size: 1.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.85rem;
   }
 
   .metaInfo {
     gap: 0.25rem;
     font-size: 0.7rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.85rem;
   }
 
   .imageWrapper {
-    aspect-ratio: 4 / 3; /* Adjusted aspect ratio for mobile */
-    margin-bottom: 1.5rem;
+    aspect-ratio: 4 / 3;
+    margin-bottom: 1.275rem;
   }
 
   .contentText {
@@ -455,7 +444,7 @@
   }
 
   .footerTop {
-    grid-template-columns: 1fr; /* Single column on mobile */
+    grid-template-columns: 1fr;
     gap: 1rem 0;
   }
 
@@ -465,41 +454,40 @@
 }
 
 /* ==================== LEGACY STYLES (OLD) ==================== */
-/* Keeping old styles for reference/backwards compatibility */
 
 .wrapper {
   width: 100%;
   display: block;
   background: #e5e5e5;
   color: #111;
-  padding: 120px 20px 72px;
+  padding: 102px 17px 61px;
   box-sizing: border-box;
-  margin-top: 100px;
+  margin-top: 85px;
 }
 
 .inner {
   width: 100%;
-  max-width: 820px;
+  max-width: 980px;
   margin: 0 auto;
   padding-left: clamp(0px, 2vw, 8px);
   padding-right: clamp(0px, 2vw, 8px);
 }
 
 .breadcrumb {
-  margin: 0 0 24px;
+  margin: 0 0 20px;
   color: #717171;
   font-size: 11px;
   line-height: 1;
 }
 
 .titleBlock {
-  margin-bottom: 32px;
+  margin-bottom: 27px;
   border-bottom: 1px solid #d7d7d7;
-  padding-bottom: 20px;
+  padding-bottom: 17px;
 }
 
 .kicker {
-  margin: 0 0 14px;
+  margin: 0 0 12px;
   color: #6e6e6e;
   font-size: 10px;
   line-height: 1.2;
@@ -517,7 +505,7 @@
 }
 
 .excerpt {
-  margin: 16px 0 14px;
+  margin: 14px 0 12px;
   color: #505050;
   font-size: 14px;
   line-height: 1.75;
@@ -552,13 +540,13 @@
   color: #4e4e4e;
   font-size: 14px;
   line-height: 1.7;
-  margin-top: 34px;
+  margin-top: 29px;
 }
 
 .shareBar {
-  margin: 30px 0 0;
+  margin: 25px 0 0;
   border-top: 1px solid #d7d7d7;
-  padding-top: 16px;
+  padding-top: 14px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -601,7 +589,7 @@
 
 @media (max-width: 680px) {
   .wrapper {
-    padding: 96px 16px 56px;
+    padding: 82px 14px 48px;
   }
 
   .title {
@@ -613,191 +601,77 @@
   }
 }
 
-/* ==================== NEW BLOG DETAIL PAGE STYLES ==================== */
+/* ==================== MULTI-IMAGE PATTERN ==================== */
 
-.pageMain {
-  min-height: 100dvh;
-  background-color: #f4f4f2;
-  padding-top: 100px;
+.triGrid {
+  display: grid;
+  gap: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-.article {
-  /* Using section-shell class handling via parent */
-  padding: 3rem 0 4.5rem;
-}
-
-@media (min-width: 640px) {
-  .article {
-    padding: 4rem 0 4.5rem;
-  }
-}
-
-.articleInner {
-  width: 100%;
-  max-width: 896px;
-  margin: 0 auto;
-}
-
-.headerSection {
-  margin-bottom: 2rem;
-}
-
-.categoryBadge {
-  display: inline-block;
-  background-color: #b6ec97;
-  color: #000;
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 0.375rem 0.75rem;
-  border-radius: 9999px;
-  margin-bottom: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.blogTitle {
-  margin: 0;
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 700;
-  color: #000;
-  line-height: 1.2;
-  margin-bottom: 1.5rem;
-}
-
-.metaInfo {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1rem;
-  font-size: 0.875rem;
-  color: #666;
-  margin-bottom: 1.5rem;
-}
-
-.metaAuthor {
-  font-weight: 500;
-  color: #333;
-}
-
-.metaSeparator {
-  color: #999;
-}
-
-.imageWrapper {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  border-radius: 0.5rem;
+.triCell {
+  border-radius: 10px;
   overflow: hidden;
-  margin-bottom: 3rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  aspect-ratio: 4 / 3;
+  background: #e8e8e8;
 }
 
-.blogImage {
+.triImg {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  display: block;
 }
 
-.contentSection {
-  margin-bottom: 3rem;
+.wideImgWrap {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 14px;
+  overflow: hidden;
+  aspect-ratio: 16 / 7;
+  background: #e8e8e8;
 }
 
-.contentText {
-  color: #4a4a4a;
-  font-size: 1rem;
-  line-height: 1.75;
-  white-space: pre-wrap;
-  word-wrap: break-word;
+.wideImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-.backLinkSection {
-  padding-top: 2rem;
-  border-top: 1px solid #d1d5db;
+.soloImgWrap {
+  margin-top: 20px;
+  margin-bottom: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 16 / 8;
+  background: #e8e8e8;
 }
 
-.backLink {
-  display: inline-flex;
-  align-items: center;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #4a4a4a;
-  text-decoration: none;
-  transition: color 0.3s ease;
+.soloImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-.backLink:hover {
-  color: #000;
-}
-
-/* ==================== RESPONSIVE STYLES ==================== */
-
-@media (max-width: 768px) {
-  .pageMain {
-    padding-top: 60px;
+@media (max-width: 680px) {
+  .triGrid {
+    grid-template-columns: 1fr !important;
   }
 
-  .article {
-    padding: 2rem 1rem;
+  .triCell {
+    aspect-ratio: 16 / 9;
   }
 
-  .blogTitle {
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
+  .wideImgWrap {
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
   }
 
-  .metaInfo {
-    gap: 0.5rem;
-    font-size: 0.75rem;
-  }
-
-  .imageWrapper {
-    margin-bottom: 2rem;
-  }
-
-  .contentSection {
-    margin-bottom: 2rem;
-  }
-
-  .backLinkSection {
-    padding-top: 1.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .pageMain {
-    padding-top: 50px;
-  }
-
-  .article {
-    padding: 1.5rem 0.75rem;
-  }
-
-  .headerSection {
-    margin-bottom: 1rem;
-  }
-
-  .categoryBadge {
-    font-size: 0.65rem;
-    padding: 0.25rem 0.5rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .blogTitle {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .metaInfo {
-    gap: 0.25rem;
-    font-size: 0.7rem;
-    margin-bottom: 1rem;
-  }
-
-  .imageWrapper {
-    aspect-ratio: 4 / 3;
-    margin-bottom: 1.5rem;
-  }
-
-  .contentText {
-    font-size: 0.9rem;
-    line-height: 1.6;
+  .soloImgWrap {
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
   }
 }

@@ -1,7 +1,20 @@
-﻿import Image from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 import styles from "./blogmain.module.css";
+import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import * as Sanity from "@/lib/sanity";
+
+type BlogListPost = {
+  _id: string;
+  title: string;
+  excerpt?: string;
+  slug: string;
+  publishedAt?: string;
+  author?: string;
+  images?: SanityImageSource[];
+  featured?: boolean;
+  category: string;
+};
 
 export default async function BlogMain() {
   const query = `*[_type == "blog" && defined(slug.current) && publishedAt <= now()] | order(publishedAt desc) {
@@ -11,13 +24,14 @@ export default async function BlogMain() {
     "slug": slug.current,
     publishedAt,
     author,
+    featured,
     images,
     "category": "Blog"
   }`;
 
-  const posts = await Sanity.fetchQuery(query);
+  const posts = await Sanity.fetchQuery<BlogListPost[]>(query);
 
-  if (!posts || posts.length === 0) {
+  if (!Array.isArray(posts) || posts.length === 0) {
     return (
       <main className={styles.blogMain}>
         <div className="section-shell">
@@ -36,27 +50,27 @@ export default async function BlogMain() {
     );
   }
 
-  const featuredPost = posts.find((p: any) => p.featured) || posts[0];
-  const otherPosts = posts.filter((p: any) => p._id !== featuredPost._id);
+  const featuredPost = posts.find((p) => p.featured) ?? posts[0];
+  const otherPosts = posts.filter((p) => p._id !== featuredPost._id);
 
-  // Build image URLs server-side to avoid bundling image-builder on client
-  let featuredImageUrl: string | null = null;
-  if (featuredPost?.images && featuredPost.images.length > 0) {
-    const b = await Sanity.urlFor(featuredPost.images[0]);
-    featuredImageUrl = b.width(1200).height(800).url();
+  async function buildImageUrl(image: SanityImageSource, width: number, height: number) {
+    if (!image) return null;
+    const builder = await Sanity.urlFor(image);
+    return builder.width(width).height(height).url();
   }
 
+  // Build image URLs server-side to avoid bundling image-builder on client
+  const featuredImageUrl = featuredPost.images?.[0]
+    ? await buildImageUrl(featuredPost.images[0], 1200, 800)
+    : null;
+
   const otherImages = await Promise.all(
-    otherPosts.map(async (p: any) => {
-      if (p?.images && p.images.length > 0) {
-        const b = await Sanity.urlFor(p.images[0]);
-        return b.width(800).height(600).url();
-      }
-      return null;
-    })
+    otherPosts.map(async (p) =>
+      p.images?.[0] ? buildImageUrl(p.images[0], 800, 600) : null
+    )
   );
 
-  function formatDate(dateStr: string) {
+  function formatDate(dateStr?: string) {
     if (!dateStr) return "";
     return new Date(dateStr).toLocaleDateString("en-GB", { month: "short", day: "numeric", year: "numeric" });
   }
@@ -110,13 +124,13 @@ export default async function BlogMain() {
 
           <section className={styles.postsSection}>
             <div className={styles.postsGrid}>
-              {otherPosts.map((post: any, idx: number) => (
+              {otherPosts.map((post, idx) => (
                 <Link key={post._id} href={`/blog/${post.slug}`}>
                   <article className={styles.card}>
                     <div className={styles.cardMedia}>
                       {otherImages[idx] ? (
                         <Image
-                          src={otherImages[idx] as string}
+                          src={otherImages[idx] ?? ""}
                           alt={post.title}
                           fill
                           sizes="(max-width: 900px) 100vw, 33vw"

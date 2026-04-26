@@ -147,6 +147,7 @@
   text-decoration: none;
 }
 
+/* ── Main ── */
 .mainSection {
   background: #c7ff9f;
   padding: 130px 80px 150px;
@@ -178,6 +179,7 @@
   color: #202020;
 }
 
+/* ── Card ── */
 .contactCard {
   margin: 0 auto;
   width: min(1149.99px, 100%);
@@ -190,38 +192,42 @@
   text-align: left;
   box-sizing: border-box;
   overflow: hidden;
+  align-items: stretch;
 }
 
+/* ── Form: stretches full height of the card via grid align-items:stretch ── */
 .form {
-  min-height: 705px;
-  padding: 16px 25px 50px 25px;
+  padding: 28px 32px 32px 28px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   box-sizing: border-box;
 }
 
+/* formMain fills remaining height so contactInfo can be pushed to bottom */
 .formMain {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  flex: 1;
+  min-height: 0;
 }
 
 .twoCols {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 20px;
 }
 
+/* ── Field spacing: generous equal gaps between every element ── */
 .field {
   display: block;
-  margin-bottom: 16px;
+  margin-bottom: 32px;
 }
 
 .field span {
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 12px;
   font-size: 14px;
+  font-weight: 500;
   color: #111;
 }
 
@@ -232,17 +238,24 @@
   border: 0;
   border-bottom: 1px solid #dcdcdc;
   background: transparent;
-  padding: 7px 0;
-  font-size: 11px;
+  padding: 10px 0;
+  font-size: 12px;
   color: #111;
   outline: none;
+  box-sizing: border-box;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: #aaa;
 }
 
 .field textarea {
   resize: none;
-  min-height: 64px;
+  min-height: 100px;
 }
 
+/* ── Submit button ── */
 .submitBtn {
   border: 0;
   background: #0d0d0d;
@@ -253,37 +266,76 @@
   line-height: 18.2px;
   letter-spacing: 0.35px;
   font-weight: 600;
-  padding: 10px 16px;
+  padding: 12px 22px;
   cursor: pointer;
-  margin-top: 8px;
+  margin-top: 6px;
+  margin-bottom: 0;
   width: fit-content;
+  transition: background 0.2s, color 0.2s;
+  align-self: flex-start;
 }
 
+.submitBtn:hover {
+  background: #333;
+}
+
+/* ── Contact info: anchored to bottom of form via margin-top auto ── */
 .contactInfo {
-  margin-top: 0;
-  display: grid;
+  margin-top: auto;           /* key: pushes block to bottom of flex column */
+  padding-top: 28px;
+  display: flex;
+  flex-direction: column;
   gap: 6px;
+  color: #111;
 }
 
 .contactInfo p {
-  margin: 0 0 3px;
-  color: #5b5b5b;
-  font-size: 10px;
+  margin: 0 0 4px;
+  color: #666;
+  font-size: 12px;
+  font-weight: 400;
 }
 
-.contactInfo a {
-  width: fit-content;
-  color: #111;
-  font-size: 11px;
+.contactInfoPhone {
+  color: #111 !important;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  display: block;
+}
+
+.contactInfoEmailRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.emailIcon {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: #0d0d0d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contactInfoEmail {
+  color: #111 !important;
+  font-size: 13px;
+  font-weight: 500;
   text-decoration: none;
 }
 
+/* ── Visual panel: sets the card's overall height ── */
 .visualPanel {
   position: relative;
   overflow: hidden;
   border-radius: 22px;
   background: #101010;
-  min-height: 705px;
+  min-height: 700px;   /* drives the card height so form can stretch to match */
 }
 
 .visualImage {
@@ -294,7 +346,7 @@
   opacity: 0.92;
 }
 
-
+/* ── Responsive ── */
 @media (max-width: 1024px) {
   .mainSection {
     padding: 108px 20px 90px;
@@ -308,9 +360,8 @@
   }
 
   .form {
-    min-height: auto;
-    padding: 8px 8px 20px;
-    gap: 24px;
+    padding: 16px 16px 24px;
+    height: auto;
   }
 
   .visualPanel {
