@@ -91,7 +91,7 @@
 .footerTitle {
   margin: 0;
   color: #fff;
-  font-size: clamp(2.75rem, 11vw, 11rem);
+  font-size:205px;
   line-height: 0.93;
   letter-spacing: -0.05em;
   font-weight: 500;
