@@ -31,6 +31,7 @@
 }
 
 .logoImage {
+  /* Desktop: clamp as before. Mobile override below. */
   width: clamp(72px, 20vw, 138px);
   height: auto;
   color: black;
@@ -137,6 +138,18 @@
 @media (max-width: 700px) {
   .navInner {
     padding: 0 16px;
+  }
+}
+
+/* ─── Mobile: bigger logo + bigger hamburger ─────────────────────────────── */
+@media (max-width: 767px) {
+  .logoImage {
+    width: 160px;
+  }
+
+  .mobileToggle {
+    width: 3.5rem;   /* 56px — matches homepage hamburger */
+    height: 3.5rem;
   }
 }
 

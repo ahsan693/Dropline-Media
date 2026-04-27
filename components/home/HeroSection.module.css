@@ -180,38 +180,23 @@
 
 /* ─── Mobile ──────────────────────────────────────────────────────────────── */
 @media (max-width: 767px) {
-  /* 
-    CRITICAL: Change section layout so items stack from the top
-    instead of being vertically centered (which causes gaps).
-    Use padding-top to push content below the fixed navbar (80px).
-  */
-  .bsHeroSection {
-    justify-content: flex-start !important;
-    min-height: 100svh;
-    padding-top: 80px; /* exact navbar height */
-  }
-
   .bsHeroSection::before,
   .bsHeroSection::after {
     width: 14vw;
   }
 
-  /* No extra padding — section padding-top already handles navbar offset */
   .bsHeroTitleWrap {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    margin-top: 0 !important;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
   .bsHeroHeading {
-    padding-block: 1rem 0.5rem !important;
-    margin: 0 !important;
+    padding-block: 1rem 0.5rem;
   }
 
-  /* Kill all vertical padding/margin on the carousel stage */
   .bsHeroCarouselStage {
-    padding: 0 !important;
-    margin: 0 !important;
+    padding: 0;
+    margin: 0;
     perspective: 400px;
   }
 

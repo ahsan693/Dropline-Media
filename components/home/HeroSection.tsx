@@ -10,10 +10,6 @@ interface HeroCard {
   src: string;
 }
 
-// ─── Local assets from /herosection-videocards ──────────────────────────────
-// Videos and images are co-located in the same folder as this component.
-// If you move them to /public, update the paths to absolute URLs, e.g.:
-//   "/videos/herosection-videocards/brand guidelines.mp4"
 const heroCards: HeroCard[] = [
   { kind: "video", src: "/herosection-videocards/brand%20guidelines.mp4" },
   { kind: "video", src: "/herosection-videocards/facebook%202.mp4" },
@@ -21,7 +17,7 @@ const heroCards: HeroCard[] = [
   { kind: "image", src: "/herosection-videocards/Instagram%20ads.png" },
   { kind: "video", src: "/herosection-videocards/logo%20updated.mp4" },
   { kind: "image", src: "/herosection-videocards/pinterest%20ads.png" },
- { kind: "image", src: "/herosection-videocards/Snapchat.png" },
+  { kind: "image", src: "/herosection-videocards/Snapchat.png" },
   { kind: "video", src: "/herosection-videocards/social%20media%20updated.mp4" },
   { kind: "video", src: "/herosection-videocards/Tiktok%20updated%203.mp4" },
   { kind: "image", src: "/herosection-videocards/youtbe%20ads.png" },
@@ -33,13 +29,18 @@ export default function HeroSection() {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [viewportWidth, setViewportWidth] = useState(0);
   const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const rafId = requestAnimationFrame(() => {
       setMounted(true);
       setViewportWidth(window.innerWidth);
+      setIsMobile(window.innerWidth < 768);
     });
-    const onResize = () => setViewportWidth(window.innerWidth);
+    const onResize = () => {
+      setViewportWidth(window.innerWidth);
+      setIsMobile(window.innerWidth < 768);
+    };
     window.addEventListener("resize", onResize);
     return () => {
       cancelAnimationFrame(rafId);
@@ -137,7 +138,22 @@ export default function HeroSection() {
   }, [mounted, viewportWidth]);
 
   return (
-    <section className={styles.bsHeroSection}>
+    <section
+      className={styles.bsHeroSection}
+      /* 
+        INLINE STYLE on mobile: overrides EVERYTHING — CSS Modules, GSAP, 
+        browser defaults. min-height:auto collapses the section to content 
+        height only, killing the giant gap below the carousel.
+        On desktop (>=768px) the CSS handles it via the stylesheet.
+      */
+      style={isMobile ? {
+        minHeight: "auto",
+        height: "auto",
+        paddingTop: "80px",
+        paddingBottom: "1.5rem",
+        justifyContent: "flex-start",
+      } : undefined}
+    >
       <div className={styles.bsHeroTitleWrap}>
         <h1 ref={titleRef} className={styles.bsHeroHeading}>
           We scale brands through
@@ -146,7 +162,14 @@ export default function HeroSection() {
         </h1>
       </div>
 
-      <div ref={sectionCardsRef} className={styles.bsHeroCarouselStage}>
+      <div
+        ref={sectionCardsRef}
+        className={styles.bsHeroCarouselStage}
+        style={isMobile ? {
+          padding: "0",
+          margin: "0",
+        } : undefined}
+      >
         <div className={styles.bsHeroCarousel3dCtx}>
           <div ref={carouselRef} className={styles.bsHeroCarousel}>
             {heroCards.map((card) => (

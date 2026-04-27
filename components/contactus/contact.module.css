@@ -90,12 +90,13 @@
   justify-content: center;
 }
 
+/* Hamburger — visible on mobile, hidden on md+ via Tailwind in JSX */
 .mobileToggle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2.75rem;
-  height: 2.75rem;
+  width: 3.5rem;
+  height: 3.5rem;
   border-radius: 999px;
   border: 0;
   background: rgba(0, 0, 0, 0.08);
@@ -103,48 +104,61 @@
   cursor: pointer;
 }
 
+/* ── DRAWER — dark panel matching home page exactly ── */
 .drawer {
   position: fixed;
   inset-inline: 1rem;
-  top: var(--navbar-offset-mobile);
+  top: 88px; /* navbar height 80px + 8px gap */
   z-index: 40;
   border-radius: 0.95rem;
-  background: #d2f6b8;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 1rem;
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
 }
 
 .drawerList {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.25rem;
 }
 
 .drawerLink {
   display: block;
   border-radius: 0.65rem;
   padding: 0.75rem 0.9rem;
-  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 1rem;
-  font-weight: 600;
-  color: #111;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
   text-decoration: none;
+  transition: background 0.15s;
+}
+
+.drawerLink:hover {
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .drawerCta {
-  margin-top: 0.65rem;
-  display: inline-flex;
+  margin-top: 0.5rem;
+  display: flex;
+  width: 100%;
   align-items: center;
   justify-content: center;
   border-radius: 999px;
-  background: #000;
-  color: #fff;
+  background: #fff;
+  color: #000;
   padding: 0.7rem 1rem;
-  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   font-weight: 600;
   text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+  box-sizing: border-box;
+}
+
+.drawerCta:hover {
+  background: #000;
+  color: #fff;
+  border: 1px solid #fff;
 }
 
 /* ── Main ── */
@@ -195,7 +209,6 @@
   align-items: stretch;
 }
 
-/* ── Form: stretches full height of the card via grid align-items:stretch ── */
 .form {
   padding: 28px 32px 32px 28px;
   display: flex;
@@ -203,7 +216,6 @@
   box-sizing: border-box;
 }
 
-/* formMain fills remaining height so contactInfo can be pushed to bottom */
 .formMain {
   display: flex;
   flex-direction: column;
@@ -217,7 +229,6 @@
   gap: 20px;
 }
 
-/* ── Field spacing: generous equal gaps between every element ── */
 .field {
   display: block;
   margin-bottom: 32px;
@@ -255,7 +266,6 @@
   min-height: 100px;
 }
 
-/* ── Submit button ── */
 .submitBtn {
   border: 0;
   background: #0d0d0d;
@@ -279,9 +289,8 @@
   background: #333;
 }
 
-/* ── Contact info: anchored to bottom of form via margin-top auto ── */
 .contactInfo {
-  margin-top: auto;           /* key: pushes block to bottom of flex column */
+  margin-top: auto;
   padding-top: 28px;
   display: flex;
   flex-direction: column;
@@ -329,13 +338,12 @@
   text-decoration: none;
 }
 
-/* ── Visual panel: sets the card's overall height ── */
 .visualPanel {
   position: relative;
   overflow: hidden;
   border-radius: 22px;
   background: #101010;
-  min-height: 700px;   /* drives the card height so form can stretch to match */
+  min-height: 700px;
 }
 
 .visualImage {
@@ -403,10 +411,6 @@
 
   .mobileToggle {
     display: none;
-  }
-
-  .drawer {
-    top: var(--navbar-offset-tablet);
   }
 }
 

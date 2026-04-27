@@ -16,9 +16,6 @@ const navLinks = [
 const desktopLinkCls =
   "min-h-11 min-w-11 flex items-center justify-center text-lg font-medium text-black transition-colors duration-300 hover:text-black/60 focus-visible:ring-2 focus-visible:ring-offset-2";
 
-const mobileLinkCls =
-  "block rounded-md px-3 py-3 text-lg font-medium text-black focus-visible:ring-2 focus-visible:ring-offset-2";
-
 export default function ContactUs() {
   const [open, setOpen] = useState(false);
 
@@ -34,18 +31,19 @@ export default function ContactUs() {
         ].join(" ")}
         style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}
       >
-        <div className="mx-auto grid h-20 w-full max-w-screen-2xl grid-cols-[auto_1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center px-12">
+        <div className="mx-auto grid h-20 w-full max-w-screen-2xl grid-cols-[auto_1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center px-4 sm:px-6 md:px-8 lg:px-12">
 
           {/* ===== LOGO ===== */}
-          <Link href="/" aria-label="Dropline Media home" className="shrink-0">
+          <Link href="/" aria-label="Dropline Media home" className="shrink-0 flex items-center">
             <Image
               src="/images/framer/logo-dropline.svg"
               alt="Dropline Media"
               width={184}
               height={28}
-              className="h-auto w-[clamp(90px,20vw,180px)] brightness-0"
-              sizes="(max-width: 390px) 40vw, (max-width: 768px) 20vw, 140px"
+              className="h-auto brightness-0 md:!w-[180px]"
+              sizes="(max-width: 767px) 200px, 180px"
               priority
+              style={{ width: "200px", height: "auto" }}
             />
           </Link>
 
@@ -67,19 +65,20 @@ export default function ContactUs() {
               Get Started
             </Link>
 
+            {/* Hamburger — mobile only */}
             <button
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
-              className="md:hidden inline-flex h-11 w-11 items-center justify-center rounded-full bg-black/10 text-black focus-visible:ring-2 focus-visible:ring-offset-2"
+              className={styles.mobileToggle}
               onClick={() => setOpen((v) => !v)}
               style={{ touchAction: "manipulation" }}
               type="button"
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
                 <path
                   d={open ? "M6 18L18 6M6 6l12 12" : "M3 6h18M3 12h18M3 18h18"}
                   stroke="currentColor"
-                  strokeWidth="1.2"
+                  strokeWidth="1.8"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
@@ -87,23 +86,24 @@ export default function ContactUs() {
             </button>
           </div>
 
-          {/* ===== MOBILE DRAWER ===== */}
+          {/* ===== MOBILE DRAWER — uses CSS module classes ===== */}
           {open && (
-            <nav className="md:hidden fixed inset-x-4 top-[var(--navbar-offset-mobile)] z-40 rounded-lg bg-bs-panel p-4 shadow-lg">
-              <div className="flex flex-col gap-3">
+            <nav className={styles.drawer}>
+              <div className={styles.drawerList}>
                 {navLinks.map((link) => (
                   <Link
                     key={link.label}
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className={mobileLinkCls}
+                    className={styles.drawerLink}
                   >
                     {link.label}
                   </Link>
                 ))}
                 <Link
                   href="/contact"
-                  className="mt-2 inline-flex items-center justify-center rounded-full border border-black bg-black px-4 py-2 text-base font-medium text-white transition-all duration-300 hover:bg-white hover:text-black"
+                  onClick={() => setOpen(false)}
+                  className={styles.drawerCta}
                 >
                   Get Started
                 </Link>
@@ -121,7 +121,6 @@ export default function ContactUs() {
             Fill out the form and we&apos;ll get back to you within 24 hours
           </p>
 
-          {/* ── Card: form + image, contact info now lives inside the form ── */}
           <div className={styles.contactCard}>
             <form className={styles.form} onSubmit={(event) => event.preventDefault()}>
               <div className={styles.formMain}>
@@ -164,7 +163,6 @@ export default function ContactUs() {
                   Submit your request
                 </button>
 
-                {/* ── Contact info: now inside the card, below submit ── */}
                 <div className={styles.contactInfo}>
                   <p>Prefer to reach out directly?</p>
                   <a href="tel:+35312834344" className={styles.contactInfoPhone}>
