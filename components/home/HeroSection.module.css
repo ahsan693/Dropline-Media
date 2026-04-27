@@ -90,19 +90,8 @@
   color: #c7ff9f;
 }
 
-/* ─── Carousel Stage ─────────────────────────────────────────────────────────
-   THE GOLDEN RULE:
-   `perspective` and `transform-style: preserve-3d` must NEVER coexist on
-   the same element — browser flattens the 3D scene when both are present.
+/* ─── Carousel Stage ─────────────────────────────────────────────────────── */
 
-   Architecture (4 layers):
-     .bsHeroCarouselStage  → perspective ONLY  (no transform-style)
-     .bsHeroCarousel3dCtx  → preserve-3d ONLY  (no perspective)
-     .bsHeroCarousel       → spinning ring      (preserve-3d + GSAP rotationY)
-     .bsHeroCard           → each card          (GSAP rotateY + z, NO 3d props)
-────────────────────────────────────────────────────────────────────────────── */
-
-/* Layer 1 — perspective root. Must NOT have transform-style. */
 .bsHeroCarouselStage {
   position: relative;
   z-index: 2;
@@ -114,7 +103,6 @@
   perspective: 600px;
 }
 
-/* Layer 2 — 3D context bridge. Must NOT have perspective. */
 .bsHeroCarousel3dCtx {
   display: flex;
   align-items: center;
@@ -124,7 +112,6 @@
   height: 33vh;
 }
 
-/* Layer 3 — the ring GSAP spins via rotationY. */
 .bsHeroCarousel {
   position: relative;
   display: flex;
@@ -136,11 +123,6 @@
   transform-style: preserve-3d;
 }
 
-/* Layer 4 — cards. Leaf nodes — no 3D props at all.
-   will-change, backface-visibility, and transform-style each force the
-   browser to composite the card into its own GPU layer with a black
-   background, which shows through as a dark tint over the video.
-   Removing all three makes the GPU render the card inline, transparent. */
 .bsHeroCard {
   position: absolute;
   box-sizing: border-box;
@@ -157,11 +139,6 @@
   object-fit: cover;
   display: block;
   background: transparent;
-  /*
-   * Counteract the slight darkening browsers apply to video elements
-   * composited inside a 3D scene. 1.08 brightness + 1.1 saturation
-   * restores the vivid, HD look without blowing out highlights.
-   */
   filter: brightness(1.08) saturate(1.1);
 }
 
@@ -203,17 +180,42 @@
 
 /* ─── Mobile ──────────────────────────────────────────────────────────────── */
 @media (max-width: 767px) {
+  /* 
+    CRITICAL: Change section layout so items stack from the top
+    instead of being vertically centered (which causes gaps).
+    Use padding-top to push content below the fixed navbar (80px).
+  */
+  .bsHeroSection {
+    justify-content: flex-start !important;
+    min-height: 100svh;
+    padding-top: 80px; /* exact navbar height */
+  }
+
   .bsHeroSection::before,
   .bsHeroSection::after {
     width: 14vw;
   }
 
+  /* No extra padding — section padding-top already handles navbar offset */
   .bsHeroTitleWrap {
-    padding-top: 1rem;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-top: 0 !important;
   }
 
+  .bsHeroHeading {
+    padding-block: 1rem 0.5rem !important;
+    margin: 0 !important;
+  }
+
+  /* Kill all vertical padding/margin on the carousel stage */
   .bsHeroCarouselStage {
-    padding-block: 1rem 2rem;
+    padding: 0 !important;
+    margin: 0 !important;
     perspective: 400px;
+  }
+
+  .bsHeroCarousel3dCtx {
+    height: 30vh;
   }
 }
