@@ -1,5 +1,5 @@
 .trustedSection {
-   background: #ffffff;
+  background: #ffffff;
   padding: 2.0rem 0 1.75rem;
 }
 
@@ -26,59 +26,49 @@
   overflow: hidden;
   width: 100%;
   position: relative;
-  /* Balanced fade at edges */
   mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
   -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
+/* The track holds two identical copies of the logo list side by side.
+   We animate translateX from 0 to -50% so it seamlessly loops. */
 .logoStrip {
+  display: flex;
+  width: max-content;
+  align-items: center;
   margin-top: 2rem;
-  position: relative;
-  width: 100%;
-  min-height: 2.35rem;
+  margin-bottom: 0.5rem;
+  animation: marqueeScroll 22s linear infinite;
+  will-change: transform;
+}
+
+/* Each half of the strip — original + duplicate */
+.logoGroup {
+  display: flex;
+  align-items: center;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  padding-right: clamp(2.5rem, 6vw, 5rem); /* trailing gap before loop */
 }
 
 .logoItem {
-  min-width: 0;
-  width: max-content;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  top: 50%;
-  left: -18%;
-  transform: translateY(-50%);
-  animation: marqueeRight 20s linear infinite;
-  will-change: left;
+  flex-shrink: 0;
 }
 
-.logoItem:nth-child(1) {
-  animation-delay: -16s;
-}
-
-.logoItem:nth-child(2) {
-  animation-delay: -12s;
-}
-
-.logoItem:nth-child(3) {
-  animation-delay: -8s;
-}
-
-.logoItem:nth-child(4) {
-  animation-delay: -4s;
-}
-
-.logoItem:nth-child(5) {
-  animation-delay: 0s;
-}
-
-@keyframes marqueeRight {
+@keyframes marqueeScroll {
   0% {
-    left: -18%;
+    transform: translateX(-50%);
   }
   100% {
-    left: 118%;
+    transform: translateX(0);
   }
+}
+
+/* Pause on hover (optional — remove if unwanted) */
+.marqueeContainer:hover .logoStrip {
+  animation-play-state: paused;
 }
 
 .logoImage {
@@ -87,12 +77,14 @@
   max-height: 2.05rem;
   object-fit: contain;
   opacity: 0.96;
+  display: block;
 }
 
 .iconLogo .logoImage {
   max-height: 1.5rem;
 }
 
+/* ─── Mobile ─────────────────────────────────────── */
 @media (max-width: 430px) {
   .trustedSection {
     padding: 1.3rem 0 1.1rem;
@@ -104,7 +96,13 @@
   }
 
   .logoStrip {
-    min-height: 1.7rem;
+    margin-top: 1.25rem;
+    animation-duration: 18s;
+  }
+
+  .logoGroup {
+    gap: 2rem;
+    padding-right: 2rem;
   }
 
   .logoImage {
@@ -116,6 +114,7 @@
   }
 }
 
+/* ─── Tablet & Desktop ───────────────────────────── */
 @media (min-width: 768px) {
   .trustedSection {
     padding: 1.8rem 0 1.65rem;
@@ -127,15 +126,18 @@
     font-size: 2.5rem;
   }
 
-  .logoStrip {
-    min-height: 2.35rem;
-  }
-
   .logoImage {
     max-height: 2.35rem;
   }
 
   .iconLogo .logoImage {
     max-height: 1.75rem;
+  }
+}
+
+/* ─── Reduced motion ─────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .logoStrip {
+    animation: none;
   }
 }

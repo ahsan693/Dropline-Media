@@ -17,9 +17,30 @@ const logos: TrustedLogo[] = [
   { src: mclLogo, alt: "Michael Creative Labs" },
   { src: rooturaLogo, alt: "Rootura" },
   { src: kudocardLogo, alt: "KudoCard" },
-  { src: nnLogo, alt: "NN" , isIcon: true },
+  { src: nnLogo, alt: "NN", isIcon: true },
   { src: nexalleyLogo, alt: "Nexalley" },
 ];
+
+function LogoGroup({ suffix }: { suffix: string }) {
+  return (
+    <div className={styles.logoGroup} aria-hidden={suffix === "b" ? true : undefined}>
+      {logos.map((logo) => (
+        <div
+          key={`${logo.alt}-${suffix}`}
+          className={`${styles.logoItem} ${logo.isIcon ? styles.iconLogo : ""}`}
+        >
+          <Image
+            src={logo.src}
+            alt={suffix === "a" ? logo.alt : ""}
+            className={styles.logoImage}
+            sizes="(max-width: 480px) 25vw, (max-width: 1024px) 16vw, 190px"
+            loading="lazy"
+          />
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export default function TrustedSection() {
   return (
@@ -29,22 +50,15 @@ export default function TrustedSection() {
           <h3 className={styles.trustedTitle}>Trusted by</h3>
 
           <div className={styles.marqueeContainer}>
+            {/*
+              Two identical groups placed side-by-side.
+              The strip is animated from translateX(0) → translateX(-50%),
+              which scrolls exactly one group width — creating a seamless loop
+              regardless of screen size or logo widths.
+            */}
             <div className={styles.logoStrip}>
-              {logos.map((logo) => (
-                <div
-                  key={logo.alt}
-                  className={`${styles.logoItem} ${logo.isIcon ? styles.iconLogo : ""}`}
-                >
-                  <Image
-                    src={logo.src}
-                    alt={logo.alt}
-                    className={styles.logoImage}
-                    sizes="(max-width: 480px) 20vw, (max-width: 1024px) 16vw, 190px"
-                    priority={logo.alt === "Rootura" || logo.alt === "KudoCard"}
-                    loading={logo.alt === "Rootura" || logo.alt === "KudoCard" ? undefined : "lazy"}
-                  />
-                </div>
-              ))}
+              <LogoGroup suffix="a" />
+              <LogoGroup suffix="b" />
             </div>
           </div>
         </div>
