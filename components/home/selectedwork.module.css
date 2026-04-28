@@ -67,6 +67,16 @@
   width: 100%;
   background: #000;
   display: block;
+  /* Mobile: make card a tap target */
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
+
+/* Desktop: revert to default cursor since hover handles interaction */
+@media (hover: hover) {
+  .selectedWorkCard {
+    cursor: default;
+  }
 }
 
 .workImage {
@@ -104,22 +114,27 @@
   will-change: transform;
 }
 
-@media (max-width: 860px) {
-  .selectedWorkOverlay {
-    position: relative;
-    height: auto;
-    min-height: 180px;
+/* Desktop hover — unchanged */
+@media (hover: hover) {
+  .selectedWorkCard:hover .selectedWorkOverlay {
     transform: translateY(0);
-    border-radius: 0 0 47px 47px;
-    padding: 1rem 1rem 1.1rem;
-    gap: 0.35rem;
+    border-radius: 47px;
   }
 }
 
-/* slide up on hover */
-.selectedWorkCard:hover .selectedWorkOverlay {
-  transform: translateY(0);
-  border-radius: 47px;
+/* Mobile: overlay is absolutely positioned (slides up over image), hidden by default */
+@media (hover: none) {
+  .selectedWorkOverlay {
+    /* Keep absolute + hidden — same as desktop default */
+    position: absolute;
+    transform: translateY(100%);
+  }
+
+  /* Revealed on tap via JS-toggled .tapped class */
+  .selectedWorkCard.tapped .selectedWorkOverlay {
+    transform: translateY(0);
+    border-radius: 47px;
+  }
 }
 
 /* ── Overlay internals ── */
@@ -152,7 +167,6 @@
   }
 }
 
-/* ✅ Works for Link (<a>) now */
 .overlayBtn {
   border: none;
   border-radius: 999px;
@@ -164,9 +178,8 @@
   white-space: nowrap;
   transition: opacity 0.15s ease, transform 0.15s ease;
   flex-shrink: 0;
-
-  text-decoration: none;   /* 🔥 FIX for Link */
-  display: inline-block;   /* 🔥 ensures proper button shape */
+  text-decoration: none;
+  display: inline-block;
 }
 
 @media (max-width: 860px) {
@@ -244,8 +257,7 @@
   background: #fff;
   cursor: pointer;
   transition: transform 0.18s ease, opacity 0.18s ease;
-
-  text-decoration: none;   /* 🔥 FIX for Link */
+  text-decoration: none;
   display: inline-block;
 }
 
@@ -254,7 +266,7 @@
   opacity: 0.95;
 }
 
-/* ── Desktop ── */
+/* ── Desktop grid ── */
 @media (min-width: 861px) {
   .selectedWorkGrid {
     grid-template-columns: repeat(2, minmax(0, 638.4px));

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useState, useCallback } from "react";
 import styles from "./selectedwork.module.css";
 
 import workOne from "./selectedworkimages/card 1.png";
@@ -63,6 +64,20 @@ const workCards = [
 ];
 
 export default function SelectedWork() {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  // Toggle on tap; dismiss when tapping the same card again
+  const handleTap = useCallback(
+    (e: React.MouseEvent<HTMLElement>, index: number) => {
+      // Only intercept on touch devices — let desktop hover handle itself
+      if (window.matchMedia("(hover: none)").matches) {
+        e.preventDefault();
+        setActiveIndex((prev) => (prev === index ? null : index));
+      }
+    },
+    []
+  );
+
   return (
     <section id="work" className={styles.selectedWorkSection}>
       <div className={styles.selectedWorkWrap}>
@@ -75,7 +90,13 @@ export default function SelectedWork() {
 
         <div className={styles.selectedWorkGrid}>
           {workCards.map((card, index) => (
-            <article key={index} className={styles.selectedWorkCard}>
+            <article
+              key={index}
+              className={`${styles.selectedWorkCard} ${
+                activeIndex === index ? styles.tapped : ""
+              }`}
+              onClick={(e) => handleTap(e, index)}
+            >
               <Image
                 src={card.image}
                 alt={`Selected work panel ${index + 1}`}
@@ -101,6 +122,8 @@ export default function SelectedWork() {
                       color: card.bg,
                       background: card.color,
                     }}
+                    // Allow the link tap to propagate without toggling card off
+                    onClick={(e) => e.stopPropagation()}
                   >
                     Get Started&nbsp;↗
                   </Link>
