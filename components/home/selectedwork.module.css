@@ -62,7 +62,7 @@
 /* ── Card ── */
 .selectedWorkCard {
   position: relative;
-  border-radius: 47px;
+  border-radius: 36px;
   overflow: hidden;
   width: 100%;
   background: #000;
@@ -116,7 +116,7 @@
 @media (hover: hover) {
   .selectedWorkCard:hover .selectedWorkOverlay {
     transform: translateY(0);
-    border-radius: 47px;
+    border-radius: 36px;
   }
 }
 
@@ -133,7 +133,7 @@
 
   .selectedWorkCard.tapped .selectedWorkOverlay {
     transform: translateY(0);
-    border-radius: 47px;
+    border-radius: 36px;
   }
 }
 

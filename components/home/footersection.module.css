@@ -89,10 +89,11 @@
   padding-top: 0.8rem;
 }
 
+/* ✅ CHANGED: was font-size: 205px (fixed) — now fluid with clamp */
 .footerTitle {
   margin: 0;
   color: #fff;
-  font-size: 205px;
+  font-size: clamp(2rem, 15.8vw, 205px);
   line-height: 0.93;
   letter-spacing: -0.05em;
   font-weight: 500;
@@ -132,10 +133,7 @@
     grid-column: 1 / -1;
   }
 
-  .footerTitle {
-    font-size: clamp(2.15rem, 12vw, 3.5rem);
-    line-height: 0.96;
-  }
+  /* ✅ REMOVED: old fixed mobile override — clamp handles this now */
 
   .footerShowcase {
     margin-top: 0.9rem;
