@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import { PortableText, type PortableTextComponents } from "@portabletext/react";
+import type { PortableTextBlock } from "@portabletext/types";
 import * as Sanity from "@/lib/sanity";
 import BlogNavbar from "@/components/blog/blognavbar";
 import BlogFooter from "@/components/blog/blogfooter";
@@ -9,57 +11,9 @@ import styles from "@/components/details/detailsblog.module.css";
 
 export const revalidate = 60;
 
-function splitTextIntoChunks(input: string, chunkCount: number) {
-  const safeChunkCount = Math.max(1, Math.floor(chunkCount));
-  const text = (input ?? "").replace(/\r\n/g, "\n").trim();
-  if (!text) return Array.from({ length: safeChunkCount }, () => "");
-
-  const paragraphs = text.split(/\n\s*\n/g).map((p) => p.trim()).filter(Boolean);
-
-  if (paragraphs.length <= 1) {
-    const words = text.split(/\s+/).filter(Boolean);
-    const perChunk = Math.max(1, Math.ceil(words.length / safeChunkCount));
-    return Array.from({ length: safeChunkCount }, (_, i) =>
-      words.slice(i * perChunk, (i + 1) * perChunk).join(" ")
-    );
-  }
-
-  const totalLength = paragraphs.reduce((sum, p) => sum + p.length, 0);
-  const target = Math.max(1, Math.floor(totalLength / safeChunkCount));
-
-  const chunks: string[] = [];
-  let current: string[] = [];
-  let currentLen = 0;
-
-  for (let i = 0; i < paragraphs.length; i++) {
-    const para = paragraphs[i];
-    const remainingParas = paragraphs.length - i;
-    const remainingChunks = safeChunkCount - chunks.length;
-
-    if (
-      current.length > 0 &&
-      currentLen >= target &&
-      remainingParas >= remainingChunks
-    ) {
-      chunks.push(current.join("\n\n"));
-      current = [];
-      currentLen = 0;
-    }
-
-    current.push(para);
-    currentLen += para.length;
-  }
-
-  if (current.length > 0) chunks.push(current.join("\n\n"));
-  while (chunks.length < safeChunkCount) chunks.push("");
-
-  if (chunks.length > safeChunkCount) {
-    const keep = chunks.slice(0, safeChunkCount - 1);
-    keep.push(chunks.slice(safeChunkCount - 1).join("\n\n"));
-    return keep;
-  }
-
-  return chunks;
+function toPortableTextValue(detail?: PortableTextBlock[] | null): PortableTextBlock[] {
+  if (Array.isArray(detail)) return detail;
+  return [];
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -79,8 +33,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     excerpt,
     publishedAt,
     author,
-    images,
-    detail
+    text1,
+    image1,
+    text2,
+    threeImages,
+    text3,
+    conclusionImage,
+    text4
   }`;
 
   const post = await Sanity.fetchQuery<
@@ -89,8 +48,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         excerpt?: string;
         publishedAt?: string;
         author?: string;
-        images?: SanityImageSource[];
-        detail?: string;
+        image1?: SanityImageSource[];
+        threeImages?: SanityImageSource[];
+        conclusionImage?: SanityImageSource;
+        text1?: PortableTextBlock[];
+        text2?: PortableTextBlock[];
+        text3?: PortableTextBlock[];
+        text4?: PortableTextBlock[];
       }
     | null
   >(query, { slug });
@@ -122,24 +86,34 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     return builder.width(width).height(height).url();
   }
 
-  const images = Array.isArray(post.images) ? post.images : [];
-  const selectedImages = images.slice(0, 6);
+  const heroSources = Array.isArray(post.image1) ? post.image1 : [];
+  const heroUrls = (
+    await Promise.all(heroSources.map((image) => buildImageUrl(image, 2000, 1125)))
+  ).filter((u): u is string => Boolean(u));
 
-  const imageUrls = await Promise.all(
-    selectedImages.map(async (image, index) => {
-      if (index === 0 || index === 5) return buildImageUrl(image, 2000, 1125);
-      if (index >= 1 && index <= 3) return buildImageUrl(image, 900, 675);
-      if (index === 4) return buildImageUrl(image, 2000, 1125);
-      return buildImageUrl(image, 1600, 900);
-    })
-  );
+  const threeImages = Array.isArray(post.threeImages) ? post.threeImages : [];
+  const gridUrls = (
+    await Promise.all(
+      threeImages.map((image) => buildImageUrl(image, 900, 675))
+    )
+  ).filter((u): u is string => Boolean(u));
 
-  const heroUrl = imageUrls[0] ?? null;
-  const gridUrls = imageUrls.slice(1, 4).filter((u): u is string => Boolean(u));
-  const wideUrl = imageUrls[4] ?? null;
-  const closingUrl = imageUrls[5] ?? null;
+  const closingUrl = post.conclusionImage
+    ? await buildImageUrl(post.conclusionImage, 2000, 1125)
+    : null;
 
-  const prose = splitTextIntoChunks(String(post.detail ?? ""), 4);
+  const text1Value = toPortableTextValue(post.text1);
+  const text2Value = toPortableTextValue(post.text2);
+  const text3Value = toPortableTextValue(post.text3);
+  const text4Value = toPortableTextValue(post.text4);
+  const portableTextComponents: PortableTextComponents = {
+    block: {
+      h1: ({ children }) => <h1 className={styles.contentH1}>{children}</h1>,
+      h2: ({ children }) => <h2 className={styles.contentH2}>{children}</h2>,
+      h3: ({ children }) => <h3 className={styles.contentH3}>{children}</h3>,
+      normal: ({ children }) => <p className={styles.contentParagraph}>{children}</p>,
+    },
+  };
 
   function formatDate(dateStr?: string) {
     if (!dateStr) return "";
@@ -171,24 +145,36 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               </div>
             </div>
 
-            {/* Featured Image */}
-            {heroUrl && (
-              <div className={styles.imageWrapper}>
-                <Image 
-                  src={heroUrl} 
-                  alt={post.title} 
-                  fill
-                  className={styles.blogImage}
-                  sizes="(max-width: 896px) 100vw, 896px"
-                  priority
-                />
+            {/* Text 1 */}
+            {text1Value.length > 0 && (
+              <div className={styles.contentSection}>
+                <div className={styles.portableText}>
+                  <PortableText value={text1Value} components={portableTextComponents} />
+                </div>
               </div>
             )}
 
-            {/* Content */}
-            {prose[0]?.trim() && (
+            {/* Image 1 */}
+            {heroUrls.length > 0 &&
+              heroUrls.map((url, index) => (
+                <div key={`${url}-${index}`} className={styles.imageWrapper}>
+                  <Image
+                    src={url}
+                    alt={post.title}
+                    fill
+                    className={styles.blogImage}
+                    sizes="(max-width: 896px) 100vw, 896px"
+                    priority={index === 0}
+                  />
+                </div>
+              ))}
+
+            {/* Text 2 */}
+            {text2Value.length > 0 && (
               <div className={styles.contentSection}>
-                <div className={styles.contentText}>{prose[0]}</div>
+                <div className={styles.portableText}>
+                  <PortableText value={text2Value} components={portableTextComponents} />
+                </div>
               </div>
             )}
 
@@ -208,35 +194,21 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               </div>
             )}
 
-            {prose[1]?.trim() && (
+            {/* Text 3 */}
+            {text3Value.length > 0 && (
               <div className={styles.contentSection}>
-                <div className={styles.contentText}>{prose[1]}</div>
+                <div className={styles.portableText}>
+                  <PortableText value={text3Value} components={portableTextComponents} />
+                </div>
               </div>
             )}
 
-            {wideUrl && (
-              <div className={styles.wideImageWrapper}>
-                <Image
-                  src={wideUrl}
-                  alt={`${post.title} image 5`}
-                  fill
-                  className={styles.blogImage}
-                  sizes="(max-width: 896px) 100vw, 896px"
-                />
-              </div>
-            )}
-
-            {prose[2]?.trim() && (
-              <div className={styles.contentSection}>
-                <div className={styles.contentText}>{prose[2]}</div>
-              </div>
-            )}
-
+            {/* Conclusion Image */}
             {closingUrl && (
               <div className={styles.imageWrapper}>
                 <Image
                   src={closingUrl}
-                  alt={`${post.title} image 6`}
+                  alt={post.title}
                   fill
                   className={styles.blogImage}
                   sizes="(max-width: 896px) 100vw, 896px"
@@ -244,9 +216,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               </div>
             )}
 
-            {prose[3]?.trim() && (
+            {/* Text 4 */}
+            {text4Value.length > 0 && (
               <div className={styles.contentSection}>
-                <div className={styles.contentText}>{prose[3]}</div>
+                <div className={styles.portableText}>
+                  <PortableText value={text4Value} components={portableTextComponents} />
+                </div>
               </div>
             )}
 
