@@ -13,7 +13,7 @@ type BlogListPost = {
   author?: string;
   images?: SanityImageSource[];
   featured?: boolean;
-  category: string;
+  category?: string;
 };
 
 export default async function BlogMain() {
@@ -25,8 +25,8 @@ export default async function BlogMain() {
     publishedAt,
     author,
     featured,
-    images,
-    "category": "Blog"
+    "images": image1,
+    category
   }`;
 
   const posts = await Sanity.fetchQuery<BlogListPost[]>(query);
@@ -55,8 +55,18 @@ export default async function BlogMain() {
 
   async function buildImageUrl(image: SanityImageSource, width: number, height: number) {
     if (!image) return null;
-    const builder = await Sanity.urlFor(image);
-    return builder.width(width).height(height).url();
+    try {
+      const builder = await Sanity.urlFor(image);
+      const url = builder.width(width).height(height).url();
+      if (typeof url !== "string" || !url) {
+        console.warn("Sanity image URL is invalid", url, image);
+        return null;
+      }
+      return url;
+    } catch (err) {
+      console.error("Error building Sanity image URL", err, image);
+      return null;
+    }
   }
 
   // Build image URLs server-side to avoid bundling image-builder on client
@@ -64,11 +74,15 @@ export default async function BlogMain() {
     ? await buildImageUrl(featuredPost.images[0], 1200, 800)
     : null;
 
-  const otherImages = await Promise.all(
-    otherPosts.map(async (p) =>
-      p.images?.[0] ? buildImageUrl(p.images[0], 800, 600) : null
-    )
-  );
+  const otherImages: (string | null)[] = [];
+  for (const p of otherPosts) {
+    if (p.images?.[0]) {
+      const url = await buildImageUrl(p.images[0], 800, 600);
+      otherImages.push(url);
+    } else {
+      otherImages.push(null);
+    }
+  }
 
   function formatDate(dateStr?: string) {
     if (!dateStr) return "";
@@ -137,9 +151,10 @@ export default async function BlogMain() {
                           style={{ objectFit: "cover" }}
                         />
                       ) : null}
+                      <span className={styles.cardMediaBadge}>{post.category ?? 'Blog'}</span>
                     </div>
                     <div className={styles.cardBody}>
-                      <span className={styles.cardBadge}>{post.category}</span>
+                      <span className={styles.cardBadgeHidden}>{post.category}</span>
                       <h3 className={styles.cardTitle}>{post.title}</h3>
                       <p className={styles.cardExcerpt}>{post.excerpt}</p>
                       <div className={styles.cardMeta}>

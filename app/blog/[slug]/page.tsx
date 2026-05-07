@@ -8,6 +8,7 @@ import * as Sanity from "@/lib/sanity";
 import BlogNavbar from "@/components/blog/blognavbar";
 import BlogFooter from "@/components/blog/blogfooter";
 import styles from "@/components/details/detailsblog.module.css";
+import ShareBar from "@/components/details/ShareBar";
 
 export const revalidate = 60;
 
@@ -39,7 +40,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     threeImages,
     text3,
     conclusionImage,
-    text4
+    authorImage,
+    authorProfession,
+    authorBio,
+    text4,
+    category
   }`;
 
   const post = await Sanity.fetchQuery<
@@ -48,6 +53,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         excerpt?: string;
         publishedAt?: string;
         author?: string;
+        category?: string;
+        authorImage?: SanityImageSource;
+        authorProfession?: string;
+        authorBio?: string;
         image1?: SanityImageSource[];
         threeImages?: SanityImageSource[];
         conclusionImage?: SanityImageSource;
@@ -102,6 +111,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     ? await buildImageUrl(post.conclusionImage, 2000, 1125)
     : null;
 
+  const authorImageUrl = post.authorImage ? await buildImageUrl(post.authorImage as SanityImageSource, 200, 200) : null;
+
   const text1Value = toPortableTextValue(post.text1);
   const text2Value = toPortableTextValue(post.text2);
   const text3Value = toPortableTextValue(post.text3);
@@ -132,7 +143,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           <div className={styles.articleInner}>
             {/* Header Section */}
             <div className={styles.headerSection}>
-              <div className={styles.categoryBadge}>Blog</div>
+              <div className={styles.categoryBadge}>{post.category ?? 'Blog'}</div>
               <h1 className={styles.blogTitle}>{post.title}</h1>
               
               {/* Meta Information */}
@@ -221,6 +232,31 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               <div className={styles.contentSection}>
                 <div className={styles.portableText}>
                   <PortableText value={text4Value} components={portableTextComponents} />
+                </div>
+              </div>
+            )}
+
+            {/* Share buttons: placed after content and before author card */}
+            <div className="mt-6 mb-6">
+              <ShareBar />
+            </div>
+
+            {(post.author || post.authorProfession || post.authorBio || authorImageUrl) && (
+              <div className={styles.authorCard}>
+                {authorImageUrl && (
+                  <div className={styles.authorImageWrap}>
+                    <Image src={authorImageUrl} alt={post.author ?? 'Author'} width={64} height={64} className={styles.authorImage} />
+                  </div>
+                )}
+
+                <div className={styles.authorCardBody}>
+                  <h3 className={styles.authorName}>{post.author}</h3>
+                  {post.authorProfession && (
+                    <p className={styles.authorProfession}>{post.authorProfession}</p>
+                  )}
+                  {post.authorBio && (
+                    <p className={styles.authorBio}>{post.authorBio}</p>
+                  )}
                 </div>
               </div>
             )}
