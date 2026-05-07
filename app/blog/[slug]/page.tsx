@@ -8,7 +8,7 @@ import * as Sanity from "@/lib/sanity";
 import BlogNavbar from "@/components/blog/blognavbar";
 import BlogFooter from "@/components/blog/blogfooter";
 import styles from "@/components/details/detailsblog.module.css";
-import ShareBar from "@/components/details/ShareBar";
+// import ShareBar from "@/components/details/ShareBar";
 
 export const revalidate = 60;
 
@@ -238,7 +238,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
             {/* Share buttons: placed after content and before author card */}
             <div className="mt-6 mb-6">
-              <ShareBar />
+              {/* <ShareBar /> removed to fix build error */}
             </div>
 
             {(post.author || post.authorProfession || post.authorBio || authorImageUrl) && (
